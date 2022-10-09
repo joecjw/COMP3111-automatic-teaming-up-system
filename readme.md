@@ -1,11 +1,11 @@
 #COMP3111 Project
 
 #Team Leader
-Name:
+Name: WANG Zekai
 
-Student ID:
+Student ID: 20764298
 
-Email:
+Email: zwanggd@connect.ust.hk
 
 Main Task: Process
 
