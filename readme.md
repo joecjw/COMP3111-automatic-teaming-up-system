@@ -7,7 +7,7 @@
 | Leung, King Suen (Member 2) | 20770625            |   Input    |ksleungac|ksleunagc@connect.ust.hk|dev/input|
 
 Link to Documentations (For TA):<br/>
-[Task Allocation Sheet](https://hkustconnect-my.sharepoint.com/:x:/g/personal/ksleungac_connect_ust_hk/EfF9FZYX7cFBl4TVLwOB2PsB3f8aJB_SB6A06X14hlNDPA?e=aCfzPA)<br />
-[Use Case Specification](https://hkustconnect-my.sharepoint.com/:w:/g/personal/ksleungac_connect_ust_hk/Ed4sBRlZl4ZEikQMjrbFy4QBn88kJ0ZvIgCR3Y39RuvJLQ?e=ANNzAY)<br />
-[Class Diagram](https://hkustconnect-my.sharepoint.com/:i:/g/personal/ksleungac_connect_ust_hk/EbCypEPs9QpAuCgS43E2cREBoQ21wHj9bMTTWfYXGhfEww?e=cCq0xy)<br />
-[Use Case Diagram](https://hkustconnect-my.sharepoint.com/:i:/g/personal/ksleungac_connect_ust_hk/EfXdd-uupmBDkkRgJ1rmn0QBX1ok_eSrGgzV2kO9YDhOGg?e=xo4tGt)
+[Task Allocation Sheet](https://hkustconnect-my.sharepoint.com/:x:/g/personal/ksleungac_connect_ust_hk/ET7hh5_Qe8ZApMco3wcB-7oBr1qTl27PvdGtr3QA7Ie6iw?e=GsgI7n)<br />
+[Use Case Specification](https://hkustconnect-my.sharepoint.com/:w:/g/personal/ksleungac_connect_ust_hk/EdmodZQ2HxZEpoiNHBNTk0kB4Q6-lEw-fjFMhR48erEppQ?e=rQO82u)<br />
+[Class Diagram](https://hkustconnect-my.sharepoint.com/:i:/g/personal/ksleungac_connect_ust_hk/EXayaH_5TDpJmTJZW1vGMQYBr8FWIQxeMPpD0v_Nz56_7g?e=fgie9f)<br />
+[Use Case Diagram](https://hkustconnect-my.sharepoint.com/:i:/g/personal/ksleungac_connect_ust_hk/ER0Uew8QhkJPsxaXadmhqdIBdxqxY2MVFtGUc7YunovpQQ?e=fjEwLV)
