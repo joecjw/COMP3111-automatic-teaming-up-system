@@ -2,7 +2,7 @@
 #Group 09
 | Name                        | Student ID:         | Main Task:  |Github ID: | Email: | Branch ID: |
 | --------------------------- |:-------------------:|:----------:|------------|--------|---------|
-| WANG, Zekai (Leader)        | 20764298            |   Process  ||zwanggd@connect.ust.hk|not-yet|
+| WANG, Zekai (Leader)        | 20764298            |   Process  ||zwanggd@connect.ust.hk|process|
 | CHEN, Jiawei (Member 1)     | 20763842            |   Output   ||jchenfq@connect.ust.hk|master|
 | Leung, King Suen (Member 2) | 20770625            |   Input    ||ksleunagc@connect.ust.hk|not-yet|
 
