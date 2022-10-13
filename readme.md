@@ -2,9 +2,9 @@
 #Group 09
 | Name                        | Student ID:         | Main Task:  |Github ID: | Email: | Branch ID: |
 | --------------------------- |:-------------------:|:----------:|------------|--------|---------|
-| WANG, Zekai (Leader)        | 20764298            |   Process  ||zwanggd@connect.ust.hk|not-yet|
-| CHEN, Jiawei (Member 1)     | 20763842            |   Output   ||jchenfq@connect.ust.hk|master|
-| Leung, King Suen (Member 2) | 20770625            |   Input    ||ksleunagc@connect.ust.hk|not-yet|
+| WANG, Zekai (Leader)        | 20764298            |   Process  |zwanggd|zwanggd@connect.ust.hk|zwanggd|
+| CHEN, Jiawei (Member 1)     | 20763842            |   Output   |BDIH|jchenfq@connect.ust.hk|master|
+| Leung, King Suen (Member 2) | 20770625            |   Input    |ksleungac|ksleunagc@connect.ust.hk|ksleungac|
 
 Link to Documentations (On Onedrive):<br/>
 [Task Allocation Sheet](https://hkustconnect-my.sharepoint.com/:x:/g/personal/ksleungac_connect_ust_hk/ET7hh5_Qe8ZApMco3wcB-7oBr1qTl27PvdGtr3QA7Ie6iw?e=57FpU0)<br />
