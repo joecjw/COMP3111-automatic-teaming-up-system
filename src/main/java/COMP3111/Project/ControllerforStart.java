@@ -82,7 +82,11 @@ public class ControllerforStart extends Library {
 		label_person.setFont(new Font("Arial", 20));
 	
 		get_person_table().setEditable(true);
-	
+		
+		TableColumn rowid_column = new TableColumn("Row_ID");
+		rowid_column.setMinWidth(100);
+		rowid_column.setCellValueFactory(new PropertyValueFactory<Statistics, String>("rowid"));
+		
 		TableColumn studentid_column = new TableColumn("Student_ID");
 		studentid_column.setMinWidth(100);
 		studentid_column.setCellValueFactory(new PropertyValueFactory<Statistics, String>("studentid"));
@@ -116,7 +120,7 @@ public class ControllerforStart extends Library {
 		concerns_column.setCellValueFactory(new PropertyValueFactory<Statistics, String>("concerns"));
 	
 		get_person_table().setItems(get_person_data());
-		get_person_table().getColumns().addAll(studentid_column, studentname_column, k1energy_column, k2energy_column,
+		get_person_table().getColumns().addAll(rowid_column, studentid_column, studentname_column, k1energy_column, k2energy_column,
 				k3trick1_column, k3trick2_column, mypreference_column, concerns_column);
 		get_person_table().setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		final VBox vbox_person = new VBox();

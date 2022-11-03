@@ -42,7 +42,8 @@ public class Library {
 	}
 
 	public static class Person {
-
+		
+		private final SimpleStringProperty rowid;
 		private final SimpleStringProperty studentid;
 		private final SimpleStringProperty studentname;
 		private final SimpleStringProperty k1energy;
@@ -52,8 +53,9 @@ public class Library {
 		private final SimpleStringProperty mypreference;
 		private final SimpleStringProperty concerns;
 
-		private Person(String student_id, String student_name, String k1_energy, String k2_energy, String k3_trick1,
+		private Person(String row_id, String student_id, String student_name, String k1_energy, String k2_energy, String k3_trick1,
 				String k3_trick2, String my_preference, String concerns) {
+			this.rowid = new SimpleStringProperty(row_id);
 			this.studentid = new SimpleStringProperty(student_id);
 			this.studentname = new SimpleStringProperty(student_name);
 			this.k1energy = new SimpleStringProperty(k1_energy);
@@ -63,7 +65,11 @@ public class Library {
 			this.mypreference = new SimpleStringProperty(my_preference);
 			this.concerns = new SimpleStringProperty(concerns);
 		}
-
+		
+		public String getRowid() {
+			return rowid.get();
+		}
+		
 		public String getStudentid() {
 			return studentid.get();
 		}
@@ -168,11 +174,14 @@ public class Library {
 			BufferedReader br = new BufferedReader(isr);
 			String line = " ";
 			String[] tempArr;
+			int i = 0;
 			br.readLine(); // skip the first line
 			while ((line = br.readLine()) != null) {
 				tempArr = line.split(delimiter);
-				person_data.add(new Person(tempArr[0], tempArr[1], tempArr[2], tempArr[3], tempArr[4], tempArr[5],
-						tempArr[6], tempArr[7]));
+				Person a = new Person(String.valueOf(i), tempArr[0], tempArr[1]+tempArr[2], tempArr[4], tempArr[5], tempArr[6],
+						tempArr[7], tempArr[8], tempArr[9]);
+				person_data.add(a);
+				i += 1;
 			}
 			br.close();
 		} catch (IOException ioe) {
@@ -181,7 +190,7 @@ public class Library {
 	}
 	
 	public static void main(String args[]) {
-		String csvFile = "C:\\Users\\s2015\\git\\COMP3111-Project\\src\\main\\resources\\Sample Student Data File.CSV";
+		String csvFile = "C:\\Users\\oscar\\git\\COMP3111-Project\\src\\main\\resources\\Sample Student Data File.CSV";
 		Library.read(csvFile);
 		UiforStart.run(args);
 	}
