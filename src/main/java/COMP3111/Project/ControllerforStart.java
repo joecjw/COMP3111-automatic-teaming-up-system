@@ -49,7 +49,7 @@ public class ControllerforStart extends Library {
 		final Label label_stat = new Label("Statistics");
 		label_stat.setFont(new Font("Arial", 20));
 	
-		get_stat_table().setEditable(true);
+		get_stat_table().setEditable(false);
 	
 		TableColumn entry_column = new TableColumn("Entry");
 		entry_column.setMinWidth(100);
@@ -83,9 +83,9 @@ public class ControllerforStart extends Library {
 	
 		get_person_table().setEditable(true);
 		
-		TableColumn rowid_column = new TableColumn("Row_ID");
+		TableColumn rowid_column = new TableColumn("Row_Index");
 		rowid_column.setMinWidth(100);
-		rowid_column.setCellValueFactory(new PropertyValueFactory<Statistics, String>("rowid"));
+		 rowid_column.setCellValueFactory(new PropertyValueFactory<Statistics, String>("rowid"));
 		
 		TableColumn studentid_column = new TableColumn("Student_ID");
 		studentid_column.setMinWidth(100);
