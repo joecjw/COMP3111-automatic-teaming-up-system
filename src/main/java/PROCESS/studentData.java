@@ -10,6 +10,11 @@ public class studentData {
 		this.data = new ArrayList<List<String>>();
 	}
 	
+//	public studentData(studentData old) {
+//		this.data = new ArrayList<List<String>>(old.returnData());
+//		this.name = new String(old.returnName());
+//	}
+
 	public List<List<String>> returnData(){
 		return data;
 	}

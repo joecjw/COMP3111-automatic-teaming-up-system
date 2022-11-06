@@ -23,17 +23,4 @@ public class fileInterpreter {
 		} 	
 //		System.out.println("File is read and stored!");
 	}
-	
-	void print(studentData data) {
-		if(data.returnData() != null) {
-			for(int i = 0; i < data.returnData().size(); i++) {
-				for(String s : data.returnData().get(i)) 
-					System.out.print(s + " ");
-				System.out.println();
-			}
-			System.out.println("In total " + (data.returnData().size() - 1) + " students");
-		} else {
-			System.out.println("The data is empty");
-		}
-	}
 }
