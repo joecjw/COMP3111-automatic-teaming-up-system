@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -40,114 +41,14 @@ public class Library {
 		}
 
 	}
-	
-	public static class Person {
-		
-		private final String rowid;
-		private final String studentid;
-		private final String studentname;
-		private final String email;
-		private final String k1energy;
-		private final String k2energy;
-		private final String k3trick1;
-		private final String k3trick2;
-		private final String mypreference;
-		private final String concerns;
-
-		private Person(String row_id, String student_id, String student_name, String student_email, String k1_energy, String k2_energy, String k3_trick1,
-				String k3_trick2, String my_preference, String concerns) {
-			this.rowid = new String(row_id);
-			this.studentid = new String(student_id);
-			this.studentname = new String(student_name);
-			this.email = new String(student_email);
-			this.k1energy = new String(k1_energy);
-			this.k2energy = new String(k2_energy);
-			this.k3trick1 = new String(k3_trick1);
-			this.k3trick2 = new String(k3_trick1);
-			this.mypreference = new String(my_preference);
-			this.concerns = new String(concerns);
-		}
-	
-		public String getRowid() {
-			return rowid;
-		}
-		
-		public String getStudentid() {
-			return studentid;
-		}
-
-//		public void setStudentid(String val) {
-//			studentid.set(val);
-//		}
-
-		public String getStudentname() {
-			return studentname;
-		}
-		
-		public String getEmail() {
-			return email;
-		}
-
-//		public void setStudentname(String val) {
-//			studentname.set(val);
-//		}
-
-		public String getK1energy() {
-			return k1energy;
-		}
-
-//		public void setK1energy(String val) {
-//			k1energy.set(val);
-//		}
-
-		public String getK2energy() {
-			return k2energy;
-		}
-
-//		public void setK2energy(String val) {
-//			k2energy.set(val);
-//		}
-		
-		public String getK3trick1() {
-			return k3trick1;
-		}
-
-//		public void setK3trick1(String val) {
-//			k3trick1.set(val);
-//		}
-
-		public String getK3trick2() {
-			return k3trick2;
-		}
-
-//		public void setK3trick2(String val) {
-//			k3trick2.set(val);
-//		}
-
-		public String getMypreference() {
-			return mypreference;
-		}
-
-//		public void setMypreference(String val) {
-//			mypreference.set(val);
-//		}
-
-		public String getConcerns() {
-			return concerns;
-		}
-
-//		public void setConcerns(String val) {
-//			concerns.set(val);
-//		}
-
-	}
+	public static ArrayList<Student> studentData = new ArrayList<Student>();
 	
 	private TableView<Statistics> stat_table = new TableView<Statistics>();
-	private TableView<Person> person_table = new TableView<Person>();
+	private TableView<Student> person_table = new TableView<Student>();
 
 	private final static ObservableList<Statistics> stat_data = FXCollections.observableArrayList();
 	
-	private final static ObservableList<Person> person_data = FXCollections.observableArrayList();
+	private static ObservableList<Student> person_data = null;
 
 	public static final String delimiter = ",";
 	
@@ -155,7 +56,7 @@ public class Library {
 		return stat_table;
 	}
 	
-	public TableView<Person> get_person_table () {
+	public TableView<Student> get_person_table () {
 		return person_table;
 	}
 	
@@ -163,7 +64,7 @@ public class Library {
 		return stat_data;
 	}
 	
-	public ObservableList<Person> get_person_data () {
+	public ObservableList<Student> get_person_data () {
 		return person_data;
 	}
 	
@@ -185,9 +86,9 @@ public class Library {
 			br.readLine(); // skip the first line
 			while ((line = br.readLine()) != null) {
 				tempArr = line.split(delimiter);
-				Person a = new Person(String.valueOf(i), tempArr[0], tempArr[1]+tempArr[2], tempArr[3], tempArr[4], tempArr[5], tempArr[6],
+				Student a = new Student(String.valueOf(i), tempArr[0], tempArr[1]+tempArr[2], tempArr[3], tempArr[4], tempArr[5], tempArr[6],
 						tempArr[7], tempArr[8], tempArr[9]);
-				person_data.add(a);
+				studentData.add(a);
 				if (tempArr[6].equals("1")) {
 					k3_tick1 += 1;
 				}
@@ -212,6 +113,7 @@ public class Library {
 			stat_data.add(new Statistics("K3_Tick1 = 1", String.valueOf(k3_tick1)));
 			stat_data.add(new Statistics("K3_Tick2 = 1", String.valueOf(k3_tick2)));
 			stat_data.add(new Statistics("My_Preference = 1", "19"));
+			person_data = FXCollections.observableArrayList(studentData);
 			br.close();
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
