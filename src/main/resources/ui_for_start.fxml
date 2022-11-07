@@ -13,7 +13,7 @@
             <Font size="22.0" />
          </font>
       </Label>
-      <Button fx:id="instructor_role_button" layoutX="96.0" layoutY="173.0" mnemonicParsing="false" onAction="#switch_scene_to_chart" prefHeight="144.0" prefWidth="164.0" text="Instructor" AnchorPane.bottomAnchor="83.0" AnchorPane.leftAnchor="100.0">
+      <Button fx:id="instructor_role_button" layoutX="96.0" layoutY="173.0" mnemonicParsing="false" onAction="#switch_scene_to_instructor_function" prefHeight="144.0" prefWidth="164.0" text="Instructor" AnchorPane.bottomAnchor="83.0" AnchorPane.leftAnchor="100.0">
          <font>
             <Font size="22.0" />
          </font>
@@ -28,6 +28,5 @@
             <Font size="30.0" />
          </font>
       </TitledPane>
-      <Button fx:id="student_info_button" layoutX="251.0" layoutY="342.0" mnemonicParsing="false" onAction="#show_input_table_scene" prefHeight="29.0" prefWidth="99.0" text="Student Info" />
    </children>
 </AnchorPane>

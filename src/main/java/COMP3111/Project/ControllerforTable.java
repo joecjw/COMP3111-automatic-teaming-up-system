@@ -58,15 +58,15 @@ public class ControllerforTable{
     }
 
     
-    void initialize_table(String key) {
-    	this.student_id.setText(key);
-    	this.student_name.setText(key);
-    	this.team_number.setText(key);
-    	this.teammate_1.setText(key);
-    	this.teammate_2.setText(key);
-    	this.teammate_3.setText(key);
-    	this.teammate_4.setText(key);
-    	this.k1_average.setText(key);
-    	this.k2_average.setText(key);
+    void initialize_table(Student target) {
+    	this.student_id.setText(target.getStudentid());
+    	this.student_name.setText(target.getStudentname());
+    	this.team_number.setText("??");
+    	this.teammate_1.setText("??");
+    	this.teammate_2.setText("??");
+    	this.teammate_3.setText("??");
+    	this.teammate_4.setText("??");
+    	this.k1_average.setText("??");
+    	this.k2_average.setText("??");
     }
 }

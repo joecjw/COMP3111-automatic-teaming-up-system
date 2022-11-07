@@ -121,8 +121,6 @@ public class Library {
 	}
 	
 	public static void main(String args[]) {
-		String csvFile = "C:\\Users\\oscar\\git\\COMP3111-Project\\src\\main\\resources\\Sample Student Data File.CSV";
-		Library.read(csvFile);
 		UiforStart.run(args);
 	}
 }

@@ -7,12 +7,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
-public class ControllerforStudentInput{
+public class ControllerforStudentInput extends ControllerforInstructorFunctions{
 	private Stage stage_start;
 	private Scene scene_start;
 	private Parent root_start;
@@ -42,12 +44,12 @@ public class ControllerforStudentInput{
     	stage_start.show();
     }
     
-    void switch_scene_to_table(ActionEvent event, String key) throws IOException {
+    void switch_scene_to_table(ActionEvent event, Student student) throws IOException {
     	FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui_for_table.fxml"));
     	root_table = loader.load();
     	
     	ControllerforTable controllerfortable = loader.getController();
-    	controllerfortable.initialize_table(key);
+    	controllerfortable.initialize_table(student);
     	
     	stage_table = (Stage)((Node)event.getSource()).getScene().getWindow();
     	scene_table = new Scene(root_table);
@@ -57,24 +59,32 @@ public class ControllerforStudentInput{
     
     @FXML
     void check_input(ActionEvent event) throws IOException, InterruptedException {
-    	Boolean valid_input = false;
-    	String key = input_text.getText();
-    	
-    	if(key.equalsIgnoreCase("20763842")) {
-    		valid_input = true;
-    	}
-    	
-    	else if(key.equalsIgnoreCase("CHEN,Jiawei")) {
-    		valid_input = true;
+    	if(ControllerforInstructorFunctions.isTeamsFormed == true) {
+    		Boolean valid_input = false;
+        	String key = input_text.getText();
+        	Student target = null;
+        	for(Student student: Library.studentData) {
+        		if(key.equalsIgnoreCase(student.getStudentid()) == true || key.equalsIgnoreCase(student.getStudentname()) == true) {
+        			valid_input = true;
+        			target = student;
+        		}
+        	}
+        	
+        	if(valid_input == true && target != null) {
+        		switch_scene_to_table(event, target);
+        	}
+        	
+        	else {
+        		input_guide_label.setText("Invalid input! Please check and enter again!");
+        		input_text.clear();
+        	}
     	}
     	
     	else {
-    		input_guide_label.setText("Invalid input! Please check and enter again!");
-    		input_text.clear();
+      		Alert alert =  new Alert(AlertType.ERROR);
+    		alert.setHeaderText("Teams Not Formed Yet! Please Wait For Instructor To Form Teams ");
+    		alert.showAndWait();
     	}
     	
-    	if(valid_input == true) {
-    		switch_scene_to_table(event, key);
-    	}
     }
 }
