@@ -5,86 +5,95 @@ import java.util.Arrays;
 import java.util.List;
 
 public class algorithm {
-	public List<List<String>> K1;
-	public List<List<String>> K2;
-	public List<List<String>> K3;
+	public Team K1 = new Team();
+	public Team K2 = new Team();
+	public Team K3 = new Team();
+	private Team copy;
 	
-	void compute(studentData data, int Team_Size) {
-		Select_K1_member(data, Team_Size);
-		Select_K2_member(data, Team_Size);
-		Select_K3_member(data, Team_Size);
+	void compute(Team t, int Team_Size) {
+		Select_K1_member(t, Team_Size);
+		Select_K2_member(t, Team_Size);
+		Select_K3_member(t, Team_Size);
 	}
-	private int K1_Position(studentData data) {
-		String k1 = "k1_energy";
-		int i = 0;
-		while(!k1.equals(data.returnData().get(0).get(i))) i++;
-		return i;
-	}
-	private int K2_Position(studentData data) {
-		String k2 = "k2_energy";
-		int i = 0;
-		while(!k2.equals(data.returnData().get(0).get(i))) i++;
-		return i;
-	}
+//	private int K1_Position(Team t) {
+//		String k1 = "k1_energy";
+//		int i = 0;
+//		while(!k1.equals(t.get(0).get(i))) i++;
+//		return i;
+//	}
+//	private int K2_Position(Team Team) {
+//		String k2 = "k2_energy";
+//		int i = 0;
+//		while(!k2.equals(Team.returnTeam().get(0).get(i))) i++;
+//		return i;
+//	}
 	
-	private void Select_K1_member(studentData data, int Team_Size) {
-		ArrayList<List<String>> copy = new ArrayList<List<String>>(data.returnData());
-		int K1_Position = K1_Position(data) + 1;
-		for(int i = 1; i < copy.size()-1; i++) {
-			for(int j = 2; j < copy.size(); j++) {
-				if(Integer.parseInt(copy.get(j-1).get(K1_Position)) < Integer.parseInt(copy.get(j).get(K1_Position))) {
-					List<String> s = copy.get(j);
-					copy.remove(j);
-					copy.add(j-1, s);
+	private void Select_K1_member(Team t, int Team_Size) {
+		if(K1.isEmptyMemberList() && K2.isEmptyMemberList() && K3.isEmptyMemberList())
+			copy = new Team (t);
+		
+		for(int i = 0; i < copy.getNumOfMembers()-1; i++) {
+			for(int j = 1; j < copy.getNumOfMembers(); j++) {
+				if(Integer.parseInt(copy.getMembersList().get(j-1).getK1energy()) 
+						< Integer.parseInt(copy.getMembersList().get(j).getK1energy())) {
+					Student s = copy.getMembersList().get(j);
+					copy.getMembersList().remove(j);
+					copy.getMembersList().add(j-1, s);
 				} 
 			}
 		}
-		K1 = new ArrayList<List<String>>(copy.subList(0, Team_Size));
+		for(int i = 0; i < Team_Size; i++) {
+			K1.addMember(copy.getMembersList().get(0));
+			copy.removeMember(K1.getMembersList().get(i));
+		}
+		System.out.println("Now have: " + copy.getNumOfMembers() + " students left");
+
 	}
-	private void Select_K2_member(studentData data, int Team_Size) {
-		ArrayList<List<String>> copy = new ArrayList<List<String>>(data.returnData());
-		int K2_Position = K2_Position(data) + 1;
-		for(int i = 1; i < copy.size()-1; i++) {
-			for(int j = 2; j < copy.size(); j++) {
-				if(Integer.parseInt(copy.get(j-1).get(K2_Position)) > Integer.parseInt(copy.get(j).get(K2_Position))) {
-					List<String> s = copy.get(j);
-					copy.remove(j);
-					copy.add(j-1, s);
+	
+	private void Select_K2_member(Team t, int Team_Size) {
+		if(K1.isEmptyMemberList() && K2.isEmptyMemberList() && K3.isEmptyMemberList())
+			copy = new Team (t);
+		
+		for(int i = 0; i < copy.getNumOfMembers()-1; i++) {
+			for(int j = 1; j < copy.getNumOfMembers(); j++) {
+				if(Integer.parseInt(copy.getMembersList().get(j-1).getK2energy()) 
+						> Integer.parseInt(copy.getMembersList().get(j).getK2energy())) {
+					Student s = copy.getMembersList().get(j);
+					copy.getMembersList().remove(j);
+					copy.getMembersList().add(j-1, s);
 				} 
 			}
 		}
-		K2 = new ArrayList<List<String>>();
-		int j = 0;
-		for(int i = copy.size()-1; i > -1; i--) {
-			if(!K1.contains(copy.get(i))) {
-				K2.add(copy.get(i));
-				j++;
-			}
-			if(j == Team_Size) break;
+		
+		for(int i = 0; i < Team_Size; i++) {
+			K2.addMember(copy.getMembersList().get(0));
+			copy.removeMember(K2.getMembersList().get(i));
+		}
+		System.out.println("Now have: " + copy.getNumOfMembers() + " students left");
+
+	}
+	
+	private void Select_K3_member(Team Team, int Team_Size) {
+		int k = copy.getNumOfMembers();
+		for(int i = 0; i < k; i++) {
+			K3.addMember(copy.getMembersList().get(0));
+			copy.removeMember(K3.getMembersList().get(i));
 		}
 	}
 	
-	private void Select_K3_member(studentData data, int Team_Size) {
-		ArrayList<List<String>> copy = new ArrayList<List<String>>(data.returnData());
-		K3 = new ArrayList<List<String>>();
-		for(int i = 1; i < copy.size()-1; i++) 
-			if(!(K1.contains(copy.get(i)) || K2.contains(copy.get(i)))) 
-				K3.add(copy.get(i));
-	}
-	
-	private int K1_Average(studentData data) {
-		try {
-			int K1_Position = K1_Position(data) + 1;
-			int sum = 0;
-			for(int i = 1; i < data.returnData().size()-1; i++) 
-				sum += Integer.parseInt(data.returnData().get(i).get(K1_Position));
-			
-			return (sum/(data.returnNumOfStudent()));
-		} catch (Exception e) {
-			System.out.println("No student!");
-			return 0;
-		}
-	}
+//	private int K1_Average(Team Team) {
+//		try {
+//			int K1_Position = K1_Position(Team) + 1;
+//			int sum = 0;
+//			for(int i = 1; i < Team.returnTeam().size()-1; i++) 
+//				sum += Integer.parseInt(Team.returnTeam().get(i).get(K1_Position));
+//			
+//			return (sum/(Team.returnNumOf()));
+//		} catch (Exception e) {
+//			System.out.println("No !");
+//			return 0;
+//		}
+//	}
 	
 	
 	
