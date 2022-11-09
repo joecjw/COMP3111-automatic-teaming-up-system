@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -119,10 +120,34 @@ public class Library {
 			ioe.printStackTrace();
 		}
 	}
+	static void print(Team t) {
+		if(t.getMembersList() != null) {
+				for(Student s : t.getMembersList()) {
+					System.out.print(s.getStudentname() + " ");
+					System.out.print(s.getK1energy() + " ");
+					System.out.print(s.getK2energy() + " ");
+					System.out.println();
+				}
+				System.out.println("Total " + t.getNumOfMembers() + " students");
+		} else {
+			System.out.println("The data is empty");
+		}
+	}
 	
 	public static void main(String args[]) {
-		String csvFile = "C:\\Users\\oscar\\git\\COMP3111-Project\\src\\main\\resources\\Sample Student Data File.CSV";
+		String csvFile = "/Users/wang/git/COMP3111-Project/src/main/resources/Sample Student Data File.CSV";
 		Library.read(csvFile);
+		/*
+		 * This part is for process debug only, if you wanna make it work, 
+		 * manually add algorithm class from dev/process branch
+		algorithm alg = new algorithm();
+		Team t = new Team(studentData);
+		System.out.println("total have: " + t.getNumOfMembers() + " students");
+		alg.compute(t, 33);
+		print(alg.K1);
+		print(alg.K2);
+		print(alg.K3);
+ */
 		UiforStart.run(args);
 	}
 }
