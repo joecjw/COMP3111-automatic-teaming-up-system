@@ -1,11 +1,12 @@
 plugins {
-    // Apply the java-library plugin to add support for Java Library
     id 'java'
     id 'application'
+    id 'jacoco'
     id 'org.openjfx.javafxplugin' version '0.0.8'
 }
 
 repositories {
+    jcenter()
     mavenCentral()
 }
 
@@ -14,5 +15,22 @@ javafx {
 	modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
 
+dependencies {
+testImplementation 'junit:junit:4.12'
+compile group: 'net.sourceforge.htmlunit', name: 'htmlunit', version: '2.31'
+}
 
-mainClassName = 'COMP3111.Project.Library'
+
+jacocoTestReport {
+	reports {
+		xml.enabled false
+		csv.enabled false
+		html.destination file("${buildDir}/jacocoHTML")
+	}
+}
+
+jacoco {
+    toolVersion = "0.8.8"
+}
+
+mainClassName = 'COMP3111.Project.MyApplication'

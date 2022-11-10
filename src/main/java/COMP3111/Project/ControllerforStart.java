@@ -1,56 +1,45 @@
 package COMP3111.Project;
 
 import java.io.IOException;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import COMP3111.Project.*;
 
-public class ControllerforStart extends Library {
-	private Stage stage_input;
-	private Scene scene_input;
-	private Parent root_input;
-	
-	private Stage stage_instructor;
-	private Scene scene_instructor;
-	private Parent root_instructor;
-	
+
+/**
+ *Controller for the user to select his/her role
+ */
+public class ControllerforStart extends MyApplication{
+
     @FXML
     private Button instructor_role_button;
 
     @FXML
     private Button student_role_button;
         
+    /**
+     * This method change the scene that select the role to the interface for the instructor role to indicate a specific function he/she wants to perform
+     * @param event event indicates that the instructor_role_button is clicked
+     * @throws IOException Handle exception type IOExceptio which might be caused when loading the fxml file 
+     */
     @FXML
     void switch_scene_to_instructor_function(ActionEvent event) throws IOException {   	
-    	root_instructor = FXMLLoader.load(getClass().getResource("/ui_for_instructor_functions.fxml"));
-    	stage_instructor = (Stage)((Node)event.getSource()).getScene().getWindow();
-    	scene_instructor = new Scene(root_instructor);
-    	stage_instructor.setScene(scene_instructor);
-    	stage_instructor.show();
+    	set_fxmlPath("/ui_for_instructor_functions.fxml");
+    	Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+    	switch_scene(stage, get_fxmlPath() );
     }
 
+    /**
+     * This method change the scene that select the role to the interface for getting the student's input for team checking
+     * @param event event indicates that the student_role_button is clicked
+     * @throws IOException Handle exception type IOExceptio which might be caused when loading the fxml file 
+     */
     @FXML
     void swith_scene_to_student_input_from_start(ActionEvent event) throws IOException {
-    	root_input = FXMLLoader.load(getClass().getResource("/ui_for_student_input.fxml"));
-    	stage_input = (Stage)((Node)event.getSource()).getScene().getWindow();
-    	scene_input = new Scene(root_input);
-    	stage_input.setScene(scene_input);
-    	stage_input.show();
+    	set_fxmlPath("/ui_for_student_input.fxml");
+    	Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+    	switch_scene(stage, get_fxmlPath() );
     }
-
 }

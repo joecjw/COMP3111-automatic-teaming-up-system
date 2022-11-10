@@ -6,70 +6,80 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-
-import javafx.beans.property.SimpleStringProperty;
+import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableView;
-import COMP3111.Project.*;
+import javafx.stage.Stage;
 
-public class Library {
-	public static class Statistics {
-
-		private final SimpleStringProperty entry;
-		private final SimpleStringProperty value;
-
-		private Statistics(String fName, String lName) {
-			this.entry = new SimpleStringProperty(fName);
-			this.value = new SimpleStringProperty(lName);
-		}
-
-		public String getEntry() {
-			return entry.get();
-		}
-
-		public void setEntry(String val) {
-			entry.set(val);
-		}
-
-		public String getValue() {
-			return value.get();
-		}
-
-		public void setValue(String val) {
-			value.set(val);
-		}
-
-	}
-	public static ArrayList<Student> studentData = new ArrayList<Student>();
+public class MyApplication extends Application{
 	
-	private TableView<Statistics> stat_table = new TableView<Statistics>();
-	private TableView<Student> person_table = new TableView<Student>();
-
+	private final String delimiter = ",";
+	
+	private static String fxmlPath = null;
+	
+	private static boolean isFileimported = false;
+	
+	private static boolean isTeamsFormed = false;
+	
+	private static ArrayList<Student> studentData = new ArrayList<Student>();
+	
 	private final static ObservableList<Statistics> stat_data = FXCollections.observableArrayList();
+
+	private TableView<Statistics> stat_table = new TableView<Statistics>();
 	
 	private static ObservableList<Student> person_data = null;
+	
+	private TableView<Student> person_table = new TableView<Student>();
 
-	public static final String delimiter = ",";
+	public ArrayList<Student> get_student_data() {
+		return studentData;
+	}
 	
 	public TableView<Statistics> get_stat_table() {
 		return stat_table;
 	}
-	
+
 	public TableView<Student> get_person_table () {
 		return person_table;
 	}
-	
+
 	public ObservableList<Statistics> get_stat_data () {
 		return stat_data;
 	}
-	
+
 	public ObservableList<Student> get_person_data () {
 		return person_data;
 	}
 	
-	public static void read(String csvFile) {
-
+	public String get_fxmlPath() {
+		return fxmlPath;
+	}
+	
+	public void set_fxmlPath(String path) {
+		MyApplication.fxmlPath = path;
+	}
+	
+	public boolean get_isFileimported() {
+		return isFileimported;
+	}
+	
+	public void set_isFileimported(boolean result) {
+		MyApplication.isFileimported = result;
+	}
+	
+	public boolean get_isTeamsFormed() {
+		return isTeamsFormed;
+	}
+	
+	public void set_isTeamsFormed(boolean result) {
+		MyApplication.isTeamsFormed = result;
+	}
+	
+	public void read(String csvFile) {
 		System.out.print("\n");
 		try {
 			File file = new File(csvFile);
@@ -119,9 +129,33 @@ public class Library {
 			ioe.printStackTrace();
 		}
 	}
-	
+
+	/**
+	 * This method changes the scene from current scene to another scene
+	 * @param stage stage that contains the current scene
+	 * @param fxmlPath .fxml file path to the file that contains the destination scene
+	 * @throws IOException IOException Handle exception type IOExceptio which might be caused when loading the fxml file
+	 */
+    void switch_scene(Stage stage, String fxmlPath) throws IOException{   	
+    	Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
+    	Scene scene = new Scene(root);
+    	stage.setTitle("COMP3111 Project - Group 09");
+    	stage.setScene(scene);
+    	stage.show();
+    }
+    
+    /**
+     * This method set up the initial UI interface
+     */
+    @Override
+	public void start(Stage stage) throws Exception{
+    	fxmlPath = "/ui_for_start.fxml";
+    	switch_scene(stage, fxmlPath);
+	}
+	/**
+	 * Entry point of the Application
+	 */
 	public static void main(String args[]) {
-		UiforStart.run(args);
+		Application.launch(args);
 	}
 }
-

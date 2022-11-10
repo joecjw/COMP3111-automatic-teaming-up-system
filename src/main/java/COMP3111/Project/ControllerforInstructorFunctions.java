@@ -14,22 +14,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-public class ControllerforInstructorFunctions extends Library {
-	
-	protected static boolean isFileimported = false;
-	protected static boolean isTeamsFormed = false;
-	
-	private Stage stage_instructor_func;
-	private Scene scene_instructor_func;
-	private Parent root_instructor_func;
-
-	private Stage stage_import;
-	private Scene scene_import;
-	private Parent root_import;
-	
-	private Stage stage_chart;
-	private Scene scene_chart;
-	private Parent root_chart;
+/**
+ *Controller for the instructor role to indicate a specific function he/she wants to perform
+ */
+public class ControllerforInstructorFunctions extends MyApplication {
 
     @FXML
     private Button back_to_start_button;
@@ -46,19 +34,26 @@ public class ControllerforInstructorFunctions extends Library {
     @FXML
     private Button start_processing_button;
     
+    /**
+     * This method will change the scene that indicate instructor'choice to the interface for importing the file
+     * @param event event indicates that the start_import_button is clicked
+     * @throws IOException Handle exception type IOExceptio which might be caused when loading the fxml file 
+     */
     @FXML
     void switch_scene_to_import_file(ActionEvent event) throws IOException {
-    	root_import = FXMLLoader.load(getClass().getResource("/ui_for_import_file.fxml"));
-    	stage_import = (Stage)((Node)event.getSource()).getScene().getWindow();
-    	scene_import = new Scene(root_import);
-    	stage_import.setScene(scene_import);
-    	stage_import.show();
+    	set_fxmlPath("/ui_for_import_file.fxml");
+    	Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+    	switch_scene(stage, get_fxmlPath() );
     }
     
+    /**
+     * This method create new Team instances with processed data
+     * @param event event indicates that the start_processing_button is clicked
+     */
     @FXML
     void process_and_form_teams(ActionEvent event) {
-    	if(isFileimported == true) {
-    		isTeamsFormed = true;
+    	if(get_isFileimported() == true) {//Prerequisite to create new Team instances
+    		set_isTeamsFormed(true);
     		Alert alert =  new Alert(AlertType.INFORMATION);
     		alert.setHeaderText("Teams Have Been Successfully Formed");
     		alert.showAndWait();
@@ -71,29 +66,38 @@ public class ControllerforInstructorFunctions extends Library {
     	}
     }
     
+    /**
+     * This method will change the scene that indicate instructor'choice to the interface for choosing the role
+     * @param event event indicates that the back_to_start_button is clicked
+     * @throws IOException Handle exception type IOExceptio which might be caused when loading the fxml file 
+     */
     @FXML
     void switch_scene_to_start_from_instructor(ActionEvent event) throws IOException {
-    	root_instructor_func = FXMLLoader.load(getClass().getResource("/ui_for_start.fxml"));
-    	stage_instructor_func = (Stage)((Node)event.getSource()).getScene().getWindow();
-    	scene_instructor_func = new Scene(root_instructor_func);
-    	stage_instructor_func.setScene(scene_instructor_func);
-    	stage_instructor_func.show();
+    	set_fxmlPath("/ui_for_start.fxml");
+    	Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+    	switch_scene(stage, get_fxmlPath() );
     }
     
+    /**
+     * This method will change the scene that indicate instructor'choice to the interface for generating the chart
+     * @param event event indicates that the review_class_statistics_button is clicked
+     * @throws IOException Handle exception type IOExceptio which might be caused when loading the fxml file 
+     */
     @FXML
     void switch_scene_to_chart(ActionEvent event) throws IOException {  
-    	if(isFileimported == true) {
-    		if(isTeamsFormed == true) {
+    	System.out.println(get_isFileimported());
+    	if(get_isFileimported() == true) {//Prerequisite to generate chart
+    		if(get_isTeamsFormed() == true) {//Prerequisite to generate chart
+    			set_fxmlPath("//ui_for_start.fxml");
     			FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui_for_chart.fxml"));
-    			root_chart = loader.load();
-    			
+    			Parent root =  loader.load();
     			ControllerforChart controllerforchart = loader.getController();
     			controllerforchart.initialize_chart();
-    			
-    			stage_chart = (Stage)((Node)event.getSource()).getScene().getWindow();
-    			scene_chart = new Scene(root_chart);
-    			stage_chart.setScene(scene_chart);
-    			stage_chart.show();
+    	    	Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+    	    	Scene scene = new Scene(root);
+    	    	stage.setScene(scene);
+    	    	stage.setTitle("COMP3111 Project - Group 09");
+    	    	stage.show();
     		}
     		else {
         		Alert alert =  new Alert(AlertType.ERROR);

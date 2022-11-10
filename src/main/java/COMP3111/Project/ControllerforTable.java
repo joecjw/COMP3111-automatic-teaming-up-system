@@ -4,18 +4,15 @@ import java.io.IOException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class ControllerforTable{
-	private Stage stage;
-	private Scene scene;
-	private Parent root;
+/**
+ *Controller for the OUTPUT Task: Generate Table with a particular student's team information 
+ */
+public class ControllerforTable extends MyApplication{
 
     @FXML
     private Button back_to_input_button;
@@ -47,17 +44,22 @@ public class ControllerforTable{
     @FXML
     private TextField teammate_4;
     
-    
+    /**
+     * This method will change the scene from table view back to interface that get student's input for checking team information
+     * @param event event indicates that the back_to_input_button is clicked
+     * @throws IOException Handle exception type IOExceptio which might be caused when loading the fxml file 
+     */
     @FXML
     void switch_scene_to_student_input_from_table(ActionEvent event) throws IOException {
-    	root = FXMLLoader.load(getClass().getResource("/ui_for_student_input.fxml"));
-    	stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-    	scene = new Scene(root);
-    	stage.setScene(scene);
-    	stage.show();
+    	set_fxmlPath("/ui_for_student_input.fxml");
+    	Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+    	switch_scene(stage, get_fxmlPath() );
     }
-
     
+    /**
+     * This method initialize the table with processed team data
+     * @param target indicates the student to be looked up for filling table data
+     */
     void initialize_table(Student target) {
     	this.student_id.setText(target.getStudentid());
     	this.student_name.setText(target.getStudentname());

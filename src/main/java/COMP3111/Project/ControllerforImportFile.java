@@ -1,17 +1,12 @@
 package COMP3111.Project;
 
-
 import java.io.IOException;
 import javax.swing.JFileChooser;
-
-import COMP3111.Project.Library.Statistics;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -24,11 +19,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-public class ControllerforImportFile extends ControllerforInstructorFunctions{
-	
-	private Stage stage_import;
-	private Scene scene_imort;
-	private Parent root_import;
+/**
+ *Controller for importing the file
+ */
+public class ControllerforImportFile extends MyApplication{
 	
     @FXML
     private Button back_to_instructor_button;
@@ -39,6 +33,10 @@ public class ControllerforImportFile extends ControllerforInstructorFunctions{
     @FXML
     private Button select_file_button;
 
+    /**
+     * This method import a selected csv file and processing the data inside
+     * @param event event indicates that the select_file_button is clicked 
+     */
     @FXML
     void select_csv_file(ActionEvent event) {
       	JFileChooser fileChooser = new JFileChooser();
@@ -46,8 +44,8 @@ public class ControllerforImportFile extends ControllerforInstructorFunctions{
     	if(response == JFileChooser.APPROVE_OPTION) {
     		String file_path = fileChooser.getSelectedFile().getAbsolutePath();
     		if(file_path.endsWith(".CSV")) {
-    		Library.read(file_path);
-	    		ControllerforInstructorFunctions.isFileimported = true;
+    			read(file_path);
+    			set_isFileimported(true);
 	    		Alert alert =  new Alert(AlertType.INFORMATION);
 	    		alert.setHeaderText("Selected File Has Been Imported");
 	    		alert.showAndWait();
@@ -66,18 +64,25 @@ public class ControllerforImportFile extends ControllerforInstructorFunctions{
     	
     }
 
+    /**
+     * This method change the scene that import the file back to the interface for the instructor role to indicate a specific function he/she wants to perform
+     * @param event event indicates that the back_to_instructor_button is clicked
+     */
     @FXML
     void switch_scene_to_instructor(ActionEvent event) throws IOException {
-    	root_import = FXMLLoader.load(getClass().getResource("/ui_for_instructor_functions.fxml"));
-    	stage_import = (Stage)((Node)event.getSource()).getScene().getWindow();
-    	scene_imort = new Scene(root_import);
-    	stage_import.setScene(scene_imort);
-    	stage_import.show();
+    	set_fxmlPath("/ui_for_instructor_functions.fxml");
+    	Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+    	switch_scene(stage, get_fxmlPath() );
     }
 
+    /**
+     * This method change the scene that import the file to the interface for displaying the calculated statistics of the imported file
+     * @param event event indicates that the review_import_result_button is clicked
+     * @throws IOException Handle exception type IOExceptio which might be caused when loading the fxml file 
+     */
     @FXML
-    void switch_scene_to_statistics(ActionEvent event) throws IOException {
-    	if(ControllerforInstructorFunctions.isFileimported  == true) {
+    void switch_scene_to_statistics(ActionEvent event){
+    	if(get_isFileimported()  == true) {//Prerequisite to display calculated statistics of selected file
 			Scene scene_stat = new Scene(new Group());
 			Stage stage_stat = new Stage();
 			stage_stat.setTitle("Table of students' personal data");
