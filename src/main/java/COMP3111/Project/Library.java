@@ -87,6 +87,8 @@ public class Library {
 			br.readLine(); // skip the first line
 			while ((line = br.readLine()) != null) {
 				tempArr = line.split(delimiter);
+				tempArr[1] = tempArr[1].replace("\"", "");
+				tempArr[2] = tempArr[2].replace("\"", "");
 				Student a = new Student(String.valueOf(i), tempArr[0], tempArr[1]+tempArr[2], tempArr[3], tempArr[4], tempArr[5], tempArr[6],
 						tempArr[7], tempArr[8], tempArr[9]);
 				studentData.add(a);
@@ -135,7 +137,7 @@ public class Library {
 	}
 	
 	public static void main(String args[]) {
-		String csvFile = "/Users/wang/git/COMP3111-Project/src/main/resources/Sample Student Data File.CSV";
+		String csvFile = "/Users/Oscar/git/COMP3111-Project/src/main/resources/Sample Student Data File.CSV";
 		Library.read(csvFile);
 		/*
 		 * This part is for process debug only, if you wanna make it work, 
