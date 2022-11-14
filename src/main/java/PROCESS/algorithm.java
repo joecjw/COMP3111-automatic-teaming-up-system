@@ -9,11 +9,13 @@ public class algorithm {
 	public Team K2 = new Team();
 	public Team K3 = new Team();
 	private Team copy;
+	public ATU_Team atu;
 	
 	void compute(Team t, int Team_Size) {
 		Select_K1_member(t, Team_Size);
 		Select_K2_member(t, Team_Size);
 		Select_K3_member(t, Team_Size);
+		Create_Team(t, Team_Size);
 	}
 //	private int K1_Position(Team t) {
 //		String k1 = "k1_energy";
@@ -73,12 +75,35 @@ public class algorithm {
 
 	}
 	
-	private void Select_K3_member(Team Team, int Team_Size) {
-		int k = copy.getNumOfMembers();
-		for(int i = 0; i < k; i++) {
-			K3.addMember(copy.getMembersList().get(0));
-			copy.removeMember(K3.getMembersList().get(i));
+	private void Select_K3_member(Team t, int Team_Size) {
+		int k = 0;
+		for(int i = 0; i < t.getNumOfMembers(); i++) {
+			if(copy.getMembersList().contains(t.getMembersList().get(i))) {
+				int index = copy.getMembersList().indexOf(t.getMembersList().get(i));
+				K3.addMember(copy.getMembersList().get(index));
+				copy.removeMember(K3.getMembersList().get(k));
+				k++;
+			}
 		}
+	}
+	
+	private void Create_Team(Team t, int Team_Size) {
+		atu = new ATU_Team(t.getNumOfMembers(), Team_Size);
+		for(int i = 0; i < Team_Size; i++) {
+			atu.append(i, "T-" + string(i,4,'0'), K1.getMembersList().get(i), false, false);
+			atu.append(i, "T-" + string(i,4,'0'), K2.getMembersList().get(i), false, false);
+			atu.append(i, "T-" + string(i,4,'0'), K3.getMembersList().get(i), false, false);
+		}
+		if(K3.getMembersList().size() == Team_Size) {
+			atu.append(Team_Size-1, "T-" + string(Team_Size-1,4,'0'), K3.getMembersList().get(Team_Size), false, true);
+			if(K3.getMembersList().size() == Team_Size + 1) {
+				atu.append(Team_Size-2, "T-" + string(Team_Size-2,4,'0'), K3.getMembersList().get(Team_Size+1), false, true);
+			}
+		}
+	}
+	
+	private String string(int i, int j, char c) {
+		return new String(Integer.toString(i) + Integer.toString(j) + Character.toString(c));
 	}
 	
 //	private int K1_Average(Team Team) {

@@ -26,7 +26,7 @@ public class Student {
 			this.mypreference = new String(my_preference);
 			this.concerns = new String(concerns);
 		}
-	
+		
 		public String getRowid() {
 			return rowid;
 		}
@@ -97,6 +97,10 @@ public class Student {
 
 //		public void setConcerns(String val) {
 //			concerns.set(val);
+//		}
+
+//		public void setIs_team_Leader(Boolean is_team_Leader) {
+//			this.is_team_Leader = is_team_Leader;
 //		}
 
 }

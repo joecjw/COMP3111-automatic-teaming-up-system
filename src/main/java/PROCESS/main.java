@@ -9,14 +9,14 @@ public class main {
 		studentData database = new studentData("abc");
 		algorithm ATU = new algorithm();
 		
-		a.read(database);
-		ATU.compute(database, 33);
-		System.out.println("K1 student");
-		print(ATU.K1);
-		System.out.println("K2 student");
-		print(ATU.K2);
-		System.out.println("K3 student");
-		print(ATU.K3);
+//		a.read(database);
+//		ATU.compute(database, 33);
+//		System.out.println("K1 student");
+//		print(ATU.K1);
+//		System.out.println("K2 student");
+//		print(ATU.K2);
+//		System.out.println("K3 student");
+//		print(ATU.K3);
 		
 		print(database);
 		
