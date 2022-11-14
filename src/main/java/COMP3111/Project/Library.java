@@ -123,6 +123,7 @@ public class Library {
 		}
 	}
 	static void print(Team t) {
+		System.out.println("Team id: " + t.getTeamId() + " / Team name: " + t.getName());
 		if(t.getMembersList() != null) {
 				for(Student s : t.getMembersList()) {
 					System.out.print(s.getStudentname() + " ");
@@ -149,7 +150,11 @@ public class Library {
 		print(alg.K1);
 		print(alg.K2);
 		print(alg.K3);
- */
+		for(int i = 0; i < 33; i++) {
+			print(alg.atu.getTeams().get(i));
+		}
+		*/
+		
 		UiforStart.run(args);
 	}
 }
