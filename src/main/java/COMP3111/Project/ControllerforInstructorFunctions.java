@@ -1,6 +1,7 @@
 package COMP3111.Project;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
@@ -34,6 +36,10 @@ public class ControllerforInstructorFunctions extends MyApplication {
     @FXML
     private Button start_processing_button;
     
+    public Button get_review_button(){
+    	return review_class_statistics_button;
+    }
+    
     /**
      * This method will change the scene that indicate instructor'choice to the interface for importing the file
      * @param event event indicates that the start_import_button is clicked
@@ -41,9 +47,19 @@ public class ControllerforInstructorFunctions extends MyApplication {
      */
     @FXML
     void switch_scene_to_import_file(ActionEvent event) throws IOException {
-    	set_fxmlPath("/ui_for_import_file.fxml");
-    	Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-    	switch_scene(stage, get_fxmlPath() );
+    	//if(get_isFileimported() != true) {
+	    	set_fxmlPath("/ui_for_import_file.fxml");
+	    	Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+	    	switch_scene(stage, get_fxmlPath() );
+    	//}
+    	
+    	/*else {
+    		Alert alert =  new Alert(AlertType.WARNING);
+    		alert.setHeaderText("File Has Already Been Imported! No Need To Imported Again!");
+    		Button warningButton = (Button) alert.getDialogPane().lookupButton(ButtonType.OK);
+    		warningButton.setId("importFileError");
+    		alert.showAndWait();
+    	}*/
     }
     
     /**
@@ -51,8 +67,9 @@ public class ControllerforInstructorFunctions extends MyApplication {
      * @param event event indicates that the start_processing_button is clicked
      */
     @FXML
-    void process_and_form_teams(ActionEvent event) {
+    void form_teams(ActionEvent event) {
     	if(get_isFileimported() == true) {//Prerequisite to create new Team instances
+    		process_team_data(get_student_data(), get_team_data());
     		set_isTeamsFormed(true);
     		Alert alert =  new Alert(AlertType.INFORMATION);
     		alert.setHeaderText("Teams Have Been Successfully Formed");
@@ -62,6 +79,8 @@ public class ControllerforInstructorFunctions extends MyApplication {
     	else {
     		Alert alert =  new Alert(AlertType.ERROR);
     		alert.setHeaderText("No File Found! Please Import A File First!");
+    		Button errorButton = (Button) alert.getDialogPane().lookupButton(ButtonType.OK);
+            errorButton.setId("formTeamsError");
     		alert.showAndWait();
     	}
     }
@@ -85,14 +104,12 @@ public class ControllerforInstructorFunctions extends MyApplication {
      */
     @FXML
     void switch_scene_to_chart(ActionEvent event) throws IOException {  
-    	System.out.println(get_isFileimported());
     	if(get_isFileimported() == true) {//Prerequisite to generate chart
     		if(get_isTeamsFormed() == true) {//Prerequisite to generate chart
-    			set_fxmlPath("//ui_for_start.fxml");
     			FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui_for_chart.fxml"));
     			Parent root =  loader.load();
     			ControllerforChart controllerforchart = loader.getController();
-    			controllerforchart.initialize_chart();
+    			controllerforchart.initialize_chart(get_team_data());
     	    	Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
     	    	Scene scene = new Scene(root);
     	    	stage.setScene(scene);
@@ -101,17 +118,41 @@ public class ControllerforInstructorFunctions extends MyApplication {
     		}
     		else {
         		Alert alert =  new Alert(AlertType.ERROR);
-        		alert.setHeaderText("Teams Not Found! Please Form Teams First! ");
+        		alert.setHeaderText("Teams Not Found! Please Form Teams First!");
+        		Button errorButton = (Button) alert.getDialogPane().lookupButton(ButtonType.OK);
+                errorButton.setId("reviewWithoutTeamsError");
         		alert.showAndWait();
     		}
     	}    	
-    	else {
+    	else {		
     		Alert alert =  new Alert(AlertType.ERROR);
     		alert.setHeaderText("No File Found! Please Import A File First!");
+       		Button errorButton = (Button) alert.getDialogPane().lookupButton(ButtonType.OK);
+            errorButton.setId("reviewWithoutImportError");
     		alert.showAndWait();
     	}
     }
 
-	
+	static void process_team_data(ArrayList<Student> studentData,  ArrayList<Team> teamData) {
+		Team test1 = new Team();
+		test1.addMember(studentData.get(0));
+		test1.addMember(studentData.get(1));
+		test1.addMember(studentData.get(2));
+		
+   		Team test2 = new Team();
+		test2.addMember(studentData.get(3));
+		test2.addMember(studentData.get(4));
+		test2.addMember(studentData.get(5));
+		
+   		Team test3 = new Team();
+		test3.addMember(studentData.get(6));
+		test3.addMember(studentData.get(7));
+		test3.addMember(studentData.get(8));
+		
+		teamData.add(test1);
+		teamData.add(test2);
+		teamData.add(test3);
+		
+	}
 
 }

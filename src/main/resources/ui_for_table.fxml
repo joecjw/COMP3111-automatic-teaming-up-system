@@ -139,7 +139,7 @@
                   </TextField>
                   <TextField fx:id="teammate_1" alignment="CENTER" editable="false" prefHeight="73.0" prefWidth="102.0" GridPane.rowIndex="1">
                      <font>
-                        <Font size="15.0" />
+                        <Font size="10.0" />
                      </font></TextField>
                   <TextField alignment="CENTER" editable="false" prefHeight="92.0" prefWidth="102.0" text="2" GridPane.columnIndex="1">
                      <font>
@@ -148,7 +148,7 @@
                   </TextField>
                   <TextField fx:id="teammate_2" alignment="CENTER" editable="false" prefHeight="87.0" prefWidth="102.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <font>
-                        <Font size="15.0" />
+                        <Font size="10.0" />
                      </font></TextField>
                   <TextField editable="false" prefHeight="78.0" prefWidth="102.0" text="K1_Average" GridPane.rowIndex="2">
                      <font>
@@ -175,7 +175,7 @@
                   </TextField>
                   <TextField fx:id="teammate_4" alignment="CENTER" editable="false" prefHeight="103.0" prefWidth="101.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
                      <font>
-                        <Font size="15.0" />
+                        <Font size="10.0" />
                      </font></TextField>
                   <TextField alignment="CENTER" editable="false" prefHeight="106.0" prefWidth="101.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
                      <font>
@@ -192,7 +192,7 @@
                   </TextField>
                   <TextField fx:id="teammate_3" alignment="CENTER" editable="false" prefHeight="103.0" prefWidth="102.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <font>
-                        <Font size="15.0" />
+                        <Font size="10.0" />
                      </font></TextField>
                   <TextField alignment="CENTER" editable="false" prefHeight="112.0" prefWidth="102.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
                      <font>

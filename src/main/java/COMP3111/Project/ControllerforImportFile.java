@@ -1,7 +1,11 @@
 package COMP3111.Project;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.swing.JFileChooser;
+
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -10,6 +14,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -48,17 +53,23 @@ public class ControllerforImportFile extends MyApplication{
     			set_isFileimported(true);
 	    		Alert alert =  new Alert(AlertType.INFORMATION);
 	    		alert.setHeaderText("Selected File Has Been Imported");
+	    		Button infoButton = (Button) alert.getDialogPane().lookupButton(ButtonType.OK);
+	    		infoButton.setId("importConfirmDialog");
 	    		alert.showAndWait();
     		}
     		else {
 	    		Alert alert =  new Alert(AlertType.ERROR);
 	    		alert.setHeaderText("Wrong Type! Please Select A CSV File!");
+	    		Button errorButton = (Button) alert.getDialogPane().lookupButton(ButtonType.OK);
+	    		errorButton.setId("importErrorDialog");
 	    		alert.showAndWait();
     		}
     	}
     	else {
     		Alert alert =  new Alert(AlertType.INFORMATION);
     		alert.setHeaderText("Import Cancelled");
+    		Button infoButton = (Button) alert.getDialogPane().lookupButton(ButtonType.OK);
+    		infoButton.setId("importCancelDialog");
     		alert.showAndWait();
     	}
     	
@@ -181,6 +192,8 @@ public class ControllerforImportFile extends MyApplication{
     	else {
     		Alert alert =  new Alert(AlertType.ERROR);
     		alert.setHeaderText("No File Found! Please Import A File First!");
+    		Button errorButton = (Button) alert.getDialogPane().lookupButton(ButtonType.OK);
+    		errorButton.setId("reviewStatisticsWithoutImportError");
     		alert.showAndWait();
     	}
     }

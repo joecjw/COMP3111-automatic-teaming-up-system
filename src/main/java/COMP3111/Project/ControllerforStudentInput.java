@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
@@ -91,9 +92,11 @@ public class ControllerforStudentInput extends MyApplication{
         	}
     	}
     	
-    	else {//inform user with error message
+    	else {//inform user with error message   		
       		Alert alert =  new Alert(AlertType.ERROR);
     		alert.setHeaderText("Teams Not Formed Yet! Please Wait For Instructor To Form Teams ");
+    		Button errorButton = (Button) alert.getDialogPane().lookupButton(ButtonType.OK);
+    		errorButton.setId("teamTableWithoutTeamsError");
     		alert.showAndWait();
     	}
     	

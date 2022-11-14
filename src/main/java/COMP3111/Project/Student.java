@@ -71,12 +71,7 @@ public class Student {
 			this.concerns = new String(concerns);
 	
 		}
-	
-		private int k3_trick1() {
-			// TODO Auto-generated method stub
-			return 0;
-		}
-
+		
 		public String getRowid() {
 			return rowid;
 		}
@@ -84,10 +79,6 @@ public class Student {
 		public String getStudentid() {
 			return studentid;
 		}
-
-//		public void setStudentid(String val) {
-//			studentid.set(val);
-//		}
 
 		public String getStudentname() {
 			return studentname;
@@ -97,56 +88,28 @@ public class Student {
 			return email;
 		}
 
-//		public void setStudentname(String val) {
-//			studentname.set(val);
-//		}
-
 		public String getK1energy() {
 			return k1energy;
 		}
-
-//		public void setK1energy(String val) {
-//			k1energy.set(val);
-//		}
 
 		public String getK2energy() {
 			return k2energy;
 		}
 
-//		public void setK2energy(String val) {
-//			k2energy.set(val);
-//		}
 		
 		public String getK3trick1() {
 			return k3trick1;
 		}
 
-//		public void setK3trick1(String val) {
-//			k3trick1.set(val);
-//		}
-
 		public String getK3trick2() {
 			return k3trick2;
 		}
-
-//		public void setK3trick2(String val) {
-//			k3trick2.set(val);
-//		}
 
 		public String getMypreference() {
 			return mypreference;
 		}
 
-//		public void setMypreference(String val) {
-//			mypreference.set(val);
-//		}
-
 		public String getConcerns() {
 			return concerns;
 		}
-
-//		public void setConcerns(String val) {
-//			concerns.set(val);
-//		}
-
 }

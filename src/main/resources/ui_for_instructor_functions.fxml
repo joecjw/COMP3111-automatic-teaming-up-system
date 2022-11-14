@@ -63,7 +63,7 @@
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button fx:id="start_processing_button" layoutX="204.0" layoutY="150.0" mnemonicParsing="false" onAction="#process_and_form_teams" prefHeight="50.0" prefWidth="235.0" text="Start Processing" textAlignment="CENTER">
+            <Button fx:id="start_processing_button" layoutX="204.0" layoutY="150.0" mnemonicParsing="false" onAction="#form_teams" prefHeight="50.0" prefWidth="235.0" text="Start Processing" textAlignment="CENTER">
                <font>
                   <Font size="20.0" />
                </font>

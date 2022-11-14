@@ -6,6 +6,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Locale;
+
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,8 +18,8 @@ import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
 public class MyApplication extends Application{
-	
-	private final String delimiter = ",";
+
+	private final static String delimiter = ",";
 	
 	private static String fxmlPath = null;
 	
@@ -27,6 +29,8 @@ public class MyApplication extends Application{
 	
 	private static ArrayList<Student> studentData = new ArrayList<Student>();
 	
+	private static ArrayList<Team> teamData = new ArrayList<Team>();
+	
 	private final static ObservableList<Statistics> stat_data = FXCollections.observableArrayList();
 
 	private TableView<Statistics> stat_table = new TableView<Statistics>();
@@ -35,8 +39,12 @@ public class MyApplication extends Application{
 	
 	private TableView<Student> person_table = new TableView<Student>();
 
-	public ArrayList<Student> get_student_data() {
+	public static ArrayList<Student> get_student_data() {
 		return studentData;
+	}
+	
+	public static ArrayList<Team> get_team_data() {
+		return teamData;
 	}
 	
 	public TableView<Statistics> get_stat_table() {
@@ -47,7 +55,7 @@ public class MyApplication extends Application{
 		return person_table;
 	}
 
-	public ObservableList<Statistics> get_stat_data () {
+	public static ObservableList<Statistics> get_stat_data () {
 		return stat_data;
 	}
 
@@ -80,7 +88,6 @@ public class MyApplication extends Application{
 	}
 	
 	public void read(String csvFile) {
-		System.out.print("\n");
 		try {
 			File file = new File(csvFile);
 			InputStreamReader isr = new InputStreamReader(new FileInputStream(file), "UTF-8");
@@ -96,6 +103,8 @@ public class MyApplication extends Application{
 			br.readLine(); // skip the first line
 			while ((line = br.readLine()) != null) {
 				tempArr = line.split(delimiter);
+				tempArr[1] = tempArr[1].replace("\"", "");
+				tempArr[2] = tempArr[2].replace("\"", "");
 				Student a = new Student(String.valueOf(i), tempArr[0], tempArr[1]+tempArr[2], tempArr[3], tempArr[4], tempArr[5], tempArr[6],
 						tempArr[7], tempArr[8], tempArr[9]);
 				studentData.add(a);
@@ -129,6 +138,20 @@ public class MyApplication extends Application{
 			ioe.printStackTrace();
 		}
 	}
+	
+	static void print(Team t) {
+		if(t.getMembersList() != null) {
+				for(Student s : t.getMembersList()) {
+					System.out.print(s.getStudentname() + " ");
+					System.out.print(s.getK1energy() + " ");
+					System.out.print(s.getK2energy() + " ");
+					System.out.println();
+				}
+				System.out.println("Total " + t.getNumOfMembers() + " students");
+		} else {
+			System.out.println("The data is empty");
+		}
+	}
 
 	/**
 	 * This method changes the scene from current scene to another scene
@@ -136,7 +159,7 @@ public class MyApplication extends Application{
 	 * @param fxmlPath .fxml file path to the file that contains the destination scene
 	 * @throws IOException IOException Handle exception type IOExceptio which might be caused when loading the fxml file
 	 */
-    void switch_scene(Stage stage, String fxmlPath) throws IOException{   	
+   public void switch_scene(Stage stage, String fxmlPath) throws IOException{   	
     	Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
     	Scene scene = new Scene(root);
     	stage.setTitle("COMP3111 Project - Group 09");
@@ -156,6 +179,20 @@ public class MyApplication extends Application{
 	 * Entry point of the Application
 	 */
 	public static void main(String args[]) {
+		/*
+		 * This part is for process debug only, if you wanna make it work, 
+		 * manually add algorithm class from dev/process branch
+		algorithm alg = new algorithm();
+		Team t = new Team(studentData);
+		System.out.println("total have: " + t.getNumOfMembers() + " students");
+		alg.compute(t, 33);
+		print(alg.K1);
+		print(alg.K2);
+		print(alg.K3);
+		*/
+		
+		Locale.setDefault(Locale.ENGLISH);
 		Application.launch(args);
+		
 	}
 }
