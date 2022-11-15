@@ -13,7 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class MyApplicationTester extends ApplicationTest{
+public class UiTester extends ApplicationTest{
 	
 	Parent mainroot;
     Stage mainstage;

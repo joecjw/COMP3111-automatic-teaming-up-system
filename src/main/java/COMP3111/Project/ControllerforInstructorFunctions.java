@@ -2,7 +2,7 @@ package COMP3111.Project;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
+import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -133,26 +133,9 @@ public class ControllerforInstructorFunctions extends MyApplication {
     	}
     }
 
-	static void process_team_data(ArrayList<Student> studentData,  ArrayList<Team> teamData) {
-		Team test1 = new Team();
-		test1.addMember(studentData.get(0));
-		test1.addMember(studentData.get(1));
-		test1.addMember(studentData.get(2));
+	void process_team_data(ArrayList<Student> studentData,  ArrayList<Team> teamData) {
+		//can implement the process part here, the parameters are for reference only.
 		
-   		Team test2 = new Team();
-		test2.addMember(studentData.get(3));
-		test2.addMember(studentData.get(4));
-		test2.addMember(studentData.get(5));
-		
-   		Team test3 = new Team();
-		test3.addMember(studentData.get(6));
-		test3.addMember(studentData.get(7));
-		test3.addMember(studentData.get(8));
-		
-		teamData.add(test1);
-		teamData.add(test2);
-		teamData.add(test3);
-		
+		set_isTeamsFormed(true);
 	}
-
 }

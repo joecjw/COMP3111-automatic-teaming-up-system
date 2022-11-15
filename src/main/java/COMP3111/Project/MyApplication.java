@@ -29,6 +29,7 @@ public class MyApplication extends Application{
 	
 	private static ArrayList<Student> studentData = new ArrayList<Student>();
 	
+	//can change to other data structure (for output testing)
 	private static ArrayList<Team> teamData = new ArrayList<Team>();
 	
 	private final static ObservableList<Statistics> stat_data = FXCollections.observableArrayList();
@@ -43,6 +44,7 @@ public class MyApplication extends Application{
 		return studentData;
 	}
 	
+	//use to get the team data (for output testing)
 	public static ArrayList<Team> get_team_data() {
 		return teamData;
 	}
@@ -140,6 +142,7 @@ public class MyApplication extends Application{
 	}
 	
 	static void print(Team t) {
+		System.out.println("Team id: " + t.getTeamId() + " / Team name: " + t.getName());
 		if(t.getMembersList() != null) {
 				for(Student s : t.getMembersList()) {
 					System.out.print(s.getStudentname() + " ");
@@ -189,6 +192,11 @@ public class MyApplication extends Application{
 		print(alg.K1);
 		print(alg.K2);
 		print(alg.K3);
+		
+
+		for(int i = 0; i < 33; i++) {
+			print(alg.atu.getTeams().get(i));
+		}
 		*/
 		
 		Locale.setDefault(Locale.ENGLISH);
