@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="COMP3111.Project.ControllerforStart">
+   <children>
+      <Label layoutX="205.0" layoutY="105.0" text="Please Select User" AnchorPane.leftAnchor="205.0" AnchorPane.rightAnchor="205.0">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <Button fx:id="instructor_role_button" layoutX="96.0" layoutY="173.0" mnemonicParsing="false" onAction="#switch_scene_to_chart" prefHeight="144.0" prefWidth="164.0" text="Instructor" AnchorPane.bottomAnchor="83.0" AnchorPane.leftAnchor="100.0">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Button>
+      <Button fx:id="student_role_button" layoutX="344.0" layoutY="173.0" mnemonicParsing="false" onAction="#swith_scene_to_student_input_from_start" prefHeight="144.0" prefWidth="164.0" text="Student" AnchorPane.bottomAnchor="83.0" AnchorPane.rightAnchor="92.0">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Button>
+      <TitledPane alignment="CENTER" collapsible="false" contentDisplay="CENTER" prefHeight="27.0" prefWidth="600.0" text="ATU System" AnchorPane.bottomAnchor="340.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </TitledPane>
+      <Button fx:id="student_info_button" layoutX="251.0" layoutY="342.0" mnemonicParsing="false" onAction="#show_input_table_scene" prefHeight="29.0" prefWidth="99.0" text="Student Info" />
+   </children>
+</AnchorPane>
