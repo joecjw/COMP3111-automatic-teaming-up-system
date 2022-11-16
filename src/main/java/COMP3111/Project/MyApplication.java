@@ -127,6 +127,9 @@ public class MyApplication extends Application{
 				else if (tempArr[7].equals("1")) {
 					k3_tick2 += 1;
 				}
+				else if (tempArr[8].equals("1")) {
+					pref_cnt += 1;
+				}
 				k1[0] += Float.parseFloat(tempArr[4]);
 				k1[1] = Float.min(k1[1], Integer.parseInt(tempArr[4]));
 				k1[2] = Float.max(k1[2], Integer.parseInt(tempArr[4]));
@@ -144,7 +147,7 @@ public class MyApplication extends Application{
 			stat_data.add(new Statistics("K2_Energy(Average, Min, Max)", k2result));
 			stat_data.add(new Statistics("K3_Tick1 = 1", String.valueOf(k3_tick1)));
 			stat_data.add(new Statistics("K3_Tick2 = 1", String.valueOf(k3_tick2)));
-			stat_data.add(new Statistics("My_Preference = 1", "19"));
+			stat_data.add(new Statistics("My_Preference = 1", String.valueOf(pref_cnt)));
 			person_data = FXCollections.observableArrayList(studentData);
 			br.close();
 		} catch (IOException ioe) {

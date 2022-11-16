@@ -60,7 +60,7 @@ public class ControllerforImportFile extends MyApplication{
 			}
 			else {
 	    		Alert alert =  new Alert(AlertType.ERROR);
-	    		alert.setHeaderText("Wrong Type! Please Select A CSV File!");
+	    		alert.setHeaderText("Wrong Type! Please Select a CSV File!");
 	    		Button errorButton = (Button) alert.getDialogPane().lookupButton(ButtonType.OK);
 	    		errorButton.setId("importErrorDialog");
 	    		alert.showAndWait();
@@ -106,11 +106,11 @@ public class ControllerforImportFile extends MyApplication{
 			get_stat_table().setEditable(false);
 		
 			TableColumn entry_column = new TableColumn("Entry");
-			entry_column.setMinWidth(100);
+			entry_column.setMinWidth(200);
 			entry_column.setCellValueFactory(new PropertyValueFactory<Statistics, String>("entry"));
 		
 			TableColumn value_column = new TableColumn("Value");
-			value_column.setMinWidth(100);
+			value_column.setMinWidth(150);
 			value_column.setCellValueFactory(new PropertyValueFactory<Statistics, String>("value"));
 		
 			get_stat_table().setItems(get_stat_data());
@@ -130,7 +130,7 @@ public class ControllerforImportFile extends MyApplication{
 			Stage stage_person = new Stage();
 			Scene scene_person = new Scene(new Group());
 			stage_person.setTitle("Table of statistics data");
-			stage_person.setWidth(450);
+			stage_person.setWidth(900);
 			stage_person.setHeight(500);
 		
 			final Label label_person = new Label("Person");
@@ -139,31 +139,31 @@ public class ControllerforImportFile extends MyApplication{
 			get_person_table().setEditable(true);
 			
 			TableColumn rowid_column = new TableColumn("Row_Index");
-			rowid_column.setMinWidth(100);
+			rowid_column.setMinWidth(80);
 			 rowid_column.setCellValueFactory(new PropertyValueFactory<Statistics, String>("rowid"));
 			
 			TableColumn studentid_column = new TableColumn("Student_ID");
-			studentid_column.setMinWidth(100);
+			studentid_column.setMinWidth(80);
 			studentid_column.setCellValueFactory(new PropertyValueFactory<Statistics, String>("studentid"));
 		
 			TableColumn studentname_column = new TableColumn("Student_Name");
-			studentname_column.setMinWidth(100);
+			studentname_column.setMinWidth(180);
 			studentname_column.setCellValueFactory(new PropertyValueFactory<Statistics, String>("studentname"));
 		
 			TableColumn k1energy_column = new TableColumn("K1_Energy");
-			k1energy_column.setMinWidth(100);
+			k1energy_column.setMinWidth(80);
 			k1energy_column.setCellValueFactory(new PropertyValueFactory<Statistics, String>("k1energy"));
 		
 			TableColumn k2energy_column = new TableColumn("k2_Energy");
-			k2energy_column.setMinWidth(100);
+			k2energy_column.setMinWidth(80);
 			k2energy_column.setCellValueFactory(new PropertyValueFactory<Statistics, String>("k2energy"));
 		
 			TableColumn k3trick1_column = new TableColumn("K3_Trick1");
-			k3trick1_column.setMinWidth(100);
+			k3trick1_column.setMinWidth(80);
 			k3trick1_column.setCellValueFactory(new PropertyValueFactory<Statistics, String>("k3trick1"));
 		
 			TableColumn k3trick2_column = new TableColumn("K3_Trick2");
-			k3trick2_column.setMinWidth(100);
+			k3trick2_column.setMinWidth(80);
 			k3trick2_column.setCellValueFactory(new PropertyValueFactory<Statistics, String>("k3trick2"));
 		
 			TableColumn mypreference_column = new TableColumn("My_Preference");
@@ -178,13 +178,14 @@ public class ControllerforImportFile extends MyApplication{
 			get_person_table().getColumns().addAll(rowid_column, studentid_column, studentname_column, k1energy_column, k2energy_column,
 					k3trick1_column, k3trick2_column, mypreference_column, concerns_column);
 			get_person_table().setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+			
 			final VBox vbox_person = new VBox();
 			vbox_person.setSpacing(5);
 			vbox_person.setPadding(new Insets(10, 0, 0, 10));
 			vbox_person.getChildren().addAll(label_person, get_person_table());
-		
+			//get_person_table().prefHeightProperty().bind(scene_person.heightProperty());
+			//get_person_table().prefWidthProperty().bind(scene_person.widthProperty());
 			((Group) scene_person.getRoot()).getChildren().addAll(vbox_person);
-		
 			stage_person.setScene(scene_person);
 			stage_person.show();
     	}

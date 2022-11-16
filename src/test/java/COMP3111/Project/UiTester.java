@@ -99,7 +99,7 @@ public class UiTester extends ApplicationTest{
 	    //check reviewWithoutTeams error dialog
 	    //import csv file performed
 	    clickOn("Back");
-	    controller.set_fxmlPath("C:\\Users\\s2015\\git\\COMP3111-Project\\src\\main\\resources\\Sample Student Data File.CSV");
+	    controller.set_fxmlPath("C:\\Users\\oscar\\git\\COMP3111-Project\\src\\main\\resources\\Sample Student Data File.CSV");
 	    controller.read(controller.get_fxmlPath());
 		controller.set_isFileimported(true);
 		
