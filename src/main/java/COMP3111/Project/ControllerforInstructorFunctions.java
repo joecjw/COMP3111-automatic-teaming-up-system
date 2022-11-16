@@ -68,19 +68,29 @@ public class ControllerforInstructorFunctions extends MyApplication {
      */
     @FXML
     void form_teams(ActionEvent event) {
-    	if(get_isFileimported() == true) {//Prerequisite to create new Team instances
-    		process_team_data(get_student_data(), get_team_data());
-    		set_isTeamsFormed(true);
-    		Alert alert =  new Alert(AlertType.INFORMATION);
-    		alert.setHeaderText("Teams Have Been Successfully Formed");
-    		alert.showAndWait();
-    	}
+    	if(get_isTeamsFormed() != true) {//no need to form new teams if already exist
+	    	if(get_isFileimported() == true) {//Prerequisite to create new Team instances
+	    		process_team_data(get_student_data(), get_teamDataCopy(), get_algorithm());
+	    		set_isTeamsFormed(true);
+	    		Alert alert =  new Alert(AlertType.INFORMATION);
+	    		alert.setHeaderText("Teams Have Been Successfully Formed");
+	    		alert.showAndWait();
+	    	}
+	    	
+	    	else {
+	    		Alert alert =  new Alert(AlertType.ERROR);
+	    		alert.setHeaderText("No File Found! Please Import A File First!");
+	    		Button errorButton = (Button) alert.getDialogPane().lookupButton(ButtonType.OK);
+	            errorButton.setId("formTeamsError");
+	    		alert.showAndWait();
+	    	}
+	    }
     	
     	else {
     		Alert alert =  new Alert(AlertType.ERROR);
-    		alert.setHeaderText("No File Found! Please Import A File First!");
+    		alert.setHeaderText("Teams Already Formed!");
     		Button errorButton = (Button) alert.getDialogPane().lookupButton(ButtonType.OK);
-            errorButton.setId("formTeamsError");
+            errorButton.setId("TeamsExistError");
     		alert.showAndWait();
     	}
     }
@@ -109,7 +119,7 @@ public class ControllerforInstructorFunctions extends MyApplication {
     			FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui_for_chart.fxml"));
     			Parent root =  loader.load();
     			ControllerforChart controllerforchart = loader.getController();
-    			controllerforchart.initialize_chart(get_team_data());
+    			controllerforchart.initialize_chart(get_algorithm());
     	    	Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
     	    	Scene scene = new Scene(root);
     	    	stage.setScene(scene);
@@ -133,9 +143,40 @@ public class ControllerforInstructorFunctions extends MyApplication {
     	}
     }
 
-	void process_team_data(ArrayList<Student> studentData,  ArrayList<Team> teamData) {
-		//can implement the process part here, the parameters are for reference only.
+	void process_team_data(ArrayList<Student> studentData,  Team teamDatacopy, algorithm a) {
+		for(int i =0; i < studentData.size(); i++) {
+			teamDatacopy.addMember(studentData.get(i));
+		}
+		
+		a.compute(teamDatacopy, 33);
+
+		System.out.println("K1 student");
+		print(a.K1);
+		System.out.println("K2 student");
+		print(a.K2);
+		System.out.println("K3 student");
+		print(a.K3);
+		
+		for(int i = 0; i < a.atu.getTeams().size(); i ++) {
+			print(a.atu.getTeams().get(i));
+		}
 		
 		set_isTeamsFormed(true);
 	}
+	
+	static void print(Team t) {
+		System.out.println("Team id: " + t.getTeamId() + " / Team name: " + t.getName());
+		if(t.getMembersList() != null) {
+				for(Student s : t.getMembersList()) {
+					System.out.print(s.getStudentname() + " ");
+					System.out.print(s.getK1energy() + " ");
+					System.out.print(s.getK2energy() + " ");
+					System.out.println();
+				}
+				System.out.println("Total " + t.getNumOfMembers() + " students");
+		} else {
+			System.out.println("The data is empty");
+		}
+	}
+
 }

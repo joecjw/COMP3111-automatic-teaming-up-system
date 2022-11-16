@@ -5,7 +5,7 @@ public class algorithm {
 	public Team K2 = new Team();
 	public Team K3 = new Team();
 	private Team copy;
-	public ATU_Team atu;
+	public static ATU_Team atu;
 	
 	void compute(Team t, int Team_Size) {
 		Select_K1_member(t, Team_Size);

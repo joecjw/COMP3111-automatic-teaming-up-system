@@ -27,10 +27,13 @@ public class MyApplication extends Application{
 	
 	private static boolean isTeamsFormed = false;
 	
+	private algorithm ATU = new algorithm();
+	
 	private static ArrayList<Student> studentData = new ArrayList<Student>();
 	
 	//can change to other data structure (for output testing)
-	private static ArrayList<Team> teamData = new ArrayList<Team>();
+	//private static ArrayList<Team> teamData = new ArrayList<Team>();
+	private static Team teamDatacopy = new Team();
 	
 	private final static ObservableList<Statistics> stat_data = FXCollections.observableArrayList();
 
@@ -39,15 +42,23 @@ public class MyApplication extends Application{
 	private static ObservableList<Student> person_data = null;
 	
 	private TableView<Student> person_table = new TableView<Student>();
+	
+	public algorithm get_algorithm() {
+		return ATU;
+	}
 
 	public static ArrayList<Student> get_student_data() {
 		return studentData;
 	}
 	
-	//use to get the team data (for output testing)
-	public static ArrayList<Team> get_team_data() {
-		return teamData;
+	public Team get_teamDataCopy() {
+		return teamDatacopy;
 	}
+	
+	//use to get the team data (for output testing)
+	//public static ArrayList<Team> get_team_data() {
+		//return teamData;
+	//}
 	
 	public TableView<Statistics> get_stat_table() {
 		return stat_table;
@@ -141,21 +152,6 @@ public class MyApplication extends Application{
 		}
 	}
 	
-	static void print(Team t) {
-		System.out.println("Team id: " + t.getTeamId() + " / Team name: " + t.getName());
-		if(t.getMembersList() != null) {
-				for(Student s : t.getMembersList()) {
-					System.out.print(s.getStudentname() + " ");
-					System.out.print(s.getK1energy() + " ");
-					System.out.print(s.getK2energy() + " ");
-					System.out.println();
-				}
-				System.out.println("Total " + t.getNumOfMembers() + " students");
-		} else {
-			System.out.println("The data is empty");
-		}
-	}
-
 	/**
 	 * This method changes the scene from current scene to another scene
 	 * @param stage stage that contains the current scene

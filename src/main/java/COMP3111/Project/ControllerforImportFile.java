@@ -1,5 +1,6 @@
 package COMP3111.Project;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -22,6 +23,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 /**
@@ -44,35 +46,33 @@ public class ControllerforImportFile extends MyApplication{
      */
     @FXML
     void select_csv_file(ActionEvent event) {
-      	JFileChooser fileChooser = new JFileChooser();
-    	int response = fileChooser.showOpenDialog(null);
-    	if(response == JFileChooser.APPROVE_OPTION) {
-    		String file_path = fileChooser.getSelectedFile().getAbsolutePath();
-    		if(file_path.endsWith(".CSV")) {
-    			read(file_path);
-    			set_isFileimported(true);
+    	FileChooser fileChooser = new FileChooser();
+    	File selectedFile = fileChooser.showOpenDialog((Stage)((Node)event.getSource()).getScene().getWindow());
+    	if(selectedFile != null) {
+	    	if(selectedFile.toString().endsWith(".CSV")) {
+				read(selectedFile.toString());
+				set_isFileimported(true);
 	    		Alert alert =  new Alert(AlertType.INFORMATION);
 	    		alert.setHeaderText("Selected File Has Been Imported");
 	    		Button infoButton = (Button) alert.getDialogPane().lookupButton(ButtonType.OK);
 	    		infoButton.setId("importConfirmDialog");
 	    		alert.showAndWait();
-    		}
-    		else {
+			}
+			else {
 	    		Alert alert =  new Alert(AlertType.ERROR);
 	    		alert.setHeaderText("Wrong Type! Please Select A CSV File!");
 	    		Button errorButton = (Button) alert.getDialogPane().lookupButton(ButtonType.OK);
 	    		errorButton.setId("importErrorDialog");
 	    		alert.showAndWait();
-    		}
-    	}
-    	else {
+			}
+    	}	
+	    else {
     		Alert alert =  new Alert(AlertType.INFORMATION);
     		alert.setHeaderText("Import Cancelled");
     		Button infoButton = (Button) alert.getDialogPane().lookupButton(ButtonType.OK);
     		infoButton.setId("importCancelDialog");
     		alert.showAndWait();
-    	}
-    	
+	    }
     }
 
     /**

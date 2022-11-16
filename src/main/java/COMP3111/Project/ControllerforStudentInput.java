@@ -51,12 +51,12 @@ public class ControllerforStudentInput extends MyApplication{
      * @param student indicates the student who wants to check his/her team information
      * @throws IOException Handle exception type IOExceptio which might be caused when loading the fxml file 
      */
-    void switch_scene_to_table(ActionEvent event, Student student) throws IOException {
+    void switch_scene_to_table(ActionEvent event, Student student, Team team, String k1_avg, String k2_avg) throws IOException {
     	set_fxmlPath("/ui_for_table.fxml");
     	FXMLLoader loader = new FXMLLoader(getClass().getResource(get_fxmlPath()));
     	Parent root =  loader.load();
     	ControllerforTable controllerfortable = loader.getController();
-    	controllerfortable.initialize_table(student);
+    	controllerfortable.initialize_table(student, team, k1_avg, k2_avg);
     	Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
     	Scene scene = new Scene(root);
     	stage.setScene(scene);
@@ -74,16 +74,33 @@ public class ControllerforStudentInput extends MyApplication{
     	if(get_isTeamsFormed() == true) {//prerequisite for generating table
     		Boolean valid_input = false;
         	String key = input_text.getText();
-        	Student target = null;
-        	for(Student student: get_student_data()) {//look up for the student in data that is the same as the input
-        		if(key.equalsIgnoreCase(student.getStudentid()) == true || key.equalsIgnoreCase(student.getStudentname()) == true) {
-        			valid_input = true;
-        			target = student;
+        	Team targetTeam = null;
+        	Student targetStudent = null;
+        	
+        	Integer team_average_k1 = 0;
+    		Integer team_average_k2 = 0;
+    		for(int i = 0; i < get_algorithm().atu.getTeams().size(); i++) {//look up for the student in teamData that is the same as the input
+        		for(int j = 0; j < get_algorithm().atu.getTeams().get(i).getNumOfMembers(); j++) {
+        			if(key.equalsIgnoreCase(get_algorithm().atu.getTeams().get(i).getMembersList().get(j).getStudentid()) || 
+        				key.equalsIgnoreCase(get_algorithm().atu.getTeams().get(i).getMembersList().get(j).getStudentname())) {
+
+        				valid_input = true;
+            			targetTeam = get_algorithm().atu.getTeams().get(i);
+            			targetStudent = get_algorithm().atu.getTeams().get(i).getMembersList().get(j);
+            			
+        				for(int k = 0; k < get_algorithm().atu.getTeams().get(i).getNumOfMembers(); k++) {
+    						team_average_k1 = team_average_k1 + Integer.parseInt(get_algorithm().atu.getTeams().get(i).getMembersList().get(k).getK1energy());
+    						team_average_k2 = team_average_k2 + Integer.parseInt(get_algorithm().atu.getTeams().get(i).getMembersList().get(k).getK2energy());
+        				}
+        				team_average_k1 = team_average_k1 / get_algorithm().atu.getTeams().get(i).getNumOfMembers();
+        				team_average_k2 = team_average_k2 / get_algorithm().atu.getTeams().get(i).getNumOfMembers();
+        				break;
+        			}
         		}
         	}
-        	
-        	if(valid_input == true && target != null) {//display table only with valid input and existing data
-        		switch_scene_to_table(event, target);
+
+        	if(valid_input == true && targetTeam != null && targetStudent != null) {//display table only with valid input and existing data
+        		switch_scene_to_table(event,targetStudent, targetTeam, team_average_k1.toString(), team_average_k2.toString());
         	}
         	
         	else {//inform user with invalid input message

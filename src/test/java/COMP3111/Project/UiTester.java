@@ -61,37 +61,40 @@ public class UiTester extends ApplicationTest{
 	    clickOn("#reviewStatisticsWithoutImportError");
 	    sleep(100);
 	    
-	    /*
-	    //check importCancel dialog
+	    ////////////////////////////////////////////////////////
+	    /*//check importCancel dialog
 	    clickOn("Select File");
 	    sleep(100);
-	    clickOn(Cancel);
+	    clickOn("È¡Ïû");
 	    sleep(100);
 	    FxAssert.verifyThat("#importCancelDialog", NodeMatchers.isVisible());
 	    clickOn("#importCancelDialog");
-	    sleep(100);*/
+	    sleep(100);
 	    
-	    /*
+	    
 	    //check importError dialog
 	    clickOn("Select File");
 	    sleep(100);
-	    write();
+	    write("/COMP3111 Project/src/test/resources/testFileForImport.txt");
 	    clickOn("Open");
 	    sleep(100);
 	    FxAssert.verifyThat("#importErrorDialog", NodeMatchers.isVisible());
 	    clickOn("#importErrorDialog");
-	    sleep(100);*/
+	    sleep(100);
 	    
-	    /*
+	    
 	    //check importSuccess dialog
 	    clickOn("Select File");
 	    sleep(100);
 	    write("Sample Student Data File.CSV");
 	    clickOn("Open");
 	    sleep(100);
-	    FxAssert.verifyThat("#importCancelDialog", NodeMatchers.isVisible());
-	    clickOn("#importCancelDialog");
-	    sleep(100);*/
+	    FxAssert.verifyThat("#importConfirmDialog", NodeMatchers.isVisible());
+	    clickOn("#importConfirmDialog");
+	    sleep(100);
+	    
+	    //////////////////////////////////////////////////////
+	    */
 	    
 	    //check reviewWithoutTeams error dialog
 	    //import csv file performed
@@ -126,6 +129,14 @@ public class UiTester extends ApplicationTest{
 		sleep(100);
 		clickOn("OK");
 		
+		//check TeamsExist error dialog
+		sleep(100);
+		clickOn("Start Processing");
+		sleep(100);
+	    FxAssert.verifyThat("#TeamsExistError", NodeMatchers.isVisible());
+	    clickOn("#TeamsExistError");
+		sleep(100);
+
 		//Test on output chart
 		clickOn("Review class statistics");
 		sleep(100);
@@ -155,7 +166,7 @@ public class UiTester extends ApplicationTest{
 		sleep(100);
 		
 		//valid input
-		clickOn("#input_text").write("20043679");
+		clickOn("#input_text").write("20556367");
 		sleep(100);
 		clickOn("Confirm");
 		sleep(100);
@@ -170,14 +181,14 @@ public class UiTester extends ApplicationTest{
 		TextField k1 = (TextField) mainstage.getScene().lookup("#k1_average");
 		TextField k2 = (TextField) mainstage.getScene().lookup("#k2_average");
 		
-		assertEquals("20043679", id.getText());
-		assertEquals("LEEKS Beetle", name.getText());
-		//assertEquals("4", t_number.getText());
-		//assertEquals("", t_1.getText());
-		//assertEquals("", t_2.getText());
-		//assertEquals("", t_3.getText());
+		assertEquals("20556367", id.getText());
+		assertEquals("ANAHEIM James", name.getText());
+		assertEquals("6", t_number.getText());
+		assertEquals("ANAHEIM James", t_1.getText());
+		assertEquals("ANGELICA Cat", t_2.getText());
+		assertEquals("MARJORAM Coral", t_3.getText());
 		assertEquals(true, t_4.getText().isEmpty());
-		//assertEquals("", k1.getText());
-		//assertEquals("", k2.getText());
+		assertEquals("70", k1.getText());
+		assertEquals("65", k2.getText());
 	}
 }

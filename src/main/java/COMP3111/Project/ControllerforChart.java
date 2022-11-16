@@ -11,6 +11,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import javafx.util.Pair;
 
 /**
  *Controller for the OUTPUT Task: Generate Chart with skill energy of the teams
@@ -42,34 +43,65 @@ public class ControllerforChart extends MyApplication{
     /**
      * This method initialize the linechart with processed team data
      */
-    void initialize_chart(ArrayList<Team> teamData) {
+    void initialize_chart(algorithm a) {
+    	//initialize three series for linechart
         XYChart.Series<String, Number> series_k1 = new XYChart.Series<String, Number>();
         XYChart.Series<String, Number> series_k2 = new XYChart.Series<String, Number>();
         XYChart.Series<String, Number> series_k1_k2 = new XYChart.Series<String, Number>();
-	    for(int i = 1; i < get_team_data().size() + 1; i++) {
-    		Integer index = i;
-    		int team_average_k1 = 0;
-    		int team_average_k2 = 0;
-    		int team_average_k1_k2 = 0;
-    		for(int j = 0; j < get_team_data().get(i-1).getNumOfMembers(); j++) {
-    			team_average_k1 = team_average_k1 + Integer.parseInt(get_team_data().get(i-1).getMembersList().get(j).getK1energy());
-    			team_average_k2 = team_average_k2 + Integer.parseInt(get_team_data().get(i-1).getMembersList().get(j).getK2energy());
-    			team_average_k1_k2 = team_average_k1_k2 + Integer.parseInt(get_team_data().get(i-1).getMembersList().get(j).getK2energy() 
-    					+ Integer.parseInt(teamData.get(i-1).getMembersList().get(j).getK2energy()));
-
-    		}
-    		series_k1.getData().add(new XYChart.Data<String,Number>(index.toString(),team_average_k1/get_team_data().get(i-1).getNumOfMembers()));
-    		series_k2.getData().add(new XYChart.Data<String,Number>(index.toString(),team_average_k2/get_team_data().get(i-1).getNumOfMembers()));
-    		series_k1_k2.getData().add(new XYChart.Data<String,Number>(index.toString(),team_average_k1_k2/get_team_data().get(i-1).getNumOfMembers()));
-    	}
     	series_k1.setName("K1");
     	series_k2.setName("K2");
     	series_k1_k2.setName("K1+K2");
-   	    		    	
+    	
+    	//initialize and compute team statistics for each team, store in a TeamAverage class array
+    	TeamAverage[] teamStat = new TeamAverage[a.atu.getTeams().size()];
+        for(int i = 0; i < teamStat.length; i++) {
+        	teamStat[i] = new TeamAverage(0.0, 0.0, 0.0, i);
+    		for(int j = 0; j < a.atu.getTeams().get(i).getNumOfMembers(); j++) {
+    			teamStat[i].avg_k1 = teamStat[i].avg_k1 + Integer.parseInt(a.atu.getTeams().get(i).getMembersList().get(j).getK1energy());
+    			teamStat[i].avg_k2 = teamStat[i].avg_k2 + Integer.parseInt(a.atu.getTeams().get(i).getMembersList().get(j).getK2energy());
+    			teamStat[i].avg_k1_k2 = teamStat[i].avg_k1_k2 + teamStat[i].avg_k1 + teamStat[i].avg_k2;
+    		}
+    		teamStat[i].avg_k1 = teamStat[i].avg_k1/(a.atu.getTeams().get(i).getNumOfMembers());
+    		teamStat[i].avg_k2 = teamStat[i].avg_k2/(a.atu.getTeams().get(i).getNumOfMembers());
+    		teamStat[i].avg_k1_k2 = (teamStat[i].avg_k1 + teamStat[i].avg_k2)/2;
+    	}
+        
+        //sort the TeamAverage class array in descending order of average k1 energy
+        for(int i = 0; i < teamStat.length - 1; i++) {
+    		for(int j = 1; j < teamStat.length; j++) {
+				if(teamStat[j-1].avg_k1 < teamStat[j].avg_k1) {
+					TeamAverage tmp = teamStat[j];
+					teamStat[j] = teamStat[j-1];
+					teamStat[j-1] = tmp;
+				} 
+			}
+		}
+        
+        //add the value of statistics to corresponding series 
+        for(int i = 0; i < teamStat.length; i++) {
+        	series_k1.getData().add(new XYChart.Data<String,Number>(String.valueOf(i+1),teamStat[i].avg_k1));
+    		series_k2.getData().add(new XYChart.Data<String,Number>(String.valueOf(i+1),teamStat[i].avg_k2));
+    		series_k1_k2.getData().add(new XYChart.Data<String,Number>(String.valueOf(i+1),teamStat[i].avg_k1_k2));	
+        }
+        	    	
+        //add series to the linechart
     	linechart.getData().add(series_k1);
     	linechart.getData().add(series_k2);
     	linechart.getData().add(series_k1_k2);
     }
-
+    
+    public class TeamAverage{//class used to store a team's average statistics
+    	Double avg_k1;
+    	Double avg_k2;
+    	Double avg_k1_k2;
+    	Integer team_id;
+    	
+    	TeamAverage(Double avg_k1, Double avg_k2, Double avg_k1_k2, Integer team_id){
+    		this.avg_k1 = avg_k1;
+    		this.avg_k2 = avg_k2;
+    		this.avg_k1_k2 = avg_k1_k2;
+    		this.team_id = team_id;
+    	}
+    }
 }
 
