@@ -73,7 +73,15 @@ public class ControllerforChart extends MyApplication{
 					TeamAverage tmp = teamStat[j];
 					teamStat[j] = teamStat[j-1];
 					teamStat[j-1] = tmp;
-				} 
+				}
+				
+				else if(teamStat[j-1].avg_k1 == teamStat[j].avg_k1) {
+					if(teamStat[j-1].avg_k2 < teamStat[j].avg_k2) {
+						TeamAverage tmp = teamStat[j];
+						teamStat[j] = teamStat[j-1];
+						teamStat[j-1] = tmp;
+					}
+				}
 			}
 		}
         
