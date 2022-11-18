@@ -17,6 +17,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
+/**
+ * Entry point of the application
+ * Containing main data of the program
+ * @author Team 9
+ *
+ */
 public class MyApplication extends Application{
 
 	private final static String delimiter = ",";
@@ -31,8 +37,6 @@ public class MyApplication extends Application{
 	
 	private static ArrayList<Student> studentData = new ArrayList<Student>();
 	
-	//can change to other data structure (for output testing)
-	//private static ArrayList<Team> teamData = new ArrayList<Team>();
 	private static Team teamDatacopy = new Team();
 	
 	private final static ObservableList<Statistics> stat_data = FXCollections.observableArrayList();
@@ -54,11 +58,6 @@ public class MyApplication extends Application{
 	public Team get_teamDataCopy() {
 		return teamDatacopy;
 	}
-	
-	//use to get the team data (for output testing)
-	//public static ArrayList<Team> get_team_data() {
-		//return teamData;
-	//}
 	
 	public TableView<Statistics> get_stat_table() {
 		return stat_table;
