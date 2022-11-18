@@ -51,12 +51,12 @@
       </TitledPane>
       <AnchorPane prefHeight="360.0" prefWidth="640.0" VBox.vgrow="ALWAYS">
          <children>
-            <Button fx:id="back_to_input_button" layoutY="320.0" mnemonicParsing="false" onAction="#switch_scene_to_student_input_from_table" prefHeight="32.0" prefWidth="640.0" text="Back" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <Button fx:id="back_to_input_button" layoutY="320.0" mnemonicParsing="false" onAction="#switch_scene_to_student_input_from_table" prefHeight="35.0" prefWidth="642.0" text="Back" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                <font>
                   <Font size="16.0" />
                </font>
             </Button>
-            <GridPane alignment="CENTER" gridLinesVisible="true" layoutX="90.0" prefHeight="320.0" prefWidth="173.0">
+            <GridPane alignment="CENTER" gridLinesVisible="true" layoutX="90.0" layoutY="-2.0" prefHeight="320.0" prefWidth="173.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="117.0" minWidth="10.0" prefWidth="117.0" />
               </columnConstraints>
@@ -75,7 +75,7 @@
                   <TextField alignment="CENTER" editable="false" prefHeight="103.0" prefWidth="117.0" text="Our Team Energy" GridPane.rowIndex="4" />
                </children>
             </GridPane>
-            <GridPane alignment="CENTER" gridLinesVisible="true" layoutX="1.0" prefHeight="320.0" prefWidth="117.0">
+            <GridPane alignment="CENTER" gridLinesVisible="true" layoutX="-6.0" layoutY="-2.0" prefHeight="320.0" prefWidth="124.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
@@ -94,7 +94,7 @@
                      </font></TextField>
                </children>
             </GridPane>
-            <GridPane gridLinesVisible="true" layoutX="235.0" prefHeight="156.0" prefWidth="405.0">
+            <GridPane gridLinesVisible="true" layoutX="235.0" layoutY="-2.0" prefHeight="156.0" prefWidth="407.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
@@ -104,7 +104,7 @@
                 <RowConstraints maxHeight="57.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField fx:id="student_id" alignment="CENTER" editable="false" prefHeight="113.0" prefWidth="407.0">
+                  <TextField fx:id="student_id" alignment="CENTER" editable="false" prefHeight="53.0" prefWidth="425.0">
                      <font>
                         <Font size="15.0" />
                      </font></TextField>
@@ -118,7 +118,7 @@
                      </font></TextField>
                </children>
             </GridPane>
-            <GridPane gridLinesVisible="true" layoutX="235.0" layoutY="156.0" prefHeight="164.0" prefWidth="407.0">
+            <GridPane gridLinesVisible="true" layoutX="235.0" layoutY="154.0" prefHeight="164.0" prefWidth="407.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -139,7 +139,7 @@
                   </TextField>
                   <TextField fx:id="teammate_1" alignment="CENTER" editable="false" prefHeight="73.0" prefWidth="102.0" GridPane.rowIndex="1">
                      <font>
-                        <Font size="15.0" />
+                        <Font size="10.0" />
                      </font></TextField>
                   <TextField alignment="CENTER" editable="false" prefHeight="92.0" prefWidth="102.0" text="2" GridPane.columnIndex="1">
                      <font>
@@ -148,7 +148,7 @@
                   </TextField>
                   <TextField fx:id="teammate_2" alignment="CENTER" editable="false" prefHeight="87.0" prefWidth="102.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <font>
-                        <Font size="15.0" />
+                        <Font size="10.0" />
                      </font></TextField>
                   <TextField editable="false" prefHeight="78.0" prefWidth="102.0" text="K1_Average" GridPane.rowIndex="2">
                      <font>
@@ -175,7 +175,7 @@
                   </TextField>
                   <TextField fx:id="teammate_4" alignment="CENTER" editable="false" prefHeight="103.0" prefWidth="101.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
                      <font>
-                        <Font size="15.0" />
+                        <Font size="10.0" />
                      </font></TextField>
                   <TextField alignment="CENTER" editable="false" prefHeight="106.0" prefWidth="101.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
                      <font>
@@ -192,7 +192,7 @@
                   </TextField>
                   <TextField fx:id="teammate_3" alignment="CENTER" editable="false" prefHeight="103.0" prefWidth="102.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <font>
-                        <Font size="15.0" />
+                        <Font size="10.0" />
                      </font></TextField>
                   <TextField alignment="CENTER" editable="false" prefHeight="112.0" prefWidth="102.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
                      <font>

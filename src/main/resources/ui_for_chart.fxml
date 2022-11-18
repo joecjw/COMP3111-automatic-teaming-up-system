@@ -50,7 +50,7 @@
       </TitledPane>
       <AnchorPane prefHeight="360.0" prefWidth="640.0" VBox.vgrow="ALWAYS">
          <children>
-            <Button fx:id="back_to_start_buttton" layoutY="320.0" mnemonicParsing="false" onAction="#switch_scene_to_start_form_chart" prefHeight="32.0" prefWidth="640.0" text="Back" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <Button fx:id="back_to_instructor_buttton" layoutY="320.0" mnemonicParsing="false" onAction="#switch_scene_to_instructor_form_chart" prefHeight="32.0" prefWidth="640.0" text="Back" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                <font>
                   <Font size="16.0" />
                </font>

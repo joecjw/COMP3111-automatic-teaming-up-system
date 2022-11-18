@@ -63,11 +63,13 @@
                <font>
                   <Font size="20.0" />
                </font></TextField>
-            <Label fx:id="input_guide_label" alignment="CENTER" layoutY="92.0" prefHeight="27.0" prefWidth="640.0" text="Please enter your student ID or Name:" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="92.0">
+            <Label fx:id="input_guide_label" alignment="CENTER" layoutX="1.0" layoutY="92.0" prefHeight="27.0" prefWidth="640.0" text="Please enter your student ID or Name:" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="92.0">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
+            <Label layoutX="150.0" layoutY="45.0" prefHeight="41.0" prefWidth="341.0" text="Separate First Name and Last Name with One White Space" />
+            <Label layoutX="196.0" layoutY="79.0" text="No Extra White Spaces or Comma Expected" />
          </children>
       </AnchorPane>
   </children>
