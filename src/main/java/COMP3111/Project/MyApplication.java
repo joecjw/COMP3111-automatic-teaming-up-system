@@ -27,7 +27,7 @@ public class MyApplication extends Application{
 	
 	private static boolean isTeamsFormed = false;
 	
-	private algorithm ATU = new algorithm();
+	private Algorithm ATU = new Algorithm();
 	
 	private static ArrayList<Student> studentData = new ArrayList<Student>();
 	
@@ -43,7 +43,7 @@ public class MyApplication extends Application{
 	
 	private TableView<Student> person_table = new TableView<Student>();
 	
-	public algorithm get_algorithm() {
+	public Algorithm get_algorithm() {
 		return ATU;
 	}
 

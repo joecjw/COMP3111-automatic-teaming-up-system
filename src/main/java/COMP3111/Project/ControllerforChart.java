@@ -43,7 +43,7 @@ public class ControllerforChart extends MyApplication{
     /**
      * This method initialize the linechart with processed team data
      */
-    void initialize_chart(algorithm a) {
+    void initialize_chart(Algorithm a) {
     	//initialize three series for linechart
         XYChart.Series<String, Number> series_k1 = new XYChart.Series<String, Number>();
         XYChart.Series<String, Number> series_k2 = new XYChart.Series<String, Number>();

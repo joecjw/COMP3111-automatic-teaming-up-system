@@ -1,12 +1,23 @@
 package COMP3111.Project;
 
-public class algorithm {
-	public Team K1 = new Team();
-	public Team K2 = new Team();
-	public Team K3 = new Team();
+/**
+ * The core algorithm of ATU
+ * @author Team 9
+ * @version 1.0
+ *
+ */
+public class Algorithm {
+	private Team K1 = new Team();
+	private Team K2 = new Team();
+	private Team K3 = new Team();
 	private Team copy;
 	public static ATU_Team atu;
 	
+	/**
+	 * Method to compute and create output
+	 * @param t team class object
+	 * @param Team_Size total number of teams
+	 */
 	void compute(Team t, int Team_Size) {
 		Select_K1_member(t, Team_Size);
 		Select_K2_member(t, Team_Size);
@@ -14,19 +25,11 @@ public class algorithm {
 		Create_Team(t, Team_Size);
 	}
 	
-//	private int K1_Position(Team t) {
-//	String k1 = "k1_energy";
-//	int i = 0;
-//	while(!k1.equals(t.get(0).get(i))) i++;
-//	return i;
-//}
-//private int K2_Position(Team Team) {
-//	String k2 = "k2_energy";
-//	int i = 0;
-//	while(!k2.equals(Team.returnTeam().get(0).get(i))) i++;
-//	return i;
-//}
-	
+	/**
+	 * Method to create K1 member list (team class object) in descending order
+	 * @param t team class object
+	 * @param Team_Size total number of teams
+	 */
 	private void Select_K1_member(Team t, int Team_Size) {
 		if(K1.isEmptyMemberList() && K2.isEmptyMemberList() && K3.isEmptyMemberList())
 			copy = new Team (t);
@@ -49,6 +52,11 @@ public class algorithm {
 
 	}
 	
+	/**
+	 * Method to create K2 member list (team class object) in ascending order, without in K1 list
+	 * @param t team class object
+	 * @param Team_Size total number of teams
+	 */
 	private void Select_K2_member(Team t, int Team_Size) {
 		if(K1.isEmptyMemberList() && K2.isEmptyMemberList() && K3.isEmptyMemberList())
 			copy = new Team (t);
@@ -72,6 +80,11 @@ public class algorithm {
 
 	}
 	
+	/**
+	 * Method to create K3 member list (team class object) without in K1 and K2 lists
+	 * @param t team class object
+	 * @param Team_Size total number of teams
+	 */
 	private void Select_K3_member(Team t, int Team_Size) {
 		int k = 0;
 		for(int i = 0; i < t.getNumOfMembers(); i++) {
@@ -84,6 +97,11 @@ public class algorithm {
 		}
 	}
 	
+	/**
+	 * Method to create list of team (ATU_Team class object) 
+	 * @param t team class object
+	 * @param Team_Size total number of teams
+	 */
 	private void Create_Team(Team t, int Team_Size) {
 		atu = new ATU_Team(t.getNumOfMembers(), Team_Size);
 		for(int i = 0; i < Team_Size; i++) {
@@ -99,21 +117,38 @@ public class algorithm {
 		}
 	}
 	
+	/**
+	 * Method to append integers and char into string
+	 * @param i int
+	 * @param j int
+	 * @param c char
+	 * @return String
+	 */
 	private String string(int i, int j, char c) {
 		return new String(Integer.toString(i) + Integer.toString(j) + Character.toString(c));
 	}
 	
-//	private int K1_Average(Team Team) {
-//	try {
-//		int K1_Position = K1_Position(Team) + 1;
-//		int sum = 0;
-//		for(int i = 1; i < Team.returnTeam().size()-1; i++) 
-//			sum += Integer.parseInt(Team.returnTeam().get(i).get(K1_Position));
-//		
-//		return (sum/(Team.returnNumOf()));
-//	} catch (Exception e) {
-//		System.out.println("No !");
-//		return 0;
-//	}
-//}
+	/**
+	 * Method to get K1 arraylist<team>
+	 * @return arraylist<team>
+	 */
+	public Team get_K1() {
+		return K1; 
+	}
+	
+	/**
+	 * Method to get K2 arraylist<team>
+	 * @return arraylist<team>
+	 */
+	public Team get_K2() {
+		return K2;
+	}
+	
+	/**
+	 * Method to get K3 arraylist<team>
+	 * @return arraylist<team>
+	 */
+	public Team get_K3() {
+		return K3;
+	}
 }

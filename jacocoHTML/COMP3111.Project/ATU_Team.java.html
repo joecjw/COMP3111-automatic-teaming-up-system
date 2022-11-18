@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ATU_Team.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">COMP3111 Project</a> &gt; <a href="index.source.html" class="el_package">COMP3111.Project</a> &gt; <span class="el_source">ATU_Team.java</span></div><h1>ATU_Team.java</h1><pre class="source lang-java linenums">package COMP3111.Project;
+
+import java.util.ArrayList;
+
+/**
+ * ATU_Team class for the output
+ * @author Team 9
+ * @version 1.0
+ */
+public class ATU_Team{
+	private ArrayList&lt;Team&gt; teams;
+	private Integer numOfStudentsPerTeam;
+	private Integer currentNumOfTeams;
+	private Integer currentNumOfStudentsPerTeam;
+
+/**
+ * Constructor of ATU_Team object
+ * @param numOfStudents total number of stduents
+ * @param Team_Size total number of teams
+ */
+<span class="fc" id="L21">	ATU_Team(int numOfStudents, int Team_Size){</span>
+<span class="fc" id="L22">		teams = new ArrayList&lt;Team&gt;();</span>
+<span class="fc" id="L23">		this.numOfStudentsPerTeam = numOfStudents/Team_Size;</span>
+<span class="fc" id="L24">		this.currentNumOfStudentsPerTeam = 0;</span>
+<span class="fc" id="L25">		this.currentNumOfTeams = 0;</span>
+<span class="fc" id="L26">	}</span>
+	
+	/**
+	 * method to return arraylist&lt;team&gt;
+	 * @return arraylist&lt;team&gt;
+	 */
+	public ArrayList&lt;Team&gt; getTeams(){
+<span class="fc" id="L33">		return teams;</span>
+	}
+	
+	/**
+	 * method to append student into a team
+	 * @param team_id team's id
+	 * @param team_name team's name
+	 * @param s student class object
+	 * @param is_team_Leader whether the student is teamleader
+	 * @param remainderFlag whether it has remaining students
+	 */
+	public void append(int team_id, String team_name, Student s, 
+			boolean is_team_Leader, boolean remainderFlag) {
+<span class="pc bpc" id="L46" title="1 of 2 branches missed.">		if(!remainderFlag) {</span>
+<span class="fc bfc" id="L47" title="All 2 branches covered.">			if(currentNumOfStudentsPerTeam == 0) {</span>
+<span class="fc" id="L48">				teams.add(new Team(team_id, team_name, s, is_team_Leader));</span>
+<span class="fc" id="L49">				currentNumOfStudentsPerTeam++;</span>
+			} else {
+<span class="fc" id="L51">				teams.get(currentNumOfTeams).addMember(s);</span>
+<span class="fc" id="L52">				currentNumOfStudentsPerTeam++;</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">				if(currentNumOfStudentsPerTeam == numOfStudentsPerTeam) {</span>
+<span class="fc" id="L54">					currentNumOfTeams++;</span>
+<span class="fc" id="L55">					currentNumOfStudentsPerTeam = 0;</span>
+				}
+			}
+		} else {
+<span class="nc bnc" id="L59" title="All 2 branches missed.">			for(int i = 0; i &lt; currentNumOfTeams; i++) {</span>
+<span class="nc bnc" id="L60" title="All 2 branches missed.">				if(teams.get(i).getTeamId() == team_id)</span>
+<span class="nc" id="L61">					teams.get(i).addMember(s);</span>
+			}
+		}
+<span class="fc" id="L64">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

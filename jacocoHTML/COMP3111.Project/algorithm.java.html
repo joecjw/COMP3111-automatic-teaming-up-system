@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Algorithm.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">COMP3111 Project</a> &gt; <a href="index.source.html" class="el_package">COMP3111.Project</a> &gt; <span class="el_source">Algorithm.java</span></div><h1>Algorithm.java</h1><pre class="source lang-java linenums">package COMP3111.Project;
+
+/**
+ * The core algorithm of ATU
+ * @author Team 9
+ * @version 1.0
+ *
+ */
+<span class="fc" id="L9">public class Algorithm {</span>
+<span class="fc" id="L10">	private Team K1 = new Team();</span>
+<span class="fc" id="L11">	private Team K2 = new Team();</span>
+<span class="fc" id="L12">	private Team K3 = new Team();</span>
+	private Team copy;
+	public static ATU_Team atu;
+	
+	/**
+	 * Method to compute and create output
+	 * @param t team class object
+	 * @param Team_Size total number of teams
+	 */
+	void compute(Team t, int Team_Size) {
+<span class="fc" id="L22">		Select_K1_member(t, Team_Size);</span>
+<span class="fc" id="L23">		Select_K2_member(t, Team_Size);</span>
+<span class="fc" id="L24">		Select_K3_member(t, Team_Size);</span>
+<span class="fc" id="L25">		Create_Team(t, Team_Size);</span>
+<span class="fc" id="L26">	}</span>
+	
+	/**
+	 * Method to create K1 member list (team class object) in descending order
+	 * @param t team class object
+	 * @param Team_Size total number of teams
+	 */
+	private void Select_K1_member(Team t, int Team_Size) {
+<span class="pc bpc" id="L34" title="3 of 6 branches missed.">		if(K1.isEmptyMemberList() &amp;&amp; K2.isEmptyMemberList() &amp;&amp; K3.isEmptyMemberList())</span>
+<span class="fc" id="L35">			copy = new Team (t);</span>
+		
+<span class="fc bfc" id="L37" title="All 2 branches covered.">		for(int i = 0; i &lt; copy.getNumOfMembers()-1; i++) {</span>
+<span class="fc bfc" id="L38" title="All 2 branches covered.">			for(int j = 1; j &lt; copy.getNumOfMembers(); j++) {</span>
+<span class="fc" id="L39">				if(Integer.parseInt(copy.getMembersList().get(j-1).getK1energy()) </span>
+<span class="fc bfc" id="L40" title="All 2 branches covered.">						&lt; Integer.parseInt(copy.getMembersList().get(j).getK1energy())) {</span>
+<span class="fc" id="L41">					Student s = copy.getMembersList().get(j);</span>
+<span class="fc" id="L42">					copy.getMembersList().remove(j);</span>
+<span class="fc" id="L43">					copy.getMembersList().add(j-1, s);</span>
+				} 
+			}
+		}
+<span class="fc bfc" id="L47" title="All 2 branches covered.">		for(int i = 0; i &lt; Team_Size; i++) {</span>
+<span class="fc" id="L48">			K1.addMember(copy.getMembersList().get(0));</span>
+<span class="fc" id="L49">			copy.removeMember(K1.getMembersList().get(i));</span>
+		}
+<span class="fc" id="L51">		System.out.println(&quot;Now have: &quot; + copy.getNumOfMembers() + &quot; students left&quot;);</span>
+
+<span class="fc" id="L53">	}</span>
+	
+	/**
+	 * Method to create K2 member list (team class object) in ascending order, without in K1 list
+	 * @param t team class object
+	 * @param Team_Size total number of teams
+	 */
+	private void Select_K2_member(Team t, int Team_Size) {
+<span class="pc bpc" id="L61" title="5 of 6 branches missed.">		if(K1.isEmptyMemberList() &amp;&amp; K2.isEmptyMemberList() &amp;&amp; K3.isEmptyMemberList())</span>
+<span class="nc" id="L62">			copy = new Team (t);</span>
+		
+<span class="fc bfc" id="L64" title="All 2 branches covered.">		for(int i = 0; i &lt; copy.getNumOfMembers()-1; i++) {</span>
+<span class="fc bfc" id="L65" title="All 2 branches covered.">			for(int j = 1; j &lt; copy.getNumOfMembers(); j++) {</span>
+<span class="fc" id="L66">				if(Integer.parseInt(copy.getMembersList().get(j-1).getK2energy()) </span>
+<span class="fc bfc" id="L67" title="All 2 branches covered.">						&gt; Integer.parseInt(copy.getMembersList().get(j).getK2energy())) {</span>
+<span class="fc" id="L68">					Student s = copy.getMembersList().get(j);</span>
+<span class="fc" id="L69">					copy.getMembersList().remove(j);</span>
+<span class="fc" id="L70">					copy.getMembersList().add(j-1, s);</span>
+				} 
+			}
+		}
+		
+<span class="fc bfc" id="L75" title="All 2 branches covered.">		for(int i = 0; i &lt; Team_Size; i++) {</span>
+<span class="fc" id="L76">			K2.addMember(copy.getMembersList().get(0));</span>
+<span class="fc" id="L77">			copy.removeMember(K2.getMembersList().get(i));</span>
+		}
+<span class="fc" id="L79">		System.out.println(&quot;Now have: &quot; + copy.getNumOfMembers() + &quot; students left&quot;);</span>
+
+<span class="fc" id="L81">	}</span>
+	
+	/**
+	 * Method to create K3 member list (team class object) without in K1 and K2 lists
+	 * @param t team class object
+	 * @param Team_Size total number of teams
+	 */
+	private void Select_K3_member(Team t, int Team_Size) {
+<span class="fc" id="L89">		int k = 0;</span>
+<span class="fc bfc" id="L90" title="All 2 branches covered.">		for(int i = 0; i &lt; t.getNumOfMembers(); i++) {</span>
+<span class="fc bfc" id="L91" title="All 2 branches covered.">			if(copy.getMembersList().contains(t.getMembersList().get(i))) {</span>
+<span class="fc" id="L92">				int index = copy.getMembersList().indexOf(t.getMembersList().get(i));</span>
+<span class="fc" id="L93">				K3.addMember(copy.getMembersList().get(index));</span>
+<span class="fc" id="L94">				copy.removeMember(K3.getMembersList().get(k));</span>
+<span class="fc" id="L95">				k++;</span>
+			}
+		}
+<span class="fc" id="L98">	}</span>
+	
+	/**
+	 * Method to create list of team (ATU_Team class object) 
+	 * @param t team class object
+	 * @param Team_Size total number of teams
+	 */
+	private void Create_Team(Team t, int Team_Size) {
+<span class="fc" id="L106">		atu = new ATU_Team(t.getNumOfMembers(), Team_Size);</span>
+<span class="fc bfc" id="L107" title="All 2 branches covered.">		for(int i = 0; i &lt; Team_Size; i++) {</span>
+<span class="fc" id="L108">			atu.append(i, &quot;T-&quot; + string(i,4,'0'), K1.getMembersList().get(i), false, false);</span>
+<span class="fc" id="L109">			atu.append(i, &quot;T-&quot; + string(i,4,'0'), K2.getMembersList().get(i), false, false);</span>
+<span class="fc" id="L110">			atu.append(i, &quot;T-&quot; + string(i,4,'0'), K3.getMembersList().get(i), false, false);</span>
+		}
+<span class="pc bpc" id="L112" title="1 of 2 branches missed.">		if(K3.getMembersList().size() == Team_Size) {</span>
+<span class="nc" id="L113">			atu.append(Team_Size-1, &quot;T-&quot; + string(Team_Size-1,4,'0'), K3.getMembersList().get(Team_Size), false, true);</span>
+<span class="nc bnc" id="L114" title="All 2 branches missed.">			if(K3.getMembersList().size() == Team_Size + 1) {</span>
+<span class="nc" id="L115">				atu.append(Team_Size-2, &quot;T-&quot; + string(Team_Size-2,4,'0'), K3.getMembersList().get(Team_Size+1), false, true);</span>
+			}
+		}
+<span class="fc" id="L118">	}</span>
+	
+	/**
+	 * Method to append integers and char into string
+	 * @param i int
+	 * @param j int
+	 * @param c char
+	 * @return String
+	 */
+	private String string(int i, int j, char c) {
+<span class="fc" id="L128">		return new String(Integer.toString(i) + Integer.toString(j) + Character.toString(c));</span>
+	}
+	
+	/**
+	 * Method to get K1 arraylist&lt;team&gt;
+	 * @return arraylist&lt;team&gt;
+	 */
+	public Team get_K1() {
+<span class="fc" id="L136">		return K1; </span>
+	}
+	
+	/**
+	 * Method to get K2 arraylist&lt;team&gt;
+	 * @return arraylist&lt;team&gt;
+	 */
+	public Team get_K2() {
+<span class="fc" id="L144">		return K2;</span>
+	}
+	
+	/**
+	 * Method to get K3 arraylist&lt;team&gt;
+	 * @return arraylist&lt;team&gt;
+	 */
+	public Team get_K3() {
+<span class="fc" id="L152">		return K3;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
