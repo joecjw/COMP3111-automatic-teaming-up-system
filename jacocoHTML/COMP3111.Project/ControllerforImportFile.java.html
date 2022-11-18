@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ControllerforImportFile.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">COMP3111 Project</a> &gt; <a href="index.source.html" class="el_package">COMP3111.Project</a> &gt; <span class="el_source">ControllerforImportFile.java</span></div><h1>ControllerforImportFile.java</h1><pre class="source lang-java linenums">package COMP3111.Project;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.swing.JFileChooser;
+
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.scene.Group;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+
+/**
+ *Controller for importing the file
+ */
+<span class="fc" id="L32">public class ControllerforImportFile extends MyApplication{</span>
+	
+    @FXML
+    private Button back_to_instructor_button;
+
+    @FXML
+    private Button review_import_result_button;
+
+    @FXML
+    private Button select_file_button;
+
+    /**
+     * This method import a selected csv file and processing the data inside
+     * @param event event indicates that the select_file_button is clicked 
+     */
+    @FXML
+    void select_csv_file(ActionEvent event) {
+<span class="nc" id="L49">    	FileChooser fileChooser = new FileChooser();</span>
+<span class="nc" id="L50">    	File selectedFile = fileChooser.showOpenDialog((Stage)((Node)event.getSource()).getScene().getWindow());</span>
+<span class="nc bnc" id="L51" title="All 2 branches missed.">    	if(selectedFile != null) {</span>
+<span class="nc bnc" id="L52" title="All 2 branches missed.">	    	if(selectedFile.toString().endsWith(&quot;.CSV&quot;)) {</span>
+<span class="nc" id="L53">				read(selectedFile.toString());</span>
+<span class="nc" id="L54">				set_isFileimported(true);</span>
+<span class="nc" id="L55">	    		Alert alert =  new Alert(AlertType.INFORMATION);</span>
+<span class="nc" id="L56">	    		alert.setHeaderText(&quot;Selected File Has Been Imported&quot;);</span>
+<span class="nc" id="L57">	    		Button infoButton = (Button) alert.getDialogPane().lookupButton(ButtonType.OK);</span>
+<span class="nc" id="L58">	    		infoButton.setId(&quot;importConfirmDialog&quot;);</span>
+<span class="nc" id="L59">	    		alert.showAndWait();</span>
+<span class="nc" id="L60">			}</span>
+			else {
+<span class="nc" id="L62">	    		Alert alert =  new Alert(AlertType.ERROR);</span>
+<span class="nc" id="L63">	    		alert.setHeaderText(&quot;Wrong Type! Please Select a CSV File!&quot;);</span>
+<span class="nc" id="L64">	    		Button errorButton = (Button) alert.getDialogPane().lookupButton(ButtonType.OK);</span>
+<span class="nc" id="L65">	    		errorButton.setId(&quot;importErrorDialog&quot;);</span>
+<span class="nc" id="L66">	    		alert.showAndWait();</span>
+<span class="nc" id="L67">			}</span>
+    	}	
+	    else {
+<span class="nc" id="L70">    		Alert alert =  new Alert(AlertType.INFORMATION);</span>
+<span class="nc" id="L71">    		alert.setHeaderText(&quot;Import Cancelled&quot;);</span>
+<span class="nc" id="L72">    		Button infoButton = (Button) alert.getDialogPane().lookupButton(ButtonType.OK);</span>
+<span class="nc" id="L73">    		infoButton.setId(&quot;importCancelDialog&quot;);</span>
+<span class="nc" id="L74">    		alert.showAndWait();</span>
+	    }
+<span class="nc" id="L76">    }</span>
+
+    /**
+     * This method change the scene that import the file back to the interface for the instructor role to indicate a specific function he/she wants to perform
+     * @param event event indicates that the back_to_instructor_button is clicked
+     */
+    @FXML
+    void switch_scene_to_instructor(ActionEvent event) throws IOException {
+<span class="fc" id="L84">    	set_fxmlPath(&quot;/ui_for_instructor_functions.fxml&quot;);</span>
+<span class="fc" id="L85">    	Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();</span>
+<span class="fc" id="L86">    	switch_scene(stage, get_fxmlPath() );</span>
+<span class="fc" id="L87">    }</span>
+
+    /**
+     * This method change the scene that import the file to the interface for displaying the calculated statistics of the imported file
+     * @param event event indicates that the review_import_result_button is clicked
+     * @throws IOException Handle exception type IOExceptio which might be caused when loading the fxml file 
+     */
+    @FXML
+    void switch_scene_to_statistics(ActionEvent event){
+<span class="pc bpc" id="L96" title="1 of 2 branches missed.">    	if(get_isFileimported()  == true) {//Prerequisite to display calculated statistics of selected file</span>
+<span class="nc" id="L97">			Scene scene_stat = new Scene(new Group());</span>
+<span class="nc" id="L98">			Stage stage_stat = new Stage();</span>
+<span class="nc" id="L99">			stage_stat.setTitle(&quot;Table of students' personal data&quot;);</span>
+<span class="nc" id="L100">			stage_stat.setWidth(450);</span>
+<span class="nc" id="L101">			stage_stat.setHeight(500);</span>
+		
+<span class="nc" id="L103">			final Label label_stat = new Label(&quot;Statistics&quot;);</span>
+<span class="nc" id="L104">			label_stat.setFont(new Font(&quot;Arial&quot;, 20));</span>
+		
+<span class="nc" id="L106">			get_stat_table().setEditable(false);</span>
+		
+<span class="nc" id="L108">			TableColumn entry_column = new TableColumn(&quot;Entry&quot;);</span>
+<span class="nc" id="L109">			entry_column.setMinWidth(200);</span>
+<span class="nc" id="L110">			entry_column.setCellValueFactory(new PropertyValueFactory&lt;Statistics, String&gt;(&quot;entry&quot;));</span>
+		
+<span class="nc" id="L112">			TableColumn value_column = new TableColumn(&quot;Value&quot;);</span>
+<span class="nc" id="L113">			value_column.setMinWidth(150);</span>
+<span class="nc" id="L114">			value_column.setCellValueFactory(new PropertyValueFactory&lt;Statistics, String&gt;(&quot;value&quot;));</span>
+		
+<span class="nc" id="L116">			get_stat_table().setItems(get_stat_data());</span>
+<span class="nc" id="L117">			get_stat_table().getColumns().addAll(entry_column, value_column);</span>
+<span class="nc" id="L118">			get_stat_table().setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);</span>
+<span class="nc" id="L119">			final VBox vbox_stat = new VBox();</span>
+<span class="nc" id="L120">			vbox_stat.setSpacing(5);</span>
+<span class="nc" id="L121">			vbox_stat.setPadding(new Insets(10, 0, 0, 10));</span>
+<span class="nc" id="L122">			vbox_stat.getChildren().addAll(label_stat, get_stat_table());</span>
+		
+<span class="nc" id="L124">			((Group) scene_stat.getRoot()).getChildren().addAll(vbox_stat);</span>
+		
+<span class="nc" id="L126">			stage_stat.setScene(scene_stat);</span>
+<span class="nc" id="L127">			stage_stat.show();</span>
+
+			
+<span class="nc" id="L130">			Stage stage_person = new Stage();</span>
+<span class="nc" id="L131">			Scene scene_person = new Scene(new Group());</span>
+<span class="nc" id="L132">			stage_person.setTitle(&quot;Table of statistics data&quot;);</span>
+<span class="nc" id="L133">			stage_person.setWidth(900);</span>
+<span class="nc" id="L134">			stage_person.setHeight(500);</span>
+		
+<span class="nc" id="L136">			final Label label_person = new Label(&quot;Person&quot;);</span>
+<span class="nc" id="L137">			label_person.setFont(new Font(&quot;Arial&quot;, 20));</span>
+		
+<span class="nc" id="L139">			get_person_table().setEditable(true);</span>
+			
+<span class="nc" id="L141">			TableColumn rowid_column = new TableColumn(&quot;Row_Index&quot;);</span>
+<span class="nc" id="L142">			rowid_column.setMinWidth(80);</span>
+<span class="nc" id="L143">			 rowid_column.setCellValueFactory(new PropertyValueFactory&lt;Statistics, String&gt;(&quot;rowid&quot;));</span>
+			
+<span class="nc" id="L145">			TableColumn studentid_column = new TableColumn(&quot;Student_ID&quot;);</span>
+<span class="nc" id="L146">			studentid_column.setMinWidth(80);</span>
+<span class="nc" id="L147">			studentid_column.setCellValueFactory(new PropertyValueFactory&lt;Statistics, String&gt;(&quot;studentid&quot;));</span>
+		
+<span class="nc" id="L149">			TableColumn studentname_column = new TableColumn(&quot;Student_Name&quot;);</span>
+<span class="nc" id="L150">			studentname_column.setMinWidth(180);</span>
+<span class="nc" id="L151">			studentname_column.setCellValueFactory(new PropertyValueFactory&lt;Statistics, String&gt;(&quot;studentname&quot;));</span>
+		
+<span class="nc" id="L153">			TableColumn k1energy_column = new TableColumn(&quot;K1_Energy&quot;);</span>
+<span class="nc" id="L154">			k1energy_column.setMinWidth(80);</span>
+<span class="nc" id="L155">			k1energy_column.setCellValueFactory(new PropertyValueFactory&lt;Statistics, String&gt;(&quot;k1energy&quot;));</span>
+		
+<span class="nc" id="L157">			TableColumn k2energy_column = new TableColumn(&quot;k2_Energy&quot;);</span>
+<span class="nc" id="L158">			k2energy_column.setMinWidth(80);</span>
+<span class="nc" id="L159">			k2energy_column.setCellValueFactory(new PropertyValueFactory&lt;Statistics, String&gt;(&quot;k2energy&quot;));</span>
+		
+<span class="nc" id="L161">			TableColumn k3trick1_column = new TableColumn(&quot;K3_Trick1&quot;);</span>
+<span class="nc" id="L162">			k3trick1_column.setMinWidth(80);</span>
+<span class="nc" id="L163">			k3trick1_column.setCellValueFactory(new PropertyValueFactory&lt;Statistics, String&gt;(&quot;k3trick1&quot;));</span>
+		
+<span class="nc" id="L165">			TableColumn k3trick2_column = new TableColumn(&quot;K3_Trick2&quot;);</span>
+<span class="nc" id="L166">			k3trick2_column.setMinWidth(80);</span>
+<span class="nc" id="L167">			k3trick2_column.setCellValueFactory(new PropertyValueFactory&lt;Statistics, String&gt;(&quot;k3trick2&quot;));</span>
+		
+<span class="nc" id="L169">			TableColumn mypreference_column = new TableColumn(&quot;My_Preference&quot;);</span>
+<span class="nc" id="L170">			mypreference_column.setMinWidth(100);</span>
+<span class="nc" id="L171">			mypreference_column.setCellValueFactory(new PropertyValueFactory&lt;Statistics, String&gt;(&quot;mypreference&quot;));</span>
+		
+<span class="nc" id="L173">			TableColumn concerns_column = new TableColumn(&quot;Concerns&quot;);</span>
+<span class="nc" id="L174">			concerns_column.setMinWidth(100);</span>
+<span class="nc" id="L175">			concerns_column.setCellValueFactory(new PropertyValueFactory&lt;Statistics, String&gt;(&quot;concerns&quot;));</span>
+		
+<span class="nc" id="L177">			get_person_table().setItems(get_person_data());</span>
+<span class="nc" id="L178">			get_person_table().getColumns().addAll(rowid_column, studentid_column, studentname_column, k1energy_column, k2energy_column,</span>
+					k3trick1_column, k3trick2_column, mypreference_column, concerns_column);
+<span class="nc" id="L180">			get_person_table().setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);</span>
+			
+<span class="nc" id="L182">			final VBox vbox_person = new VBox();</span>
+<span class="nc" id="L183">			vbox_person.setSpacing(5);</span>
+<span class="nc" id="L184">			vbox_person.setPadding(new Insets(10, 0, 0, 10));</span>
+<span class="nc" id="L185">			vbox_person.getChildren().addAll(label_person, get_person_table());</span>
+			//get_person_table().prefHeightProperty().bind(scene_person.heightProperty());
+			//get_person_table().prefWidthProperty().bind(scene_person.widthProperty());
+<span class="nc" id="L188">			((Group) scene_person.getRoot()).getChildren().addAll(vbox_person);</span>
+<span class="nc" id="L189">			stage_person.setScene(scene_person);</span>
+<span class="nc" id="L190">			stage_person.show();</span>
+<span class="nc" id="L191">    	}</span>
+    	
+    	else {
+<span class="fc" id="L194">    		Alert alert =  new Alert(AlertType.ERROR);</span>
+<span class="fc" id="L195">    		alert.setHeaderText(&quot;No File Found! Please Import A File First!&quot;);</span>
+<span class="fc" id="L196">    		Button errorButton = (Button) alert.getDialogPane().lookupButton(ButtonType.OK);</span>
+<span class="fc" id="L197">    		errorButton.setId(&quot;reviewStatisticsWithoutImportError&quot;);</span>
+<span class="fc" id="L198">    		alert.showAndWait();</span>
+    	}
+<span class="fc" id="L200">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

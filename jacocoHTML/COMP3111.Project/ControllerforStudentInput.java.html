@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ControllerforStudentInput.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">COMP3111 Project</a> &gt; <a href="index.source.html" class="el_package">COMP3111.Project</a> &gt; <span class="el_source">ControllerforStudentInput.java</span></div><h1>ControllerforStudentInput.java</h1><pre class="source lang-java linenums">package COMP3111.Project;
+
+import java.io.IOException;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
+import javafx.stage.Stage;
+
+
+/**
+ *Controller for the OUTPUT Task: Generate Table with a particular student's team information 
+ */
+<span class="fc" id="L22">public class ControllerforStudentInput extends MyApplication{</span>
+	
+    @FXML
+    private Label input_guide_label;
+	
+    @FXML
+    private TextField input_text;
+    
+    @FXML
+    private Button back_to_start_button;
+    
+    @FXML
+    private Button confirm_button;
+    
+    /**
+     * This method will change the scene that get student's input for checking team information back to the interface for choosing the role
+     * @param event event indicates that the back_to_start_button is clicked
+     * @throws IOException Handle exception type IOExceptio which might be caused when loading the fxml file 
+     */
+    @FXML
+    void switch_scene_to_start_from_input(ActionEvent event) throws IOException {
+<span class="fc" id="L43">    	set_fxmlPath(&quot;/ui_for_start.fxml&quot;);</span>
+<span class="fc" id="L44">    	Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();</span>
+<span class="fc" id="L45">    	switch_scene(stage, get_fxmlPath() );</span>
+<span class="fc" id="L46">    }</span>
+    
+    /**
+     * This method change the scene that get student's input for checking team information to the interface that showing the table
+     * @param event event indicates that the confirm_button is clicked
+     * @param student indicates the student who wants to check his/her team information
+     * @throws IOException Handle exception type IOExceptio which might be caused when loading the fxml file 
+     */
+    void switch_scene_to_table(ActionEvent event, Student student, Team team, String k1_avg, String k2_avg) throws IOException {
+<span class="fc" id="L55">    	set_fxmlPath(&quot;/ui_for_table.fxml&quot;);</span>
+<span class="fc" id="L56">    	FXMLLoader loader = new FXMLLoader(getClass().getResource(get_fxmlPath()));</span>
+<span class="fc" id="L57">    	Parent root =  loader.load();</span>
+<span class="fc" id="L58">    	ControllerforTable controllerfortable = loader.getController();</span>
+<span class="fc" id="L59">    	controllerfortable.initialize_table(student, team, k1_avg, k2_avg);</span>
+<span class="fc" id="L60">    	Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();</span>
+<span class="fc" id="L61">    	Scene scene = new Scene(root);</span>
+<span class="fc" id="L62">    	stage.setScene(scene);</span>
+<span class="fc" id="L63">    	stage.setTitle(&quot;COMP3111 Project - Group 09&quot;);</span>
+<span class="fc" id="L64">    	stage.show();</span>
+<span class="fc" id="L65">    }</span>
+    
+    /**
+     * This method check the if the id or name entered corresponds to a student in database and invoke the 'switch_scene_to_table' function upon valid input
+     * @param event event indicates that the confirm_button is clicked
+     * @throws Exception Handle exception which might be caused when calling the 'switch_scene_to_table' function 
+     */
+    @FXML
+    void check_input(ActionEvent event) throws Exception {
+<span class="fc bfc" id="L74" title="All 2 branches covered.">    	if(get_isTeamsFormed() == true) {//prerequisite for generating table</span>
+<span class="fc" id="L75">    		Boolean valid_input = false;</span>
+<span class="fc" id="L76">        	String key = input_text.getText();</span>
+<span class="fc" id="L77">        	Team targetTeam = null;</span>
+<span class="fc" id="L78">        	Student targetStudent = null;</span>
+        	
+<span class="fc" id="L80">        	Integer team_average_k1 = 0;</span>
+<span class="fc" id="L81">    		Integer team_average_k2 = 0;</span>
+<span class="fc bfc" id="L82" title="All 2 branches covered.">    		for(int i = 0; i &lt; get_algorithm().atu.getTeams().size(); i++) {//look up for the student in teamData that is the same as the input</span>
+<span class="fc bfc" id="L83" title="All 2 branches covered.">        		for(int j = 0; j &lt; get_algorithm().atu.getTeams().get(i).getNumOfMembers(); j++) {</span>
+<span class="fc bfc" id="L84" title="All 2 branches covered.">        			if(key.equalsIgnoreCase(get_algorithm().atu.getTeams().get(i).getMembersList().get(j).getStudentid()) || </span>
+<span class="pc bpc" id="L85" title="1 of 2 branches missed.">        				key.equalsIgnoreCase(get_algorithm().atu.getTeams().get(i).getMembersList().get(j).getStudentname())) {</span>
+
+<span class="fc" id="L87">        				valid_input = true;</span>
+<span class="fc" id="L88">            			targetTeam = get_algorithm().atu.getTeams().get(i);</span>
+<span class="fc" id="L89">            			targetStudent = get_algorithm().atu.getTeams().get(i).getMembersList().get(j);</span>
+            			
+<span class="fc bfc" id="L91" title="All 2 branches covered.">        				for(int k = 0; k &lt; get_algorithm().atu.getTeams().get(i).getNumOfMembers(); k++) {</span>
+<span class="fc" id="L92">    						team_average_k1 = team_average_k1 + Integer.parseInt(get_algorithm().atu.getTeams().get(i).getMembersList().get(k).getK1energy());</span>
+<span class="fc" id="L93">    						team_average_k2 = team_average_k2 + Integer.parseInt(get_algorithm().atu.getTeams().get(i).getMembersList().get(k).getK2energy());</span>
+        				}
+<span class="fc" id="L95">        				team_average_k1 = team_average_k1 / get_algorithm().atu.getTeams().get(i).getNumOfMembers();</span>
+<span class="fc" id="L96">        				team_average_k2 = team_average_k2 / get_algorithm().atu.getTeams().get(i).getNumOfMembers();</span>
+<span class="fc" id="L97">        				break;</span>
+        			}
+        		}
+        	}
+
+<span class="pc bpc" id="L102" title="2 of 6 branches missed.">        	if(valid_input == true &amp;&amp; targetTeam != null &amp;&amp; targetStudent != null) {//display table only with valid input and existing data</span>
+<span class="fc" id="L103">        		switch_scene_to_table(event,targetStudent, targetTeam, team_average_k1.toString(), team_average_k2.toString());</span>
+        	}
+        	
+        	else {//inform user with invalid input message
+<span class="fc" id="L107">        		input_guide_label.setText(&quot;Invalid input! Please check and enter again!&quot;);</span>
+<span class="fc" id="L108">        		input_text.clear();</span>
+        	}
+<span class="fc" id="L110">    	}</span>
+    	
+    	else {//inform user with error message   		
+<span class="fc" id="L113">      		Alert alert =  new Alert(AlertType.ERROR);</span>
+<span class="fc" id="L114">    		alert.setHeaderText(&quot;Teams Not Formed Yet! Please Wait For Instructor To Form Teams &quot;);</span>
+<span class="fc" id="L115">    		Button errorButton = (Button) alert.getDialogPane().lookupButton(ButtonType.OK);</span>
+<span class="fc" id="L116">    		errorButton.setId(&quot;teamTableWithoutTeamsError&quot;);</span>
+<span class="fc" id="L117">    		alert.showAndWait();</span>
+    	}
+    	
+<span class="fc" id="L120">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

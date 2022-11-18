@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Student.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">COMP3111 Project</a> &gt; <a href="index.source.html" class="el_package">COMP3111.Project</a> &gt; <span class="el_source">Student.java</span></div><h1>Student.java</h1><pre class="source lang-java linenums">package COMP3111.Project;
+/**
+ * Student class
+ * Consists of student information
+ * @author Team 9 
+ * @version 1.0
+ */
+public class Student {
+		
+		private final String rowid;
+		private final String studentid;
+		private final String studentname;
+		private final String email;
+		private final String k1energy;
+		private final String k2energy;
+		private final String k3trick1;
+		private final String k3trick2;
+		private final String mypreference;
+		private final String concerns;
+		
+		/**
+		 * Constructor
+		 * @param row_id for table display row_index
+		 * @param student_id student id shown in the system
+		 * @param student_name student name shown in the system
+		 * @param student_name email address of the student
+		 * @param k1_energy the value of k1
+		 * @param k2_energy the value of k2
+		 * @param k3_trick1 indicate whether the student have k3 trick 1
+		 * @param k3_trick2 indicate whether the student have k3 trick 2
+		 * @param my_preference indicate student's preferences to be a team leader
+		 * @param concerns student's concerns
+		 */
+		public Student(String row_id, String student_id, String student_name, String student_email, String k1_energy, String k2_energy, String k3_trick1,
+<span class="fc" id="L35">				String k3_trick2, String my_preference, String concerns) {</span>
+<span class="pc bpc" id="L36" title="3 of 6 branches missed.">			if(student_id.length() != 8 ||Integer.parseInt(student_id) &gt; 29999999 || Integer.parseInt(student_id) &lt; 20000001) {</span>
+<span class="nc" id="L37">				throw new IllegalArgumentException(&quot;Object not created due to invalid student id&quot;);</span>
+			}
+			
+<span class="pc bpc" id="L40" title="1 of 2 branches missed.">			if(student_name.length() &gt; 40) {</span>
+<span class="nc" id="L41">				throw new IllegalArgumentException(&quot;Object not created due to invalid student name&quot;);</span>
+			}
+			
+<span class="pc bpc" id="L44" title="1 of 2 branches missed.">			if(student_email.length() &gt;50) {</span>
+<span class="nc" id="L45">				throw new IllegalArgumentException(&quot;Object not created due to invalid student email &quot;);</span>
+			}
+			
+<span class="pc bpc" id="L48" title="3 of 6 branches missed.">			if(k1_energy.length() &gt; 3 || Integer.parseInt(k1_energy) &gt; 100 || Integer.parseInt(k1_energy) &lt; 0) {</span>
+<span class="nc" id="L49">				throw new IllegalArgumentException(&quot;Object not created due to invalid student k1 energy&quot;);</span>
+			}
+			
+<span class="pc bpc" id="L52" title="3 of 6 branches missed.">			if(k2_energy.length() &gt; 3 || Integer.parseInt(k2_energy) &gt; 100 || Integer.parseInt(k2_energy) &lt; 0) {</span>
+<span class="nc" id="L53">				throw new IllegalArgumentException(&quot;Object not created due to invalid student k2 energy&quot;);</span>
+			}
+			
+<span class="pc bpc" id="L56" title="1 of 2 branches missed.">			if(k3_trick1 != &quot;&quot;) {</span>
+<span class="pc bpc" id="L57" title="3 of 6 branches missed.">				if(k3_trick1.length() &gt; 1 || Integer.parseInt(k3_trick1) &gt; 1 || Integer.parseInt(k3_trick1) &lt; 0){</span>
+<span class="nc" id="L58">					throw new IllegalArgumentException(&quot;Object not created due to invalid student k3 trick1&quot;);</span>
+				}
+				
+<span class="pc bpc" id="L61" title="1 of 2 branches missed.">			if(k3_trick2 != &quot;&quot; )</span>
+<span class="pc bpc" id="L62" title="3 of 6 branches missed.">				if(k3_trick2.length() &gt; 1 || Integer.parseInt(k3_trick2) &gt; 1 || Integer.parseInt(k3_trick2) &lt; 0){</span>
+<span class="nc" id="L63">					throw new IllegalArgumentException(&quot;Object not created due to invalid student k3 trick2&quot;);</span>
+				}
+			}
+			
+			/*if(my_preference != &quot;&quot;) {
+				if(my_preference.length() &gt; 1 || Integer.parseInt(my_preference) &gt; 1 || Integer.parseInt(my_preference) &lt; 0){
+					throw new IllegalArgumentException(&quot;Object not created due to invalid student my preference&quot;);
+				}
+			}
+				
+			if(concerns != &quot;&quot;) {
+				if(concerns.length() &gt; 200){
+					throw new IllegalArgumentException(&quot;Object not created due to invalid student concern&quot;);
+				}
+			}*/
+			
+			
+<span class="fc" id="L80">			this.rowid = new String(row_id);</span>
+<span class="fc" id="L81">			this.studentid = new String(student_id);</span>
+<span class="fc" id="L82">			this.studentname = new String(student_name);</span>
+<span class="fc" id="L83">			this.email = new String(student_email);</span>
+<span class="fc" id="L84">			this.k1energy = new String(k1_energy);</span>
+<span class="fc" id="L85">			this.k2energy = new String(k2_energy);</span>
+<span class="fc" id="L86">			this.k3trick1 = new String(k3_trick1);</span>
+<span class="fc" id="L87">			this.k3trick2 = new String(k3_trick2);</span>
+<span class="fc" id="L88">			this.mypreference = new String(my_preference);</span>
+<span class="fc" id="L89">			this.concerns = new String(concerns);</span>
+	
+<span class="fc" id="L91">		}</span>
+		
+		/**
+		 * Method to get row_index of a student
+		 * @return {@code String} row index of the student, return type is string is because need to convert to JavaFx SimpleStringProperty
+		 */
+		public String getRowid() {
+<span class="fc" id="L98">			return rowid;</span>
+		}
+		
+		/**
+		 * Method to get student id of a student
+		 * @return {@code String} student id of the student, return type is string is because need to convert to JavaFx SimpleStringProperty
+		 */
+		public String getStudentid() {
+<span class="fc" id="L106">			return studentid;</span>
+		}
+		
+		/**
+		 * Method to get name of a student
+		 * @return {@code String} name of the student, return type is string is because need to convert to JavaFx SimpleStringProperty
+		 */
+		public String getStudentname() {
+<span class="fc" id="L114">			return studentname;</span>
+		}
+		
+		/**
+		 * Method to get email of a student
+		 * @return {@code String} email of the student, return type is string is because need to convert to JavaFx SimpleStringProperty
+		 */
+		public String getEmail() {
+<span class="fc" id="L122">			return email;</span>
+		}
+
+		/**
+		 * Method to get k1 energy value of a student
+		 * @return {@code String} value of k1 energy of the student, return type is string is because need to convert to JavaFx SimpleStringProperty
+		 */
+		public String getK1energy() {
+<span class="fc" id="L130">			return k1energy;</span>
+		}
+
+		/**
+		 * Method to get k2 energy value of a student
+		 * @return {@code String} value of k2 energy of the student, return type is string is because need to convert to JavaFx SimpleStringProperty
+		 */
+		public String getK2energy() {
+<span class="fc" id="L138">			return k2energy;</span>
+		}
+
+		/**
+		 * Method to get k3 trick 1 of a student
+		 * @return {@code String} k3 trick 1 of the student, return type is string is because need to convert to JavaFx SimpleStringProperty
+		 */
+		public String getK3trick1() {
+<span class="fc" id="L146">			return k3trick1;</span>
+		}
+
+		/**
+		 * Method to get k3 trick 2 of a student
+		 * @return {@code String} k3 trick 2 of the student, return type is string is because need to convert to JavaFx SimpleStringProperty
+		 */
+		public String getK3trick2() {
+<span class="fc" id="L154">			return k3trick2;</span>
+		}
+
+		/**
+		 * Method to get preference on whether the student want to be a team leader
+		 * @return {@code String} preference of the student, return type is string is because need to convert to JavaFx SimpleStringProperty
+		 */
+		public String getMypreference() {
+<span class="fc" id="L162">			return mypreference;</span>
+		}
+
+		/**
+		 * Method to get student concerns
+		 * @return {@code String} concerns of the student, return type is string is because need to convert to JavaFx SimpleStringProperty
+		 */
+		public String getConcerns() {
+<span class="fc" id="L170">			return concerns;</span>
+		}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
