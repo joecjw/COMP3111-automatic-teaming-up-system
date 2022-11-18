@@ -2,6 +2,11 @@ package COMP3111.Project;
 
 import javafx.beans.property.SimpleStringProperty;
 
+/**
+ * Statistics class Consists of statistic information of the class
+ * @author Team 9
+ *
+ */
 public class Statistics {
 
 	private final SimpleStringProperty entry;
