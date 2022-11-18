@@ -2,12 +2,22 @@ package COMP3111.Project;
 
 import java.util.ArrayList;
 
+/**
+ * ATU_Team class for the output
+ * @author Team 9
+ * @version 1.0
+ */
 public class ATU_Team{
 	private ArrayList<Team> teams;
 	private Integer numOfStudentsPerTeam;
 	private Integer currentNumOfTeams;
 	private Integer currentNumOfStudentsPerTeam;
 
+/**
+ * Constructor of ATU_Team object
+ * @param numOfStudents total number of stduents
+ * @param Team_Size total number of teams
+ */
 	ATU_Team(int numOfStudents, int Team_Size){
 		teams = new ArrayList<Team>();
 		this.numOfStudentsPerTeam = numOfStudents/Team_Size;
@@ -15,10 +25,22 @@ public class ATU_Team{
 		this.currentNumOfTeams = 0;
 	}
 	
+	/**
+	 * method to return arraylist<team>
+	 * @return arraylist<team>
+	 */
 	public ArrayList<Team> getTeams(){
 		return teams;
 	}
 	
+	/**
+	 * method to append student into a team
+	 * @param team_id team's id
+	 * @param team_name team's name
+	 * @param s student class object
+	 * @param is_team_Leader whether the student is teamleader
+	 * @param remainderFlag whether it has remaining students
+	 */
 	public void append(int team_id, String team_name, Student s, 
 			boolean is_team_Leader, boolean remainderFlag) {
 		if(!remainderFlag) {

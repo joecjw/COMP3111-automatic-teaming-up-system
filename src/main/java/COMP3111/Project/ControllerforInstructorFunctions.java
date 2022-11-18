@@ -143,7 +143,7 @@ public class ControllerforInstructorFunctions extends MyApplication {
     	}
     }
 
-	void process_team_data(ArrayList<Student> studentData,  Team teamDatacopy, algorithm a) {
+	void process_team_data(ArrayList<Student> studentData,  Team teamDatacopy, Algorithm a) {
 		for(int i =0; i < studentData.size(); i++) {
 			teamDatacopy.addMember(studentData.get(i));
 		}
@@ -151,11 +151,11 @@ public class ControllerforInstructorFunctions extends MyApplication {
 		a.compute(teamDatacopy, 33);
 
 		System.out.println("K1 student");
-		print(a.K1);
+		print(a.get_K1());
 		System.out.println("K2 student");
-		print(a.K2);
+		print(a.get_K2());
 		System.out.println("K3 student");
-		print(a.K3);
+		print(a.get_K3());
 		
 		for(int i = 0; i < a.atu.getTeams().size(); i ++) {
 			print(a.atu.getTeams().get(i));
