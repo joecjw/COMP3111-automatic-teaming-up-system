@@ -1,5 +1,10 @@
 package COMP3111.Project;
-
+/**
+ * Student class
+ * Consists of student information
+ * @author Team 9 
+ * @version 1.0
+ */
 public class Student {
 		
 		private final String rowid;
@@ -12,7 +17,20 @@ public class Student {
 		private final String k3trick2;
 		private final String mypreference;
 		private final String concerns;
-
+		
+		/**
+		 * Constructor
+		 * @param row_id for table display row_index
+		 * @param student_id student id shown in the system
+		 * @param student_name student name shown in the system
+		 * @param student_name email address of the student
+		 * @param k1_energy the value of k1
+		 * @param k2_energy the value of k2
+		 * @param k3_trick1 indicate whether the student have k3 trick 1
+		 * @param k3_trick2 indicate whether the student have k3 trick 2
+		 * @param my_preference indicate student's preferences to be a team leader
+		 * @param concerns student's concerns
+		 */
 		public Student(String row_id, String student_id, String student_name, String student_email, String k1_energy, String k2_energy, String k3_trick1,
 				String k3_trick2, String my_preference, String concerns) {
 			if(student_id.length() != 8 ||Integer.parseInt(student_id) > 29999999 || Integer.parseInt(student_id) < 20000001) {
@@ -72,43 +90,82 @@ public class Student {
 	
 		}
 		
+		/**
+		 * Method to get row_index of a student
+		 * @return {@code String} row index of the student, return type is string is because need to convert to JavaFx SimpleStringProperty
+		 */
 		public String getRowid() {
 			return rowid;
 		}
 		
+		/**
+		 * Method to get student id of a student
+		 * @return {@code String} student id of the student, return type is string is because need to convert to JavaFx SimpleStringProperty
+		 */
 		public String getStudentid() {
 			return studentid;
 		}
-
+		
+		/**
+		 * Method to get name of a student
+		 * @return {@code String} name of the student, return type is string is because need to convert to JavaFx SimpleStringProperty
+		 */
 		public String getStudentname() {
 			return studentname;
 		}
 		
+		/**
+		 * Method to get email of a student
+		 * @return {@code String} email of the student, return type is string is because need to convert to JavaFx SimpleStringProperty
+		 */
 		public String getEmail() {
 			return email;
 		}
 
+		/**
+		 * Method to get k1 energy value of a student
+		 * @return {@code String} value of k1 energy of the student, return type is string is because need to convert to JavaFx SimpleStringProperty
+		 */
 		public String getK1energy() {
 			return k1energy;
 		}
 
+		/**
+		 * Method to get k2 energy value of a student
+		 * @return {@code String} value of k2 energy of the student, return type is string is because need to convert to JavaFx SimpleStringProperty
+		 */
 		public String getK2energy() {
 			return k2energy;
 		}
 
-		
+		/**
+		 * Method to get k3 trick 1 of a student
+		 * @return {@code String} k3 trick 1 of the student, return type is string is because need to convert to JavaFx SimpleStringProperty
+		 */
 		public String getK3trick1() {
 			return k3trick1;
 		}
 
+		/**
+		 * Method to get k3 trick 2 of a student
+		 * @return {@code String} k3 trick 2 of the student, return type is string is because need to convert to JavaFx SimpleStringProperty
+		 */
 		public String getK3trick2() {
 			return k3trick2;
 		}
 
+		/**
+		 * Method to get preference on whether the student want to be a team leader
+		 * @return {@code String} preference of the student, return type is string is because need to convert to JavaFx SimpleStringProperty
+		 */
 		public String getMypreference() {
 			return mypreference;
 		}
 
+		/**
+		 * Method to get student concerns
+		 * @return {@code String} concerns of the student, return type is string is because need to convert to JavaFx SimpleStringProperty
+		 */
 		public String getConcerns() {
 			return concerns;
 		}
