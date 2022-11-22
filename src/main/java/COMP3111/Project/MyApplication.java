@@ -141,12 +141,12 @@ public class MyApplication extends Application{
 			k1[0] /= sum; k2[0] /= sum;
 			String k1result = "(" + k1[0] + ", " + k1[1] + ", " + k1[2] + ")";
 			String k2result = "(" + k2[0] + ", " + k2[1] + ", " + k2[2] + ")";
-			stat_data.add(new Statistics("Total Number of Students", String.valueOf(sum)));
-			stat_data.add(new Statistics("K1_Energy(Average, Min, Max)", k1result));
-			stat_data.add(new Statistics("K2_Energy(Average, Min, Max)", k2result));
-			stat_data.add(new Statistics("K3_Tick1 = 1", String.valueOf(k3_tick1)));
-			stat_data.add(new Statistics("K3_Tick2 = 1", String.valueOf(k3_tick2)));
-			stat_data.add(new Statistics("My_Preference = 1", String.valueOf(pref_cnt)));
+			stat_data.add(new Statistics("0", "Total Number of Students", String.valueOf(sum)));
+			stat_data.add(new Statistics("1","K1_Energy(Average, Min, Max)", k1result));
+			stat_data.add(new Statistics("2","K2_Energy(Average, Min, Max)", k2result));
+			stat_data.add(new Statistics("3","K3_Tick1 = 1", String.valueOf(k3_tick1)));
+			stat_data.add(new Statistics("4","K3_Tick2 = 1", String.valueOf(k3_tick2)));
+			stat_data.add(new Statistics("5","My_Preference = 1", String.valueOf(pref_cnt)));
 			person_data = FXCollections.observableArrayList(studentData);
 			br.close();
 		} catch (IOException ioe) {
