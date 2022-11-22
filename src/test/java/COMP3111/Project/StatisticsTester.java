@@ -14,7 +14,7 @@ public class StatisticsTester {
 	
 	@Before
 	public void setUp() throws Exception {
-		tester = new Statistics("column1", "column2");
+		tester = new Statistics("column0","column1", "column2");
 	}
 
 	@After

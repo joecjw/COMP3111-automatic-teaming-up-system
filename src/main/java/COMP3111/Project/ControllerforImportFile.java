@@ -104,9 +104,13 @@ public class ControllerforImportFile extends MyApplication{
 			label_stat.setFont(new Font("Arial", 20));
 		
 			get_stat_table().setEditable(false);
-		
+			
+			TableColumn row_column = new TableColumn("Row_Index");
+			row_column.setMinWidth(80);
+			row_column.setCellValueFactory(new PropertyValueFactory<Statistics, String>("rowid"));
+			
 			TableColumn entry_column = new TableColumn("Entry");
-			entry_column.setMinWidth(200);
+			entry_column.setMinWidth(180);
 			entry_column.setCellValueFactory(new PropertyValueFactory<Statistics, String>("entry"));
 		
 			TableColumn value_column = new TableColumn("Value");
@@ -114,7 +118,7 @@ public class ControllerforImportFile extends MyApplication{
 			value_column.setCellValueFactory(new PropertyValueFactory<Statistics, String>("value"));
 		
 			get_stat_table().setItems(get_stat_data());
-			get_stat_table().getColumns().addAll(entry_column, value_column);
+			get_stat_table().getColumns().addAll(row_column, entry_column, value_column);
 			get_stat_table().setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 			final VBox vbox_stat = new VBox();
 			vbox_stat.setSpacing(5);
@@ -130,7 +134,7 @@ public class ControllerforImportFile extends MyApplication{
 			Stage stage_person = new Stage();
 			Scene scene_person = new Scene(new Group());
 			stage_person.setTitle("Table of statistics data");
-			stage_person.setWidth(900);
+			stage_person.setWidth(1000);
 			stage_person.setHeight(500);
 		
 			final Label label_person = new Label("Person");
