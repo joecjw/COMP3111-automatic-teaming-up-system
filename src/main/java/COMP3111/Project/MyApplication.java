@@ -222,21 +222,17 @@ public class MyApplication extends Application{
 	public static void main(String args[]) {
 		/*
 		 * This part is for process debug only, if you wanna make it work, 
-		 * manually add algorithm class from dev/process branch
-		algorithm alg = new algorithm();
+		 * manually add algorithm class from dev/process branch 
+		Algorithm alg = new Algorithm();
 		Team t = new Team(studentData);
 		System.out.println("total have: " + t.getNumOfMembers() + " students");
 		alg.compute(t, 33);
-		print(alg.K1);
-		print(alg.K2);
-		print(alg.K3);
 		
 
-		for(int i = 0; i < 33; i++) {
-			print(alg.atu.getTeams().get(i));
+		for(Team t1 : alg.atu.getTeams()) {
+			print(t1);
 		}
 		*/
-		
 		Locale.setDefault(Locale.ENGLISH);
 		Application.launch(args);
 		
