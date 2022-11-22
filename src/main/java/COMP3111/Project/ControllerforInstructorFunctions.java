@@ -157,9 +157,13 @@ public class ControllerforInstructorFunctions extends MyApplication {
 		System.out.println("K3 student");
 		print(a.get_K3());
 		
+		a.Get_Standard_Deviation_K1();
+		a.Get_Standard_Deviation_K2();
+		
 		for(int i = 0; i < a.atu.getTeams().size(); i ++) {
 			print(a.atu.getTeams().get(i));
 		}
+
 		
 		set_isTeamsFormed(true);
 	}

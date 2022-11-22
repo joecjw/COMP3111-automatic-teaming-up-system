@@ -11,7 +11,12 @@ public class Algorithm {
 	private Team K2 = new Team();
 	private Team K3 = new Team();
 	private Team copy;
-	public static ATU_Team atu;
+	private double standardDeviationK1;
+	private double standardDeviationK2;
+	private double team_K1_avg;
+	private double team_K2_avg;
+
+	public ATU_Team atu;
 	
 	/**
 	 * Method to compute and create output
@@ -19,10 +24,14 @@ public class Algorithm {
 	 * @param Team_Size total number of teams
 	 */
 	void compute(Team t, int Team_Size) {
+		Set_K1_Average(t);
+		Set_K2_Average(t);
 		Select_K1_member(t, Team_Size);
 		Select_K2_member(t, Team_Size);
 		Select_K3_member(t, Team_Size);
 		Create_Team(t, Team_Size);
+		Set_Standard_Deviation_K1();
+		Set_Standard_Deviation_K2();
 	}
 	
 	/**
@@ -109,12 +118,72 @@ public class Algorithm {
 			atu.append(i, "T-" + string(i,4,'0'), K2.getMembersList().get(i), false, false);
 			atu.append(i, "T-" + string(i,4,'0'), K3.getMembersList().get(i), false, false);
 		}
-		if(K3.getMembersList().size() == Team_Size) {
+		if(K3.getMembersList().size() == Team_Size + 1) {
 			atu.append(Team_Size-1, "T-" + string(Team_Size-1,4,'0'), K3.getMembersList().get(Team_Size), false, true);
-			if(K3.getMembersList().size() == Team_Size + 1) {
+			if(K3.getMembersList().size() == Team_Size + 2) {
 				atu.append(Team_Size-2, "T-" + string(Team_Size-2,4,'0'), K3.getMembersList().get(Team_Size+1), false, true);
 			}
 		}
+	}
+	
+	private void Set_K1_Average(Team t) {
+		double result = 0;
+		for(Student s : t.getMembersList()) {
+			result += Integer.parseInt(s.getK1energy());
+		}
+		System.out.println("K1 average is:" + result/t.getNumOfMembers());
+		this.team_K1_avg = result/t.getNumOfMembers();
+	}
+	
+	private double Get_K1_Average(Team t) {
+		double result = 0;
+		for(Student s : t.getMembersList()) {
+			result += Integer.parseInt(s.getK1energy());
+		}
+		return result/t.getNumOfMembers();
+	}
+	
+	private void Set_K2_Average(Team t) {
+		double result = 0;
+		for(Student s : t.getMembersList()) {
+			result += Integer.parseInt(s.getK2energy());
+		}
+		System.out.println("K2 average is:" + result/t.getNumOfMembers());
+		this.team_K2_avg = result/t.getNumOfMembers();
+	}
+	
+	private double Get_K2_Average(Team t) {
+		double result = 0;
+		for(Student s : t.getMembersList()) {
+			result += Integer.parseInt(s.getK1energy());
+		}
+		return result/t.getNumOfMembers();
+	}
+	
+	public double Get_Standard_Deviation_K1() {
+		System.out.println("Standard Devaition of K1 is:" + this.standardDeviationK1);
+		return standardDeviationK1;
+	}
+	
+	public double Get_Standard_Deviation_K2() {
+		System.out.println("Standard Devaition of K2 is:" + this.standardDeviationK2);
+		return standardDeviationK2;
+	}
+	
+	private void Set_Standard_Deviation_K1() {
+		double result = 0;
+		for(Team t : this.atu.getTeams()) {
+			result += Math.pow(this.Get_K1_Average(t) - team_K1_avg, 2);
+		}
+		this.standardDeviationK1 = Math.sqrt(result/atu.getTeams().size());
+	}
+	
+	private void Set_Standard_Deviation_K2() {
+		double result = 0;
+		for(Team t : this.atu.getTeams()) {
+			result += Math.pow(this.Get_K2_Average(t) - team_K2_avg, 2);
+		}
+		this.standardDeviationK2 = Math.sqrt(result/atu.getTeams().size());
 	}
 	
 	/**
