@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ControllerforInstructorFunctions.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">COMP3111 Project</a> &gt; <a href="index.source.html" class="el_package">COMP3111.Project</a> &gt; <span class="el_source">ControllerforInstructorFunctions.java</span></div><h1>ControllerforInstructorFunctions.java</h1><pre class="source lang-java linenums">package COMP3111.Project;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
+/**
+ *Controller for the instructor role to indicate a specific function he/she wants to perform
+ */
+<span class="fc" id="L22">public class ControllerforInstructorFunctions extends MyApplication {</span>
+
+    @FXML
+    private Button back_to_start_button;
+
+    @FXML
+    private Label instructor_guide_label;
+
+    @FXML
+    private Button review_class_statistics_button;
+
+    @FXML
+    private Button start_import_button;
+
+    @FXML
+    private Button start_processing_button;
+    
+    public Button get_review_button(){
+<span class="nc" id="L40">    	return review_class_statistics_button;</span>
+    }
+    
+    /**
+     * This method will change the scene that indicate instructor'choice to the interface for importing the file
+     * @param event event indicates that the start_import_button is clicked
+     * @throws IOException Handle exception type IOExceptio which might be caused when loading the fxml file 
+     */
+    @FXML
+    void switch_scene_to_import_file(ActionEvent event) throws IOException {
+    	//if(get_isFileimported() != true) {
+<span class="fc" id="L51">	    	set_fxmlPath(&quot;/ui_for_import_file.fxml&quot;);</span>
+<span class="fc" id="L52">	    	Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();</span>
+<span class="fc" id="L53">	    	switch_scene(stage, get_fxmlPath() );</span>
+    	//}
+    	
+    	/*else {
+    		Alert alert =  new Alert(AlertType.WARNING);
+    		alert.setHeaderText(&quot;File Has Already Been Imported! No Need To Imported Again!&quot;);
+    		Button warningButton = (Button) alert.getDialogPane().lookupButton(ButtonType.OK);
+    		warningButton.setId(&quot;importFileError&quot;);
+    		alert.showAndWait();
+    	}*/
+<span class="fc" id="L63">    }</span>
+    
+    /**
+     * This method create new Team instances with processed data
+     * @param event event indicates that the start_processing_button is clicked
+     */
+    @FXML
+    void form_teams(ActionEvent event) {
+<span class="fc bfc" id="L71" title="All 2 branches covered.">    	if(get_isTeamsFormed() != true) {//no need to form new teams if already exist</span>
+<span class="fc bfc" id="L72" title="All 2 branches covered.">	    	if(get_isFileimported() == true) {//Prerequisite to create new Team instances</span>
+<span class="fc" id="L73">	    		process_team_data(get_student_data(), get_teamDataCopy(), get_algorithm());</span>
+<span class="fc" id="L74">	    		set_isTeamsFormed(true);</span>
+<span class="fc" id="L75">	    		Alert alert =  new Alert(AlertType.INFORMATION);</span>
+<span class="fc" id="L76">	    		alert.setHeaderText(&quot;Teams Have Been Successfully Formed&quot;);</span>
+<span class="fc" id="L77">	    		alert.showAndWait();</span>
+<span class="fc" id="L78">	    	}</span>
+	    	
+	    	else {
+<span class="fc" id="L81">	    		Alert alert =  new Alert(AlertType.ERROR);</span>
+<span class="fc" id="L82">	    		alert.setHeaderText(&quot;No File Found! Please Import A File First!&quot;);</span>
+<span class="fc" id="L83">	    		Button errorButton = (Button) alert.getDialogPane().lookupButton(ButtonType.OK);</span>
+<span class="fc" id="L84">	            errorButton.setId(&quot;formTeamsError&quot;);</span>
+<span class="fc" id="L85">	    		alert.showAndWait();</span>
+<span class="fc" id="L86">	    	}</span>
+	    }
+    	
+    	else {
+<span class="fc" id="L90">    		Alert alert =  new Alert(AlertType.ERROR);</span>
+<span class="fc" id="L91">    		alert.setHeaderText(&quot;Teams Already Formed!&quot;);</span>
+<span class="fc" id="L92">    		Button errorButton = (Button) alert.getDialogPane().lookupButton(ButtonType.OK);</span>
+<span class="fc" id="L93">            errorButton.setId(&quot;TeamsExistError&quot;);</span>
+<span class="fc" id="L94">    		alert.showAndWait();</span>
+    	}
+<span class="fc" id="L96">    }</span>
+    
+    /**
+     * This method will change the scene that indicate instructor'choice to the interface for choosing the role
+     * @param event event indicates that the back_to_start_button is clicked
+     * @throws IOException Handle exception type IOExceptio which might be caused when loading the fxml file 
+     */
+    @FXML
+    void switch_scene_to_start_from_instructor(ActionEvent event) throws IOException {
+<span class="fc" id="L105">    	set_fxmlPath(&quot;/ui_for_start.fxml&quot;);</span>
+<span class="fc" id="L106">    	Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();</span>
+<span class="fc" id="L107">    	switch_scene(stage, get_fxmlPath() );</span>
+<span class="fc" id="L108">    }</span>
+    
+    /**
+     * This method will change the scene that indicate instructor'choice to the interface for generating the chart
+     * @param event event indicates that the review_class_statistics_button is clicked
+     * @throws IOException Handle exception type IOExceptio which might be caused when loading the fxml file 
+     */
+    @FXML
+    void switch_scene_to_chart(ActionEvent event) throws IOException {  
+<span class="fc bfc" id="L117" title="All 2 branches covered.">    	if(get_isFileimported() == true) {//Prerequisite to generate chart</span>
+<span class="fc bfc" id="L118" title="All 2 branches covered.">    		if(get_isTeamsFormed() == true) {//Prerequisite to generate chart</span>
+<span class="fc" id="L119">    			FXMLLoader loader = new FXMLLoader(getClass().getResource(&quot;/ui_for_chart.fxml&quot;));</span>
+<span class="fc" id="L120">    			Parent root =  loader.load();</span>
+<span class="fc" id="L121">    			ControllerforChart controllerforchart = loader.getController();</span>
+<span class="fc" id="L122">    			controllerforchart.initialize_chart(get_algorithm());</span>
+<span class="fc" id="L123">    	    	Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();</span>
+<span class="fc" id="L124">    	    	Scene scene = new Scene(root);</span>
+<span class="fc" id="L125">    	    	stage.setScene(scene);</span>
+<span class="fc" id="L126">    	    	stage.setTitle(&quot;COMP3111 Project - Group 09&quot;);</span>
+<span class="fc" id="L127">    	    	stage.show();</span>
+<span class="fc" id="L128">    		}</span>
+    		else {
+<span class="fc" id="L130">        		Alert alert =  new Alert(AlertType.ERROR);</span>
+<span class="fc" id="L131">        		alert.setHeaderText(&quot;Teams Not Found! Please Form Teams First!&quot;);</span>
+<span class="fc" id="L132">        		Button errorButton = (Button) alert.getDialogPane().lookupButton(ButtonType.OK);</span>
+<span class="fc" id="L133">                errorButton.setId(&quot;reviewWithoutTeamsError&quot;);</span>
+<span class="fc" id="L134">        		alert.showAndWait();</span>
+<span class="fc" id="L135">    		}</span>
+    	}    	
+    	else {		
+<span class="fc" id="L138">    		Alert alert =  new Alert(AlertType.ERROR);</span>
+<span class="fc" id="L139">    		alert.setHeaderText(&quot;No File Found! Please Import A File First!&quot;);</span>
+<span class="fc" id="L140">       		Button errorButton = (Button) alert.getDialogPane().lookupButton(ButtonType.OK);</span>
+<span class="fc" id="L141">            errorButton.setId(&quot;reviewWithoutImportError&quot;);</span>
+<span class="fc" id="L142">    		alert.showAndWait();</span>
+    	}
+<span class="fc" id="L144">    }</span>
+
+	void process_team_data(ArrayList&lt;Student&gt; studentData,  Team teamDatacopy, Algorithm a) {
+<span class="fc bfc" id="L147" title="All 2 branches covered.">		for(int i =0; i &lt; studentData.size(); i++) {</span>
+<span class="fc" id="L148">			teamDatacopy.addMember(studentData.get(i));</span>
+		}
+		
+<span class="fc" id="L151">		a.compute(teamDatacopy, 33);</span>
+
+<span class="fc" id="L153">		System.out.println(&quot;K1 student&quot;);</span>
+<span class="fc" id="L154">		print(a.get_K1());</span>
+<span class="fc" id="L155">		System.out.println(&quot;K2 student&quot;);</span>
+<span class="fc" id="L156">		print(a.get_K2());</span>
+<span class="fc" id="L157">		System.out.println(&quot;K3 student&quot;);</span>
+<span class="fc" id="L158">		print(a.get_K3());</span>
+		
+<span class="fc bfc" id="L160" title="All 2 branches covered.">		for(int i = 0; i &lt; a.atu.getTeams().size(); i ++) {</span>
+<span class="fc" id="L161">			print(a.atu.getTeams().get(i));</span>
+		}
+		
+<span class="fc" id="L164">		set_isTeamsFormed(true);</span>
+<span class="fc" id="L165">	}</span>
+	
+	static void print(Team t) {
+<span class="fc" id="L168">		System.out.println(&quot;Team id: &quot; + t.getTeamId() + &quot; / Team name: &quot; + t.getName());</span>
+<span class="pc bpc" id="L169" title="1 of 2 branches missed.">		if(t.getMembersList() != null) {</span>
+<span class="fc bfc" id="L170" title="All 2 branches covered.">				for(Student s : t.getMembersList()) {</span>
+<span class="fc" id="L171">					System.out.print(s.getStudentname() + &quot; &quot;);</span>
+<span class="fc" id="L172">					System.out.print(s.getK1energy() + &quot; &quot;);</span>
+<span class="fc" id="L173">					System.out.print(s.getK2energy() + &quot; &quot;);</span>
+<span class="fc" id="L174">					System.out.println();</span>
+<span class="fc" id="L175">				}</span>
+<span class="fc" id="L176">				System.out.println(&quot;Total &quot; + t.getNumOfMembers() + &quot; students&quot;);</span>
+		} else {
+<span class="nc" id="L178">			System.out.println(&quot;The data is empty&quot;);</span>
+		}
+<span class="fc" id="L180">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

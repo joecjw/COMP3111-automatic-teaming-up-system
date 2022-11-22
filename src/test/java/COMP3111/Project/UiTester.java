@@ -97,9 +97,10 @@ public class UiTester extends ApplicationTest{
 	    */
 	    
 	    //check reviewWithoutTeams error dialog
-	    //import csv file performed
+	    //import csv file performed manually
 	    clickOn("Back");
-	    controller.set_fxmlPath("/Users/wang/git/COMP3111/src/main/resources/Sample Student Data File.CSV");
+	    //Here the csv file path should be set manually according to the tester's local path
+	    controller.set_fxmlPath("C:\\Users\\s2015\\git\\COMP3111-Project\\src\\main\\resources\\Sample Student Data File.CSV");
 	    controller.read(controller.get_fxmlPath());
 		controller.set_isFileimported(true);
 		
