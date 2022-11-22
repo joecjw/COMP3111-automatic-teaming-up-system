@@ -50,7 +50,11 @@ public class MyApplication extends Application{
 	public Algorithm get_algorithm() {
 		return ATU;
 	}
-
+	
+	/**
+	 * Method to get ArrayList of students 
+	 * @return ArrayList of Student object that contains all students
+	 */
 	public static ArrayList<Student> get_student_data() {
 		return studentData;
 	}
@@ -59,18 +63,34 @@ public class MyApplication extends Application{
 		return teamDatacopy;
 	}
 	
+	/**
+	 * Method to return statistics table for table-printing
+	 * @return TableView in Statistics
+	 */
 	public TableView<Statistics> get_stat_table() {
 		return stat_table;
 	}
-
+	
+	/**
+	 * Method to return student table for table-printing
+	 * @return TableView in Student
+	 */
 	public TableView<Student> get_person_table () {
 		return person_table;
 	}
 
+	/**
+	 * Method to return statistics obervableList for table-generating
+	 * @return ObservableList in Statistics
+	 */
 	public static ObservableList<Statistics> get_stat_data () {
 		return stat_data;
 	}
-
+	
+	/**
+	 * Method to return student obervableList for table-generating
+	 * @return ObservableList in Student
+	 */
 	public ObservableList<Student> get_person_data () {
 		return person_data;
 	}
@@ -83,22 +103,42 @@ public class MyApplication extends Application{
 		MyApplication.fxmlPath = path;
 	}
 	
+	/**
+	 * Method to get indicator for indicating whether file is imported
+	 * @return indicator boolean for modifier. 1 is imported, 0 is not imported
+	 */
 	public boolean get_isFileimported() {
 		return isFileimported;
 	}
 	
+	/**
+	 * Method to set indicator for indicating whether file is imported
+	 * @param result indicator boolean for modifier. 1 is imported, 0 is not imported
+	 */
 	public void set_isFileimported(boolean result) {
 		MyApplication.isFileimported = result;
 	}
 	
+	/**
+	 * Method to get indicator for indicating whether team is formed
+	 * @return indicator boolean for modifier. 1 is formed, 0 is not formed
+	 */
 	public boolean get_isTeamsFormed() {
 		return isTeamsFormed;
 	}
 	
+	/**
+	 * Method to set indicator for indicating whether a team is formed
+	 * @param result indicator boolean for modifier. 1 is formed, 0 is not formed
+	 */
 	public void set_isTeamsFormed(boolean result) {
 		MyApplication.isTeamsFormed = result;
 	}
 	
+	/**
+	 * Method to read csvFile into student data and compute statistics
+	 * @param csvFile input from fileChooser of the file in String
+	 */
 	public void read(String csvFile) {
 		try {
 			File file = new File(csvFile);
@@ -141,12 +181,12 @@ public class MyApplication extends Application{
 			k1[0] /= sum; k2[0] /= sum;
 			String k1result = "(" + k1[0] + ", " + k1[1] + ", " + k1[2] + ")";
 			String k2result = "(" + k2[0] + ", " + k2[1] + ", " + k2[2] + ")";
-			stat_data.add(new Statistics("Total Number of Students", String.valueOf(sum)));
-			stat_data.add(new Statistics("K1_Energy(Average, Min, Max)", k1result));
-			stat_data.add(new Statistics("K2_Energy(Average, Min, Max)", k2result));
-			stat_data.add(new Statistics("K3_Tick1 = 1", String.valueOf(k3_tick1)));
-			stat_data.add(new Statistics("K3_Tick2 = 1", String.valueOf(k3_tick2)));
-			stat_data.add(new Statistics("My_Preference = 1", String.valueOf(pref_cnt)));
+			stat_data.add(new Statistics("0", "Total Number of Students", String.valueOf(sum)));
+			stat_data.add(new Statistics("1","K1_Energy(Average, Min, Max)", k1result));
+			stat_data.add(new Statistics("2","K2_Energy(Average, Min, Max)", k2result));
+			stat_data.add(new Statistics("3","K3_Tick1 = 1", String.valueOf(k3_tick1)));
+			stat_data.add(new Statistics("4","K3_Tick2 = 1", String.valueOf(k3_tick2)));
+			stat_data.add(new Statistics("5","My_Preference = 1", String.valueOf(pref_cnt)));
 			person_data = FXCollections.observableArrayList(studentData);
 			br.close();
 		} catch (IOException ioe) {

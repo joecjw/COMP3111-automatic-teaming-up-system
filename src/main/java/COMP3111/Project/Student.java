@@ -23,7 +23,7 @@ public class Student {
 		 * @param row_id for table display row_index
 		 * @param student_id student id shown in the system
 		 * @param student_name student name shown in the system
-		 * @param student_name email address of the student
+		 * @param student_email email address of the student
 		 * @param k1_energy the value of k1
 		 * @param k2_energy the value of k2
 		 * @param k3_trick1 indicate whether the student have k3 trick 1
