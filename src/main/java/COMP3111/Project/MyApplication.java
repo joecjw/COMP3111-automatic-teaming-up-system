@@ -50,7 +50,11 @@ public class MyApplication extends Application{
 	public Algorithm get_algorithm() {
 		return ATU;
 	}
-
+	
+	/**
+	 * Method to get ArrayList of students 
+	 * @return ArrayList of Student object that contains all students
+	 */
 	public static ArrayList<Student> get_student_data() {
 		return studentData;
 	}
@@ -59,18 +63,34 @@ public class MyApplication extends Application{
 		return teamDatacopy;
 	}
 	
+	/**
+	 * Method to return statistics table for table-printing
+	 * @return TableView in Statistics
+	 */
 	public TableView<Statistics> get_stat_table() {
 		return stat_table;
 	}
-
+	
+	/**
+	 * Method to return student table for table-printing
+	 * @return TableView in Student
+	 */
 	public TableView<Student> get_person_table () {
 		return person_table;
 	}
 
+	/**
+	 * Method to return statistics obervableList for table-generating
+	 * @return ObservableList in Statistics
+	 */
 	public static ObservableList<Statistics> get_stat_data () {
 		return stat_data;
 	}
-
+	
+	/**
+	 * Method to return student obervableList for table-generating
+	 * @return ObservableList in Student
+	 */
 	public ObservableList<Student> get_person_data () {
 		return person_data;
 	}
@@ -83,22 +103,42 @@ public class MyApplication extends Application{
 		MyApplication.fxmlPath = path;
 	}
 	
+	/**
+	 * Method to get indicator for indicating whether file is imported
+	 * @return indicator boolean for modifier. 1 is imported, 0 is not imported
+	 */
 	public boolean get_isFileimported() {
 		return isFileimported;
 	}
 	
+	/**
+	 * Method to set indicator for indicating whether file is imported
+	 * @param result indicator boolean for modifier. 1 is imported, 0 is not imported
+	 */
 	public void set_isFileimported(boolean result) {
 		MyApplication.isFileimported = result;
 	}
 	
+	/**
+	 * Method to get indicator for indicating whether team is formed
+	 * @return indicator boolean for modifier. 1 is formed, 0 is not formed
+	 */
 	public boolean get_isTeamsFormed() {
 		return isTeamsFormed;
 	}
 	
+	/**
+	 * Method to set indicator for indicating whether a team is formed
+	 * @param result indicator boolean for modifier. 1 is formed, 0 is not formed
+	 */
 	public void set_isTeamsFormed(boolean result) {
 		MyApplication.isTeamsFormed = result;
 	}
 	
+	/**
+	 * Method to read csvFile into student data and compute statistics
+	 * @param csvFile input from fileChooser of the file in String
+	 */
 	public void read(String csvFile) {
 		try {
 			File file = new File(csvFile);
