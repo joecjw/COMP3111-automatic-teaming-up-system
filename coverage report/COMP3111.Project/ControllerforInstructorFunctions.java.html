@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ControllerforInstructorFunctions.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">COMP3111 Project</a> &gt; <a href="index.source.html" class="el_package">COMP3111.Project</a> &gt; <span class="el_source">ControllerforInstructorFunctions.java</span></div><h1>ControllerforInstructorFunctions.java</h1><pre class="source lang-java linenums">package COMP3111.Project;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ControllerforInstructorFunctions.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">COMP3111 Project</a> &gt; <a href="index.source.html" class="el_package">COMP3111.Project</a> &gt; <span class="el_source">ControllerforInstructorFunctions.java</span></div><h1>ControllerforInstructorFunctions.java</h1><pre class="source lang-java linenums">package COMP3111.Project;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -142,42 +142,58 @@ import javafx.stage.Stage;
 <span class="fc" id="L142">    		alert.showAndWait();</span>
     	}
 <span class="fc" id="L144">    }</span>
+    /**
+     * This method will be called when pressing &quot;process data&quot; button, it will form teams according to the algorithm
+     * @param studentData ArrayList studentData
+     * @param teamDatacopy Team teamDatacopy
+     * @param a Algorithm a
+     */
 
 	void process_team_data(ArrayList&lt;Student&gt; studentData,  Team teamDatacopy, Algorithm a) {
-<span class="fc bfc" id="L147" title="All 2 branches covered.">		for(int i =0; i &lt; studentData.size(); i++) {</span>
-<span class="fc" id="L148">			teamDatacopy.addMember(studentData.get(i));</span>
+<span class="fc bfc" id="L153" title="All 2 branches covered.">		for(int i =0; i &lt; studentData.size(); i++) {</span>
+<span class="fc" id="L154">			teamDatacopy.addMember(studentData.get(i));</span>
 		}
 		
-<span class="fc" id="L151">		a.compute(teamDatacopy, 33);</span>
+<span class="fc" id="L157">		a.compute(teamDatacopy, 33);</span>
+<span class="fc" id="L158">		System.out.println(&quot;K1 student&quot;);</span>
+<span class="fc" id="L159">		print(a.get_K1());</span>
+<span class="fc" id="L160">		System.out.println(&quot;K2 student&quot;);</span>
+<span class="fc" id="L161">		print(a.get_K2());</span>
+<span class="fc" id="L162">		System.out.println(&quot;K3 student&quot;);</span>
+<span class="fc" id="L163">		print(a.get_K3());</span>
+		
+		
+<span class="fc" id="L166">		a.Get_Standard_Deviation_K1();</span>
+<span class="fc" id="L167">		a.Get_Standard_Deviation_K2();</span>
+<span class="fc" id="L168">		a.Get_Standard_Deviation_K1K2();</span>
+		
+<span class="fc bfc" id="L170" title="All 2 branches covered.">		for(int i = 0; i &lt; a.atu.getTeams().size(); i ++) {</span>
+<span class="fc" id="L171">			print(a.atu.getTeams().get(i));</span>
+		}
 
-<span class="fc" id="L153">		System.out.println(&quot;K1 student&quot;);</span>
-<span class="fc" id="L154">		print(a.get_K1());</span>
-<span class="fc" id="L155">		System.out.println(&quot;K2 student&quot;);</span>
-<span class="fc" id="L156">		print(a.get_K2());</span>
-<span class="fc" id="L157">		System.out.println(&quot;K3 student&quot;);</span>
-<span class="fc" id="L158">		print(a.get_K3());</span>
 		
-<span class="fc bfc" id="L160" title="All 2 branches covered.">		for(int i = 0; i &lt; a.atu.getTeams().size(); i ++) {</span>
-<span class="fc" id="L161">			print(a.atu.getTeams().get(i));</span>
-		}
-		
-<span class="fc" id="L164">		set_isTeamsFormed(true);</span>
-<span class="fc" id="L165">	}</span>
+<span class="fc" id="L175">		set_isTeamsFormed(true);</span>
+<span class="fc" id="L176">	}</span>
+	
+	/**
+	 * This is a helper function to print out team's information. It is for internal debugging use
+	 * @param t Team t
+	 */
 	
 	static void print(Team t) {
-<span class="fc" id="L168">		System.out.println(&quot;Team id: &quot; + t.getTeamId() + &quot; / Team name: &quot; + t.getName());</span>
-<span class="pc bpc" id="L169" title="1 of 2 branches missed.">		if(t.getMembersList() != null) {</span>
-<span class="fc bfc" id="L170" title="All 2 branches covered.">				for(Student s : t.getMembersList()) {</span>
-<span class="fc" id="L171">					System.out.print(s.getStudentname() + &quot; &quot;);</span>
-<span class="fc" id="L172">					System.out.print(s.getK1energy() + &quot; &quot;);</span>
-<span class="fc" id="L173">					System.out.print(s.getK2energy() + &quot; &quot;);</span>
-<span class="fc" id="L174">					System.out.println();</span>
-<span class="fc" id="L175">				}</span>
-<span class="fc" id="L176">				System.out.println(&quot;Total &quot; + t.getNumOfMembers() + &quot; students&quot;);</span>
+<span class="fc" id="L184">		System.out.println(&quot;Team id: &quot; + t.getTeamId() + &quot; / Team name: &quot; + t.getName());</span>
+<span class="pc bpc" id="L185" title="1 of 2 branches missed.">		if(t.getMembersList() != null) {</span>
+<span class="fc bfc" id="L186" title="All 2 branches covered.">				for(Student s : t.getMembersList()) {</span>
+<span class="fc" id="L187">					System.out.print(s.getStudentname() + &quot; &quot;);</span>
+<span class="fc" id="L188">					System.out.print(s.getK1energy() + &quot; &quot;);</span>
+<span class="fc" id="L189">					System.out.print(s.getK2energy() + &quot; &quot;);</span>
+<span class="fc" id="L190">					System.out.println();</span>
+<span class="fc" id="L191">				}</span>
+<span class="fc" id="L192">				System.out.println(&quot;Total &quot; + t.getNumOfMembers() + &quot; students&quot;);</span>
 		} else {
-<span class="nc" id="L178">			System.out.println(&quot;The data is empty&quot;);</span>
+<span class="nc" id="L194">			System.out.println(&quot;The data is empty&quot;);</span>
 		}
-<span class="fc" id="L180">	}</span>
+<span class="fc" id="L196">	}</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

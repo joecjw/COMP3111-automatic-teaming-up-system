@@ -1,22 +1,34 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ControllerforChart.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">COMP3111 Project</a> &gt; <a href="index.source.html" class="el_package">COMP3111.Project</a> &gt; <span class="el_source">ControllerforChart.java</span></div><h1>ControllerforChart.java</h1><pre class="source lang-java linenums">package COMP3111.Project;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ControllerforChart.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">COMP3111 Project</a> &gt; <a href="index.source.html" class="el_package">COMP3111.Project</a> &gt; <span class="el_source">ControllerforChart.java</span></div><h1>ControllerforChart.java</h1><pre class="source lang-java linenums">package COMP3111.Project;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 
 /**
  *Controller for the OUTPUT Task: Generate Chart with skill energy of the teams
  */
-<span class="fc" id="L19">public class ControllerforChart extends MyApplication{</span>
+<span class="fc" id="L31">public class ControllerforChart extends MyApplication{</span>
 
     @FXML
     private Button back_to_instructor_buttton;
@@ -25,7 +37,7 @@ import javafx.util.Pair;
     private LineChart&lt;String, Number&gt; linechart;
     
     public LineChart&lt;String, Number&gt; get_linechart() {
-<span class="nc" id="L28">    	return linechart;</span>
+<span class="nc" id="L40">    	return linechart;</span>
     }
     
     /**
@@ -35,68 +47,113 @@ import javafx.util.Pair;
      */
     @FXML
     void switch_scene_to_instructor_form_chart(ActionEvent event) throws IOException    {
-<span class="fc" id="L38">    	set_fxmlPath(&quot;/ui_for_instructor_functions.fxml&quot;);</span>
-<span class="fc" id="L39">    	Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();</span>
-<span class="fc" id="L40">    	switch_scene(stage, get_fxmlPath() );</span>
-<span class="fc" id="L41">    }</span>
+<span class="fc" id="L50">    	set_fxmlPath(&quot;/ui_for_instructor_functions.fxml&quot;);</span>
+<span class="fc" id="L51">    	Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();</span>
+<span class="fc" id="L52">    	switch_scene(stage, get_fxmlPath() );</span>
+<span class="fc" id="L53">    }</span>
     
     /**
      * This method initialize the linechart with processed team data
+     * and also shows a table with standard deviation data of formed teams
      */
     void initialize_chart(Algorithm a) {
     	//initialize three series for linechart
-<span class="fc" id="L48">        XYChart.Series&lt;String, Number&gt; series_k1 = new XYChart.Series&lt;String, Number&gt;();</span>
-<span class="fc" id="L49">        XYChart.Series&lt;String, Number&gt; series_k2 = new XYChart.Series&lt;String, Number&gt;();</span>
-<span class="fc" id="L50">        XYChart.Series&lt;String, Number&gt; series_k1_k2 = new XYChart.Series&lt;String, Number&gt;();</span>
-<span class="fc" id="L51">    	series_k1.setName(&quot;K1&quot;);</span>
-<span class="fc" id="L52">    	series_k2.setName(&quot;K2&quot;);</span>
-<span class="fc" id="L53">    	series_k1_k2.setName(&quot;K1+K2&quot;);</span>
+<span class="fc" id="L61">        XYChart.Series&lt;String, Number&gt; series_k1 = new XYChart.Series&lt;String, Number&gt;();</span>
+<span class="fc" id="L62">        XYChart.Series&lt;String, Number&gt; series_k2 = new XYChart.Series&lt;String, Number&gt;();</span>
+<span class="fc" id="L63">        XYChart.Series&lt;String, Number&gt; series_k1_k2 = new XYChart.Series&lt;String, Number&gt;();</span>
+<span class="fc" id="L64">    	series_k1.setName(&quot;K1&quot;);</span>
+<span class="fc" id="L65">    	series_k2.setName(&quot;K2&quot;);</span>
+<span class="fc" id="L66">    	series_k1_k2.setName(&quot;K1+K2&quot;);</span>
     	
     	//initialize and compute team statistics for each team, store in a TeamAverage class array
-<span class="fc" id="L56">    	TeamAverage[] teamStat = new TeamAverage[a.atu.getTeams().size()];</span>
-<span class="fc bfc" id="L57" title="All 2 branches covered.">        for(int i = 0; i &lt; teamStat.length; i++) {</span>
-<span class="fc" id="L58">        	teamStat[i] = new TeamAverage(0.0, 0.0, 0.0, i);</span>
-<span class="fc bfc" id="L59" title="All 2 branches covered.">    		for(int j = 0; j &lt; a.atu.getTeams().get(i).getNumOfMembers(); j++) {</span>
-<span class="fc" id="L60">    			teamStat[i].avg_k1 = teamStat[i].avg_k1 + Integer.parseInt(a.atu.getTeams().get(i).getMembersList().get(j).getK1energy());</span>
-<span class="fc" id="L61">    			teamStat[i].avg_k2 = teamStat[i].avg_k2 + Integer.parseInt(a.atu.getTeams().get(i).getMembersList().get(j).getK2energy());</span>
-<span class="fc" id="L62">    			teamStat[i].avg_k1_k2 = teamStat[i].avg_k1_k2 + teamStat[i].avg_k1 + teamStat[i].avg_k2;</span>
+<span class="fc" id="L69">    	TeamAverage[] teamStat = new TeamAverage[a.atu.getTeams().size()];</span>
+<span class="fc bfc" id="L70" title="All 2 branches covered.">        for(int i = 0; i &lt; teamStat.length; i++) {</span>
+<span class="fc" id="L71">        	teamStat[i] = new TeamAverage(0.0, 0.0, 0.0, i);</span>
+<span class="fc bfc" id="L72" title="All 2 branches covered.">    		for(int j = 0; j &lt; a.atu.getTeams().get(i).getNumOfMembers(); j++) {</span>
+<span class="fc" id="L73">    			teamStat[i].avg_k1 = teamStat[i].avg_k1 + Integer.parseInt(a.atu.getTeams().get(i).getMembersList().get(j).getK1energy());</span>
+<span class="fc" id="L74">    			teamStat[i].avg_k2 = teamStat[i].avg_k2 + Integer.parseInt(a.atu.getTeams().get(i).getMembersList().get(j).getK2energy());</span>
+<span class="fc" id="L75">    			teamStat[i].avg_k1_k2 = teamStat[i].avg_k1_k2 + teamStat[i].avg_k1 + teamStat[i].avg_k2;</span>
     		}
-<span class="fc" id="L64">    		teamStat[i].avg_k1 = teamStat[i].avg_k1/(a.atu.getTeams().get(i).getNumOfMembers());</span>
-<span class="fc" id="L65">    		teamStat[i].avg_k2 = teamStat[i].avg_k2/(a.atu.getTeams().get(i).getNumOfMembers());</span>
-<span class="fc" id="L66">    		teamStat[i].avg_k1_k2 = (teamStat[i].avg_k1 + teamStat[i].avg_k2)/2;</span>
+<span class="fc" id="L77">    		teamStat[i].avg_k1 = teamStat[i].avg_k1/(a.atu.getTeams().get(i).getNumOfMembers());</span>
+<span class="fc" id="L78">    		teamStat[i].avg_k2 = teamStat[i].avg_k2/(a.atu.getTeams().get(i).getNumOfMembers());</span>
+<span class="fc" id="L79">    		teamStat[i].avg_k1_k2 = (teamStat[i].avg_k1 + teamStat[i].avg_k2)/2;</span>
     	}
         
         //sort the TeamAverage class array in descending order of average k1 energy
-<span class="fc bfc" id="L70" title="All 2 branches covered.">        for(int i = 0; i &lt; teamStat.length - 1; i++) {</span>
-<span class="fc bfc" id="L71" title="All 2 branches covered.">    		for(int j = 1; j &lt; teamStat.length; j++) {</span>
-<span class="fc bfc" id="L72" title="All 2 branches covered.">				if(teamStat[j-1].avg_k1 &lt; teamStat[j].avg_k1) {</span>
-<span class="fc" id="L73">					TeamAverage tmp = teamStat[j];</span>
-<span class="fc" id="L74">					teamStat[j] = teamStat[j-1];</span>
-<span class="fc" id="L75">					teamStat[j-1] = tmp;</span>
-<span class="fc" id="L76">				}</span>
+<span class="fc bfc" id="L83" title="All 2 branches covered.">        for(int i = 0; i &lt; teamStat.length - 1; i++) {</span>
+<span class="fc bfc" id="L84" title="All 2 branches covered.">    		for(int j = 1; j &lt; teamStat.length; j++) {</span>
+<span class="fc bfc" id="L85" title="All 2 branches covered.">				if(teamStat[j-1].avg_k1 &lt; teamStat[j].avg_k1) {</span>
+<span class="fc" id="L86">					TeamAverage tmp = teamStat[j];</span>
+<span class="fc" id="L87">					teamStat[j] = teamStat[j-1];</span>
+<span class="fc" id="L88">					teamStat[j-1] = tmp;</span>
+<span class="fc" id="L89">				}</span>
 				
-<span class="pc bpc" id="L78" title="1 of 2 branches missed.">				else if(teamStat[j-1].avg_k1 == teamStat[j].avg_k1) {</span>
-<span class="nc bnc" id="L79" title="All 2 branches missed.">					if(teamStat[j-1].avg_k2 &lt; teamStat[j].avg_k2) {</span>
-<span class="nc" id="L80">						TeamAverage tmp = teamStat[j];</span>
-<span class="nc" id="L81">						teamStat[j] = teamStat[j-1];</span>
-<span class="nc" id="L82">						teamStat[j-1] = tmp;</span>
+<span class="pc bpc" id="L91" title="1 of 2 branches missed.">				else if(teamStat[j-1].avg_k1 == teamStat[j].avg_k1) {</span>
+<span class="nc bnc" id="L92" title="All 2 branches missed.">					if(teamStat[j-1].avg_k2 &lt; teamStat[j].avg_k2) {</span>
+<span class="nc" id="L93">						TeamAverage tmp = teamStat[j];</span>
+<span class="nc" id="L94">						teamStat[j] = teamStat[j-1];</span>
+<span class="nc" id="L95">						teamStat[j-1] = tmp;</span>
 					}
 				}
 			}
 		}
         
         //add the value of statistics to corresponding series 
-<span class="fc bfc" id="L89" title="All 2 branches covered.">        for(int i = 0; i &lt; teamStat.length; i++) {</span>
-<span class="fc" id="L90">        	series_k1.getData().add(new XYChart.Data&lt;String,Number&gt;(String.valueOf(i+1),teamStat[i].avg_k1));</span>
-<span class="fc" id="L91">    		series_k2.getData().add(new XYChart.Data&lt;String,Number&gt;(String.valueOf(i+1),teamStat[i].avg_k2));</span>
-<span class="fc" id="L92">    		series_k1_k2.getData().add(new XYChart.Data&lt;String,Number&gt;(String.valueOf(i+1),teamStat[i].avg_k1_k2));	</span>
+<span class="fc bfc" id="L102" title="All 2 branches covered.">        for(int i = 0; i &lt; teamStat.length; i++) {</span>
+<span class="fc" id="L103">        	series_k1.getData().add(new XYChart.Data&lt;String,Number&gt;(String.valueOf(i+1),teamStat[i].avg_k1));</span>
+<span class="fc" id="L104">    		series_k2.getData().add(new XYChart.Data&lt;String,Number&gt;(String.valueOf(i+1),teamStat[i].avg_k2));</span>
+<span class="fc" id="L105">    		series_k1_k2.getData().add(new XYChart.Data&lt;String,Number&gt;(String.valueOf(i+1),teamStat[i].avg_k1_k2));	</span>
         }
         	    	
         //add series to the linechart
-<span class="fc" id="L96">    	linechart.getData().add(series_k1);</span>
-<span class="fc" id="L97">    	linechart.getData().add(series_k2);</span>
-<span class="fc" id="L98">    	linechart.getData().add(series_k1_k2);</span>
-<span class="fc" id="L99">    }</span>
+<span class="fc" id="L109">    	linechart.getData().add(series_k1);</span>
+<span class="fc" id="L110">    	linechart.getData().add(series_k2);</span>
+<span class="fc" id="L111">    	linechart.getData().add(series_k1_k2);</span>
+    	
+    	//show the standard deviation table UI (extra feature implementation)
+<span class="fc" id="L114">    	ObservableList&lt;Statistics&gt; sd_data = FXCollections.observableArrayList();</span>
+<span class="fc" id="L115">    	TableView&lt;Statistics&gt; sd_table = new TableView&lt;Statistics&gt;();</span>
+    	
+<span class="fc" id="L117">    	Scene scene_sd = new Scene(new Group());</span>
+<span class="fc" id="L118">		Stage stage_sd = new Stage();</span>
+<span class="fc" id="L119">		stage_sd.setTitle(&quot;Table of formed teams' standard deviation data&quot;);</span>
+<span class="fc" id="L120">		stage_sd.setWidth(450);</span>
+<span class="fc" id="L121">		stage_sd.setHeight(500);</span>
+	
+<span class="fc" id="L123">		final Label label_sd = new Label(&quot;Standard Deviation&quot;);</span>
+<span class="fc" id="L124">		label_sd.setFont(new Font(&quot;Arial&quot;, 20));</span>
+		
+<span class="fc" id="L126">		sd_table.setEditable(false);</span>
+
+<span class="fc" id="L128">		TableColumn row_column = new TableColumn(&quot;Row_Index&quot;);</span>
+<span class="fc" id="L129">		row_column.setMinWidth(80);</span>
+<span class="fc" id="L130">		row_column.setCellValueFactory(new PropertyValueFactory&lt;Statistics, String&gt;(&quot;rowid&quot;));</span>
+		
+<span class="fc" id="L132">		TableColumn entry_column = new TableColumn(&quot;Entry&quot;);</span>
+<span class="fc" id="L133">		entry_column.setMinWidth(180);</span>
+<span class="fc" id="L134">		entry_column.setCellValueFactory(new PropertyValueFactory&lt;Statistics, String&gt;(&quot;entry&quot;));</span>
+	
+<span class="fc" id="L136">		TableColumn value_column = new TableColumn(&quot;Value&quot;);</span>
+<span class="fc" id="L137">		value_column.setMinWidth(150);</span>
+<span class="fc" id="L138">		value_column.setCellValueFactory(new PropertyValueFactory&lt;Statistics, String&gt;(&quot;value&quot;));</span>
+		
+<span class="fc" id="L140">		sd_data.add(new Statistics(&quot;0&quot;, &quot;K1 Standard Deviation&quot;, Double.toString(a.Get_Standard_Deviation_K1())));</span>
+<span class="fc" id="L141">		sd_data.add(new Statistics(&quot;1&quot;, &quot;K2 Standard Deviation&quot;, Double.toString(a.Get_Standard_Deviation_K2())));</span>
+<span class="fc" id="L142">		sd_data.add(new Statistics(&quot;2&quot;, &quot;K1+K1 Standard Deviation&quot;, Double.toString(a.Get_Standard_Deviation_K1K2())));</span>
+	
+<span class="fc" id="L144">		sd_table.setItems(sd_data);</span>
+<span class="fc" id="L145">		sd_table.getColumns().addAll(row_column, entry_column, value_column);</span>
+<span class="fc" id="L146">		sd_table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);</span>
+<span class="fc" id="L147">		final VBox vbox_stat = new VBox();</span>
+<span class="fc" id="L148">		vbox_stat.setSpacing(5);</span>
+<span class="fc" id="L149">		vbox_stat.setPadding(new Insets(10, 0, 0, 10));</span>
+<span class="fc" id="L150">		vbox_stat.getChildren().addAll(label_sd, sd_table);</span>
+	
+<span class="fc" id="L152">		((Group) scene_sd.getRoot()).getChildren().addAll(vbox_stat);</span>
+	
+<span class="fc" id="L154">		stage_sd.setScene(scene_sd);</span>
+<span class="fc" id="L155">		stage_sd.show();</span>
+<span class="fc" id="L156">    }</span>
     
     public class TeamAverage{//class used to store a team's average statistics
     	Double avg_k1;
@@ -104,12 +161,12 @@ import javafx.util.Pair;
     	Double avg_k1_k2;
     	Integer team_id;
     	
-<span class="fc" id="L107">    	TeamAverage(Double avg_k1, Double avg_k2, Double avg_k1_k2, Integer team_id){</span>
-<span class="fc" id="L108">    		this.avg_k1 = avg_k1;</span>
-<span class="fc" id="L109">    		this.avg_k2 = avg_k2;</span>
-<span class="fc" id="L110">    		this.avg_k1_k2 = avg_k1_k2;</span>
-<span class="fc" id="L111">    		this.team_id = team_id;</span>
-<span class="fc" id="L112">    	}</span>
+<span class="fc" id="L164">    	TeamAverage(Double avg_k1, Double avg_k2, Double avg_k1_k2, Integer team_id){</span>
+<span class="fc" id="L165">    		this.avg_k1 = avg_k1;</span>
+<span class="fc" id="L166">    		this.avg_k2 = avg_k2;</span>
+<span class="fc" id="L167">    		this.avg_k1_k2 = avg_k1_k2;</span>
+<span class="fc" id="L168">    		this.team_id = team_id;</span>
+<span class="fc" id="L169">    	}</span>
     }
 }
 

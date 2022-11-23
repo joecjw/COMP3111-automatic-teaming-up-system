@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MyApplication.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">COMP3111 Project</a> &gt; <a href="index.source.html" class="el_package">COMP3111.Project</a> &gt; <span class="el_source">MyApplication.java</span></div><h1>MyApplication.java</h1><pre class="source lang-java linenums">package COMP3111.Project;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MyApplication.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">COMP3111 Project</a> &gt; <a href="index.source.html" class="el_package">COMP3111.Project</a> &gt; <span class="el_source">MyApplication.java</span></div><h1>MyApplication.java</h1><pre class="source lang-java linenums">package COMP3111.Project;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -17,143 +17,187 @@ import javafx.scene.Scene;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
-<span class="fc" id="L20">public class MyApplication extends Application{</span>
+/**
+ * Entry point of the application
+ * Containing main data of the program
+ * @author Team 9
+ *
+ */
+<span class="fc" id="L26">public class MyApplication extends Application{</span>
 
 	private final static String delimiter = &quot;,&quot;;
 	
-<span class="fc" id="L24">	private static String fxmlPath = null;</span>
+<span class="fc" id="L30">	private static String fxmlPath = null;</span>
 	
-<span class="fc" id="L26">	private static boolean isFileimported = false;</span>
+<span class="fc" id="L32">	private static boolean isFileimported = false;</span>
 	
-<span class="fc" id="L28">	private static boolean isTeamsFormed = false;</span>
+<span class="fc" id="L34">	private static boolean isTeamsFormed = false;</span>
 	
-<span class="fc" id="L30">	private Algorithm ATU = new Algorithm();</span>
+<span class="fc" id="L36">	private static Algorithm ATU = new Algorithm();</span>
 	
-<span class="fc" id="L32">	private static ArrayList&lt;Student&gt; studentData = new ArrayList&lt;Student&gt;();</span>
+<span class="fc" id="L38">	private static ArrayList&lt;Student&gt; studentData = new ArrayList&lt;Student&gt;();</span>
 	
-	//can change to other data structure (for output testing)
-	//private static ArrayList&lt;Team&gt; teamData = new ArrayList&lt;Team&gt;();
-<span class="fc" id="L36">	private static Team teamDatacopy = new Team();</span>
+<span class="fc" id="L40">	private static Team teamDatacopy = new Team();</span>
 	
-<span class="fc" id="L38">	private final static ObservableList&lt;Statistics&gt; stat_data = FXCollections.observableArrayList();</span>
+<span class="fc" id="L42">	private final static ObservableList&lt;Statistics&gt; stat_data = FXCollections.observableArrayList();</span>
 
-<span class="fc" id="L40">	private TableView&lt;Statistics&gt; stat_table = new TableView&lt;Statistics&gt;();</span>
+<span class="fc" id="L44">	private TableView&lt;Statistics&gt; stat_table = new TableView&lt;Statistics&gt;();</span>
 	
-<span class="fc" id="L42">	private static ObservableList&lt;Student&gt; person_data = null;</span>
+<span class="fc" id="L46">	private static ObservableList&lt;Student&gt; person_data = null;</span>
 	
-<span class="fc" id="L44">	private TableView&lt;Student&gt; person_table = new TableView&lt;Student&gt;();</span>
+<span class="fc" id="L48">	private TableView&lt;Student&gt; person_table = new TableView&lt;Student&gt;();</span>
 	
 	public Algorithm get_algorithm() {
-<span class="fc" id="L47">		return ATU;</span>
+<span class="fc" id="L51">		return ATU;</span>
 	}
-
+	
+	/**
+	 * Method to get ArrayList of students 
+	 * @return ArrayList of Student object that contains all students
+	 */
 	public static ArrayList&lt;Student&gt; get_student_data() {
-<span class="fc" id="L51">		return studentData;</span>
+<span class="fc" id="L59">		return studentData;</span>
 	}
 	
 	public Team get_teamDataCopy() {
-<span class="fc" id="L55">		return teamDatacopy;</span>
+<span class="fc" id="L63">		return teamDatacopy;</span>
 	}
 	
-	//use to get the team data (for output testing)
-	//public static ArrayList&lt;Team&gt; get_team_data() {
-		//return teamData;
-	//}
-	
+	/**
+	 * Method to return statistics table for table-printing
+	 * @return TableView in Statistics
+	 */
 	public TableView&lt;Statistics&gt; get_stat_table() {
-<span class="nc" id="L64">		return stat_table;</span>
+<span class="nc" id="L71">		return stat_table;</span>
 	}
-
+	
+	/**
+	 * Method to return student table for table-printing
+	 * @return TableView in Student
+	 */
 	public TableView&lt;Student&gt; get_person_table () {
-<span class="nc" id="L68">		return person_table;</span>
+<span class="nc" id="L79">		return person_table;</span>
 	}
 
+	/**
+	 * Method to return statistics obervableList for table-generating
+	 * @return ObservableList in Statistics
+	 */
 	public static ObservableList&lt;Statistics&gt; get_stat_data () {
-<span class="nc" id="L72">		return stat_data;</span>
+<span class="nc" id="L87">		return stat_data;</span>
 	}
-
+	
+	/**
+	 * Method to return student obervableList for table-generating
+	 * @return ObservableList in Student
+	 */
 	public ObservableList&lt;Student&gt; get_person_data () {
-<span class="nc" id="L76">		return person_data;</span>
+<span class="nc" id="L95">		return person_data;</span>
 	}
+	
+	/**
+	 * Method to return standard deviation table for table-printing
+	 * @return TableView in standard deviation
+	 */
 	
 	public String get_fxmlPath() {
-<span class="fc" id="L80">		return fxmlPath;</span>
+<span class="fc" id="L104">		return fxmlPath;</span>
 	}
 	
 	public void set_fxmlPath(String path) {
-<span class="fc" id="L84">		MyApplication.fxmlPath = path;</span>
-<span class="fc" id="L85">	}</span>
+<span class="fc" id="L108">		MyApplication.fxmlPath = path;</span>
+<span class="fc" id="L109">	}</span>
 	
+	/**
+	 * Method to get indicator for indicating whether file is imported
+	 * @return indicator boolean for modifier. 1 is imported, 0 is not imported
+	 */
 	public boolean get_isFileimported() {
-<span class="fc" id="L88">		return isFileimported;</span>
+<span class="fc" id="L116">		return isFileimported;</span>
 	}
 	
+	/**
+	 * Method to set indicator for indicating whether file is imported
+	 * @param result indicator boolean for modifier. 1 is imported, 0 is not imported
+	 */
 	public void set_isFileimported(boolean result) {
-<span class="fc" id="L92">		MyApplication.isFileimported = result;</span>
-<span class="fc" id="L93">	}</span>
+<span class="fc" id="L124">		MyApplication.isFileimported = result;</span>
+<span class="fc" id="L125">	}</span>
 	
+	/**
+	 * Method to get indicator for indicating whether team is formed
+	 * @return indicator boolean for modifier. 1 is formed, 0 is not formed
+	 */
 	public boolean get_isTeamsFormed() {
-<span class="fc" id="L96">		return isTeamsFormed;</span>
+<span class="fc" id="L132">		return isTeamsFormed;</span>
 	}
 	
+	/**
+	 * Method to set indicator for indicating whether a team is formed
+	 * @param result indicator boolean for modifier. 1 is formed, 0 is not formed
+	 */
 	public void set_isTeamsFormed(boolean result) {
-<span class="fc" id="L100">		MyApplication.isTeamsFormed = result;</span>
-<span class="fc" id="L101">	}</span>
+<span class="fc" id="L140">		MyApplication.isTeamsFormed = result;</span>
+<span class="fc" id="L141">	}</span>
 	
+	/**
+	 * Method to read csvFile into student data and compute statistics
+	 * @param csvFile input from fileChooser of the file in String
+	 */
 	public void read(String csvFile) {
 		try {
-<span class="fc" id="L105">			File file = new File(csvFile);</span>
-<span class="fc" id="L106">			InputStreamReader isr = new InputStreamReader(new FileInputStream(file), &quot;UTF-8&quot;);</span>
-<span class="fc" id="L107">			BufferedReader br = new BufferedReader(isr);</span>
-<span class="fc" id="L108">			String line = &quot; &quot;;</span>
+<span class="fc" id="L149">			File file = new File(csvFile);</span>
+<span class="fc" id="L150">			InputStreamReader isr = new InputStreamReader(new FileInputStream(file), &quot;UTF-8&quot;);</span>
+<span class="fc" id="L151">			BufferedReader br = new BufferedReader(isr);</span>
+<span class="fc" id="L152">			String line = &quot; &quot;;</span>
 			String[] tempArr;
-<span class="fc" id="L110">			Integer i = 0;</span>
-<span class="fc" id="L111">			float[] k1 = new float[]{0, 100, 0};</span>
-<span class="fc" id="L112">			float[] k2 = new float[]{0, 100, 0};</span>
-<span class="fc" id="L113">			Integer k3_tick1 = 0;</span>
-<span class="fc" id="L114">			Integer k3_tick2 = 0;</span>
-<span class="fc" id="L115">			Integer pref_cnt = 0;</span>
-<span class="fc" id="L116">			br.readLine(); // skip the first line</span>
-<span class="fc bfc" id="L117" title="All 2 branches covered.">			while ((line = br.readLine()) != null) {</span>
-<span class="fc" id="L118">				tempArr = line.split(delimiter);</span>
-<span class="fc" id="L119">				tempArr[1] = tempArr[1].replace(&quot;\&quot;&quot;, &quot;&quot;);</span>
-<span class="fc" id="L120">				tempArr[2] = tempArr[2].replace(&quot;\&quot;&quot;, &quot;&quot;);</span>
-<span class="fc" id="L121">				Student a = new Student(String.valueOf(i), tempArr[0], tempArr[1]+tempArr[2], tempArr[3], tempArr[4], tempArr[5], tempArr[6],</span>
+<span class="fc" id="L154">			Integer i = 0;</span>
+<span class="fc" id="L155">			float[] k1 = new float[]{0, 100, 0};</span>
+<span class="fc" id="L156">			float[] k2 = new float[]{0, 100, 0};</span>
+<span class="fc" id="L157">			Integer k3_tick1 = 0;</span>
+<span class="fc" id="L158">			Integer k3_tick2 = 0;</span>
+<span class="fc" id="L159">			Integer pref_cnt = 0;</span>
+<span class="fc" id="L160">			br.readLine(); // skip the first line</span>
+<span class="fc bfc" id="L161" title="All 2 branches covered.">			while ((line = br.readLine()) != null) {</span>
+<span class="fc" id="L162">				tempArr = line.split(delimiter);</span>
+<span class="fc" id="L163">				tempArr[1] = tempArr[1].replace(&quot;\&quot;&quot;, &quot;&quot;);</span>
+<span class="fc" id="L164">				tempArr[2] = tempArr[2].replace(&quot;\&quot;&quot;, &quot;&quot;);</span>
+<span class="fc" id="L165">				Student a = new Student(String.valueOf(i), tempArr[0], tempArr[1]+tempArr[2], tempArr[3], tempArr[4], tempArr[5], tempArr[6],</span>
 						tempArr[7], tempArr[8], tempArr[9]);
-<span class="fc" id="L123">				studentData.add(a);</span>
-<span class="fc bfc" id="L124" title="All 2 branches covered.">				if (tempArr[6].equals(&quot;1&quot;)) {</span>
-<span class="fc" id="L125">					k3_tick1 += 1;</span>
+<span class="fc" id="L167">				studentData.add(a);</span>
+<span class="fc bfc" id="L168" title="All 2 branches covered.">				if (tempArr[6].equals(&quot;1&quot;)) {</span>
+<span class="fc" id="L169">					k3_tick1 += 1;</span>
 				}
-<span class="fc bfc" id="L127" title="All 2 branches covered.">				else if (tempArr[7].equals(&quot;1&quot;)) {</span>
-<span class="fc" id="L128">					k3_tick2 += 1;</span>
+<span class="fc bfc" id="L171" title="All 2 branches covered.">				else if (tempArr[7].equals(&quot;1&quot;)) {</span>
+<span class="fc" id="L172">					k3_tick2 += 1;</span>
 				}
-<span class="pc bpc" id="L130" title="1 of 2 branches missed.">				else if (tempArr[8].equals(&quot;1&quot;)) {</span>
-<span class="nc" id="L131">					pref_cnt += 1;</span>
+<span class="pc bpc" id="L174" title="1 of 2 branches missed.">				else if (tempArr[8].equals(&quot;1&quot;)) {</span>
+<span class="nc" id="L175">					pref_cnt += 1;</span>
 				}
-<span class="fc" id="L133">				k1[0] += Float.parseFloat(tempArr[4]);</span>
-<span class="fc" id="L134">				k1[1] = Float.min(k1[1], Integer.parseInt(tempArr[4]));</span>
-<span class="fc" id="L135">				k1[2] = Float.max(k1[2], Integer.parseInt(tempArr[4]));</span>
-<span class="fc" id="L136">				k2[0] += Float.parseFloat(tempArr[5]);</span>
-<span class="fc" id="L137">				k2[1] = Float.min(k2[1], Integer.parseInt(tempArr[5]));</span>
-<span class="fc" id="L138">				k2[2] = Float.max(k2[2], Integer.parseInt(tempArr[5]));</span>
-<span class="fc" id="L139">				i += 1;</span>
-<span class="fc" id="L140">			}</span>
-<span class="fc" id="L141">			Integer sum = i;</span>
-<span class="fc" id="L142">			k1[0] /= sum; k2[0] /= sum;</span>
-<span class="fc" id="L143">			String k1result = &quot;(&quot; + k1[0] + &quot;, &quot; + k1[1] + &quot;, &quot; + k1[2] + &quot;)&quot;;</span>
-<span class="fc" id="L144">			String k2result = &quot;(&quot; + k2[0] + &quot;, &quot; + k2[1] + &quot;, &quot; + k2[2] + &quot;)&quot;;</span>
-<span class="fc" id="L145">			stat_data.add(new Statistics(&quot;Total Number of Students&quot;, String.valueOf(sum)));</span>
-<span class="fc" id="L146">			stat_data.add(new Statistics(&quot;K1_Energy(Average, Min, Max)&quot;, k1result));</span>
-<span class="fc" id="L147">			stat_data.add(new Statistics(&quot;K2_Energy(Average, Min, Max)&quot;, k2result));</span>
-<span class="fc" id="L148">			stat_data.add(new Statistics(&quot;K3_Tick1 = 1&quot;, String.valueOf(k3_tick1)));</span>
-<span class="fc" id="L149">			stat_data.add(new Statistics(&quot;K3_Tick2 = 1&quot;, String.valueOf(k3_tick2)));</span>
-<span class="fc" id="L150">			stat_data.add(new Statistics(&quot;My_Preference = 1&quot;, String.valueOf(pref_cnt)));</span>
-<span class="fc" id="L151">			person_data = FXCollections.observableArrayList(studentData);</span>
-<span class="fc" id="L152">			br.close();</span>
-<span class="nc" id="L153">		} catch (IOException ioe) {</span>
-<span class="nc" id="L154">			ioe.printStackTrace();</span>
-<span class="fc" id="L155">		}</span>
-<span class="fc" id="L156">	}</span>
+<span class="fc" id="L177">				k1[0] += Float.parseFloat(tempArr[4]);</span>
+<span class="fc" id="L178">				k1[1] = Float.min(k1[1], Integer.parseInt(tempArr[4]));</span>
+<span class="fc" id="L179">				k1[2] = Float.max(k1[2], Integer.parseInt(tempArr[4]));</span>
+<span class="fc" id="L180">				k2[0] += Float.parseFloat(tempArr[5]);</span>
+<span class="fc" id="L181">				k2[1] = Float.min(k2[1], Integer.parseInt(tempArr[5]));</span>
+<span class="fc" id="L182">				k2[2] = Float.max(k2[2], Integer.parseInt(tempArr[5]));</span>
+<span class="fc" id="L183">				i += 1;</span>
+<span class="fc" id="L184">			}</span>
+<span class="fc" id="L185">			Integer sum = i;</span>
+<span class="fc" id="L186">			k1[0] /= sum; k2[0] /= sum;</span>
+<span class="fc" id="L187">			String k1result = &quot;(&quot; + k1[0] + &quot;, &quot; + k1[1] + &quot;, &quot; + k1[2] + &quot;)&quot;;</span>
+<span class="fc" id="L188">			String k2result = &quot;(&quot; + k2[0] + &quot;, &quot; + k2[1] + &quot;, &quot; + k2[2] + &quot;)&quot;;</span>
+<span class="fc" id="L189">			stat_data.add(new Statistics(&quot;0&quot;, &quot;Total Number of Students&quot;, String.valueOf(sum)));</span>
+<span class="fc" id="L190">			stat_data.add(new Statistics(&quot;1&quot;,&quot;K1_Energy(Average, Min, Max)&quot;, k1result));</span>
+<span class="fc" id="L191">			stat_data.add(new Statistics(&quot;2&quot;,&quot;K2_Energy(Average, Min, Max)&quot;, k2result));</span>
+<span class="fc" id="L192">			stat_data.add(new Statistics(&quot;3&quot;,&quot;K3_Tick1 = 1&quot;, String.valueOf(k3_tick1)));</span>
+<span class="fc" id="L193">			stat_data.add(new Statistics(&quot;4&quot;,&quot;K3_Tick2 = 1&quot;, String.valueOf(k3_tick2)));</span>
+<span class="fc" id="L194">			stat_data.add(new Statistics(&quot;5&quot;,&quot;My_Preference = 1&quot;, String.valueOf(pref_cnt)));</span>
+<span class="fc" id="L195">			person_data = FXCollections.observableArrayList(studentData);</span>
+<span class="fc" id="L196">			br.close();</span>
+<span class="nc" id="L197">		} catch (IOException ioe) {</span>
+<span class="nc" id="L198">			ioe.printStackTrace();</span>
+<span class="fc" id="L199">		}</span>
+<span class="fc" id="L200">	}</span>
 	
 	/**
 	 * This method changes the scene from current scene to another scene
@@ -162,45 +206,41 @@ import javafx.stage.Stage;
 	 * @throws IOException IOException Handle exception type IOExceptio which might be caused when loading the fxml file
 	 */
    public void switch_scene(Stage stage, String fxmlPath) throws IOException{   	
-<span class="fc" id="L165">    	Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));</span>
-<span class="fc" id="L166">    	Scene scene = new Scene(root);</span>
-<span class="fc" id="L167">    	stage.setTitle(&quot;COMP3111 Project - Group 09&quot;);</span>
-<span class="fc" id="L168">    	stage.setScene(scene);</span>
-<span class="fc" id="L169">    	stage.show();</span>
-<span class="fc" id="L170">    }</span>
+<span class="fc" id="L209">    	Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));</span>
+<span class="fc" id="L210">    	Scene scene = new Scene(root);</span>
+<span class="fc" id="L211">    	stage.setTitle(&quot;COMP3111 Project - Group 09&quot;);</span>
+<span class="fc" id="L212">    	stage.setScene(scene);</span>
+<span class="fc" id="L213">    	stage.show();</span>
+<span class="fc" id="L214">    }</span>
     
     /**
      * This method set up the initial UI interface
      */
     @Override
 	public void start(Stage stage) throws Exception{
-<span class="nc" id="L177">    	fxmlPath = &quot;/ui_for_start.fxml&quot;;</span>
-<span class="nc" id="L178">    	switch_scene(stage, fxmlPath);</span>
-<span class="nc" id="L179">	}</span>
+<span class="nc" id="L221">    	fxmlPath = &quot;/ui_for_start.fxml&quot;;</span>
+<span class="nc" id="L222">    	switch_scene(stage, fxmlPath);</span>
+<span class="nc" id="L223">	}</span>
 	/**
 	 * Entry point of the Application
 	 */
 	public static void main(String args[]) {
 		/*
 		 * This part is for process debug only, if you wanna make it work, 
-		 * manually add algorithm class from dev/process branch
-		algorithm alg = new algorithm();
+		 * manually add algorithm class from dev/process branch 
+		Algorithm alg = new Algorithm();
 		Team t = new Team(studentData);
 		System.out.println(&quot;total have: &quot; + t.getNumOfMembers() + &quot; students&quot;);
 		alg.compute(t, 33);
-		print(alg.K1);
-		print(alg.K2);
-		print(alg.K3);
 		
 
-		for(int i = 0; i &lt; 33; i++) {
-			print(alg.atu.getTeams().get(i));
+		for(Team t1 : alg.atu.getTeams()) {
+			print(t1);
 		}
 		*/
+<span class="nc" id="L241">		Locale.setDefault(Locale.ENGLISH);</span>
+<span class="nc" id="L242">		Application.launch(args);</span>
 		
-<span class="nc" id="L201">		Locale.setDefault(Locale.ENGLISH);</span>
-<span class="nc" id="L202">		Application.launch(args);</span>
-		
-<span class="nc" id="L204">	}</span>
+<span class="nc" id="L244">	}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
