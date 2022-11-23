@@ -26,8 +26,8 @@ public class ATU_Team{
 	}
 	
 	/**
-	 * method to return arraylist<team>
-	 * @return arraylist<team>
+	 * method to return arraylist saved in atu object
+	 * @return arraylist team objects
 	 */
 	public ArrayList<Team> getTeams(){
 		return teams;
