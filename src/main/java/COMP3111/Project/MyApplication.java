@@ -33,7 +33,7 @@ public class MyApplication extends Application{
 	
 	private static boolean isTeamsFormed = false;
 	
-	private Algorithm ATU = new Algorithm();
+	private static Algorithm ATU = new Algorithm();
 	
 	private static ArrayList<Student> studentData = new ArrayList<Student>();
 	
@@ -94,6 +94,11 @@ public class MyApplication extends Application{
 	public ObservableList<Student> get_person_data () {
 		return person_data;
 	}
+	
+	/**
+	 * Method to return standard deviation table for table-printing
+	 * @return TableView in standard deviation
+	 */
 	
 	public String get_fxmlPath() {
 		return fxmlPath;

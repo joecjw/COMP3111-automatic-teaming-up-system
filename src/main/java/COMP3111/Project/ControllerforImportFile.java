@@ -140,7 +140,7 @@ public class ControllerforImportFile extends MyApplication{
 			final Label label_person = new Label("Person");
 			label_person.setFont(new Font("Arial", 20));
 		
-			get_person_table().setEditable(true);
+			get_person_table().setEditable(false);
 			
 			TableColumn rowid_column = new TableColumn("Row_Index");
 			rowid_column.setMinWidth(80);

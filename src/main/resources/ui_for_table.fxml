@@ -71,7 +71,7 @@
                   <TextField alignment="CENTER" editable="false" prefHeight="58.0" prefWidth="117.0" text="My Sudent ID:" />
                   <TextField alignment="CENTER" editable="false" prefHeight="65.0" prefWidth="117.0" text="My Name:" GridPane.rowIndex="1" />
                   <TextField alignment="CENTER" editable="false" prefHeight="69.0" prefWidth="117.0" text="My Team No." GridPane.rowIndex="2" />
-                  <TextField alignment="CENTER" editable="false" prefHeight="127.0" prefWidth="117.0" text="My Teammates" GridPane.rowIndex="3" />
+                  <TextField alignment="CENTER" editable="false" prefHeight="127.0" prefWidth="117.0" text="Team Members" GridPane.rowIndex="3" />
                   <TextField alignment="CENTER" editable="false" prefHeight="103.0" prefWidth="117.0" text="Our Team Energy" GridPane.rowIndex="4" />
                </children>
             </GridPane>

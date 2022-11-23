@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Algorithm.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">COMP3111 Project</a> &gt; <a href="index.source.html" class="el_package">COMP3111.Project</a> &gt; <span class="el_source">Algorithm.java</span></div><h1>Algorithm.java</h1><pre class="source lang-java linenums">package COMP3111.Project;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+/**
+ * The core algorithm of ATU
+ * @author Team 9
+ * @version 1.0
+ *
+ */
+<span class="fc" id="L12">public class Algorithm {</span>
+<span class="fc" id="L13">	private Team K1 = new Team();</span>
+<span class="fc" id="L14">	private Team K2 = new Team();</span>
+<span class="fc" id="L15">	private Team K3 = new Team();</span>
+	private Team copy;
+	private HashMap&lt;Double, Integer&gt; map;
+	private double standardDeviationK1;
+	private double standardDeviationK2;
+	private double standardDeviationK1K2;
+	private double team_K1_avg;
+	private double team_K2_avg;
+
+	public ATU_Team atu;
+	
+	/**
+	 * Method to compute and create output
+	 * @param t team class object
+	 * @param Team_Size total number of teams
+	 */
+	public void compute(Team t, int Team_Size) {
+<span class="fc" id="L32">		Set_K1_Average(t);</span>
+<span class="fc" id="L33">		Set_K2_Average(t);</span>
+//		for(int i = 0; i &lt; Team_Size/precision; i++) {
+//			Select_K1_member(t, precision, i);
+//			Select_K2_member(t, precision, i);
+//		}
+<span class="fc" id="L38">		Select_K1_member(t, Team_Size);</span>
+<span class="fc" id="L39">		Select_K2_member(t, Team_Size);</span>
+<span class="fc" id="L40">		Select_K3_member(t, Team_Size);</span>
+<span class="fc" id="L41">		Create_Map(Team_Size);</span>
+<span class="fc" id="L42">		Create_Team(t, Team_Size);</span>
+<span class="fc" id="L43">		Select_remain_member(Team_Size);</span>
+<span class="fc" id="L44">		Set_Standard_Deviation_K1();</span>
+<span class="fc" id="L45">		Set_Standard_Deviation_K2();</span>
+<span class="fc" id="L46">		Set_Standard_Deviation_K1K2();</span>
+<span class="fc" id="L47">	}</span>
+	
+	/**
+	 * Method to create K1 member list (team class object) in descending order
+	 * @param t team class object
+	 * @param Team_Size total number of teams
+	 */
+	private void Select_K1_member(Team t, int Team_Size) {
+<span class="pc bpc" id="L55" title="3 of 6 branches missed.">		if(K1.isEmptyMemberList() &amp;&amp; K2.isEmptyMemberList() &amp;&amp; K3.isEmptyMemberList())</span>
+<span class="fc" id="L56">			copy = new Team (t);</span>
+		
+<span class="fc bfc" id="L58" title="All 2 branches covered.">		for(int i = 0; i &lt; copy.getNumOfMembers()-1; i++) {</span>
+<span class="fc bfc" id="L59" title="All 2 branches covered.">			for(int j = 1; j &lt; copy.getNumOfMembers(); j++) {</span>
+<span class="fc" id="L60">				if(Integer.parseInt(copy.getMembersList().get(j-1).getK1energy()) </span>
+<span class="fc bfc" id="L61" title="All 2 branches covered.">						&lt; Integer.parseInt(copy.getMembersList().get(j).getK1energy())) {</span>
+<span class="fc" id="L62">					Student s = copy.getMembersList().get(j);</span>
+<span class="fc" id="L63">					copy.getMembersList().remove(j);</span>
+<span class="fc" id="L64">					copy.getMembersList().add(j-1, s);</span>
+				} 
+			}
+		}
+<span class="fc bfc" id="L68" title="All 2 branches covered.">		for(int i = 0; i &lt; Team_Size; i++) {</span>
+<span class="pc bpc" id="L69" title="1 of 2 branches missed.">			if(!copy.isEmptyMemberList()) K1.addMember(copy.getMembersList().get(0));</span>
+<span class="fc" id="L70">			copy.removeMember(K1.getMembersList().get(i));</span>
+		}
+<span class="fc" id="L72">		System.out.println(&quot;Now have: &quot; + copy.getNumOfMembers() + &quot; students left&quot;);</span>
+
+<span class="fc" id="L74">	}</span>
+	
+	/**
+	 * Method to create K2 member list (team class object) in ascending order, without in K1 list
+	 * @param t team class object
+	 * @param Team_Size total number of teams
+	 */
+	private void Select_K2_member(Team t, int Team_Size) {
+<span class="pc bpc" id="L82" title="5 of 6 branches missed.">		if(K1.isEmptyMemberList() &amp;&amp; K2.isEmptyMemberList() &amp;&amp; K3.isEmptyMemberList())</span>
+<span class="nc" id="L83">			copy = new Team (t);</span>
+		
+<span class="fc bfc" id="L85" title="All 2 branches covered.">		for(int i = 0; i &lt; copy.getNumOfMembers()-1; i++) {</span>
+<span class="fc bfc" id="L86" title="All 2 branches covered.">			for(int j = 1; j &lt; copy.getNumOfMembers(); j++) {</span>
+<span class="fc" id="L87">				if(Integer.parseInt(copy.getMembersList().get(j-1).getK2energy()) </span>
+<span class="fc bfc" id="L88" title="All 2 branches covered.">						&gt; Integer.parseInt(copy.getMembersList().get(j).getK2energy())) {</span>
+<span class="fc" id="L89">					Student s = copy.getMembersList().get(j);</span>
+<span class="fc" id="L90">					copy.getMembersList().remove(j);</span>
+<span class="fc" id="L91">					copy.getMembersList().add(j-1, s);</span>
+				} 
+			}
+		}
+		
+<span class="fc bfc" id="L96" title="All 2 branches covered.">		for(int i = 0; i &lt; Team_Size; i++) {</span>
+<span class="pc bpc" id="L97" title="1 of 2 branches missed.">			if(!copy.isEmptyMemberList()) K2.addMember(copy.getMembersList().get(0));</span>
+<span class="fc" id="L98">			copy.removeMember(K2.getMembersList().get(i));</span>
+		}
+<span class="fc" id="L100">		System.out.println(&quot;Now have: &quot; + copy.getNumOfMembers() + &quot; students left&quot;);</span>
+
+<span class="fc" id="L102">	}</span>
+	
+	/**
+	 * Method to create K3 member list in ascending order of K1+K2 energy, without members in K1 and K2 lists
+	 * @param t team class object
+	 * @param Team_Size total number of teams
+	 */
+	private void Select_K3_member(Team t, int Team_Size) {
+<span class="pc bpc" id="L110" title="5 of 6 branches missed.">		if(K1.isEmptyMemberList() &amp;&amp; K2.isEmptyMemberList() &amp;&amp; K3.isEmptyMemberList())</span>
+<span class="nc" id="L111">			copy = new Team (t);</span>
+<span class="fc bfc" id="L112" title="All 2 branches covered.">		for(int i = 0; i &lt; copy.getNumOfMembers()-1; i++) {</span>
+<span class="fc bfc" id="L113" title="All 2 branches covered.">			for(int j = 1; j &lt; copy.getNumOfMembers(); j++) {</span>
+<span class="fc" id="L114">				if((Integer.parseInt(copy.getMembersList().get(j-1).getK1energy())</span>
+<span class="fc" id="L115">					+ Integer.parseInt(copy.getMembersList().get(j-1).getK2energy()))</span>
+<span class="fc" id="L116">					&gt; (Integer.parseInt(copy.getMembersList().get(j).getK1energy())</span>
+<span class="fc bfc" id="L117" title="All 2 branches covered.">					+ Integer.parseInt(copy.getMembersList().get(j).getK2energy()))) {</span>
+<span class="fc" id="L118">				Student s = copy.getMembersList().get(j);</span>
+<span class="fc" id="L119">				copy.getMembersList().remove(j);</span>
+<span class="fc" id="L120">				copy.getMembersList().add(j-1, s);</span>
+				} 
+			}
+		}
+	
+<span class="fc bfc" id="L125" title="All 2 branches covered.">		for(int i = 0; i &lt; Team_Size; i++) {</span>
+<span class="pc bpc" id="L126" title="1 of 2 branches missed.">			if(!copy.isEmptyMemberList()) K3.addMember(copy.getMembersList().get(0));</span>
+<span class="fc" id="L127">			copy.removeMember(K3.getMembersList().get(i));</span>
+		}
+<span class="fc" id="L129">		System.out.println(&quot;Now have: &quot; + copy.getNumOfMembers() + &quot; students left&quot;);</span>
+<span class="fc" id="L130">	}</span>
+	
+	/**
+	 * Method to handle remaining students
+	 * @param Team_Size total number of teams
+	 */
+	private void Select_remain_member(int Team_Size) {
+<span class="fc" id="L137">		int i = 0;</span>
+		Student s;
+<span class="fc bfc" id="L139" title="All 2 branches covered.">		while(copy.getNumOfMembers() &gt; 0) {</span>
+<span class="fc" id="L140">			s = copy.getMembersList().get(i++);</span>
+<span class="fc" id="L141">			atu.getTeams().get(Team_Size - copy.getNumOfMembers()).addMember(s);</span>
+<span class="fc" id="L142">			copy.removeMember(s);</span>
+		}
+<span class="fc" id="L144">	}</span>
+	/**
+	 * Method to create hashmap for indicating which member in K3 should be appended to which teams
+	 * @param Team_Size total number of teams
+	 */
+	private void Create_Map(int Team_Size) {
+<span class="fc" id="L150">		ArrayList&lt;Team&gt; pre = new ArrayList&lt;Team&gt;();</span>
+<span class="fc" id="L151">		map = new HashMap&lt;Double, Integer&gt;();</span>
+<span class="fc" id="L152">		double avg = 0;</span>
+<span class="fc bfc" id="L153" title="All 2 branches covered.">		for(int i = 0; i &lt; Team_Size; i++) {</span>
+<span class="fc" id="L154">			Team K1K2 = new Team();</span>
+<span class="fc" id="L155">			K1K2.addMember(K1.getMembersList().get(i));</span>
+<span class="fc" id="L156">			K1K2.addMember(K2.getMembersList().get(i));</span>
+<span class="fc" id="L157">			pre.add(K1K2);</span>
+		}
+		
+<span class="fc bfc" id="L160" title="All 2 branches covered.">		for(int i = 0; i &lt; Team_Size-1; i++) {</span>
+<span class="fc bfc" id="L161" title="All 2 branches covered.">			for(int j = 1; j &lt; Team_Size; j++) {</span>
+<span class="fc" id="L162">				double avg1 = Get_K1_Average(pre.get(j-1)) + Get_K2_Average(pre.get(j-1));</span>
+<span class="fc" id="L163">				double avg2 = Get_K1_Average(pre.get(j)) + Get_K2_Average(pre.get(j));</span>
+				Team tmp;
+<span class="fc bfc" id="L165" title="All 2 branches covered.">				if(avg1 &lt; avg2) {</span>
+<span class="fc" id="L166">					tmp = new Team(pre.get(j));</span>
+<span class="fc" id="L167">					pre.remove(j);</span>
+<span class="fc" id="L168">					pre.add(j-1, tmp);</span>
+				}
+			}
+		}
+		
+<span class="fc" id="L173">		int k = 0;</span>
+<span class="fc bfc" id="L174" title="All 2 branches covered.">		for(Team K1K2 : pre) {</span>
+<span class="fc" id="L175">			avg = Get_K1_Average(K1K2) + Get_K2_Average(K1K2);</span>
+<span class="fc" id="L176">			System.out.println(&quot;avg is:&quot; + avg);</span>
+<span class="fc" id="L177">			map.put(avg, k++);</span>
+<span class="fc" id="L178">		}</span>
+
+<span class="fc" id="L180">	}</span>
+	/**
+	 * Method to create list of team (ATU_Team class object) 
+	 * @param t team class object
+	 * @param Team_Size total number of teams
+	 */
+	private void Create_Team(Team t, int Team_Size) {
+<span class="fc" id="L187">		atu = new ATU_Team(t.getNumOfMembers(), Team_Size);</span>
+<span class="fc bfc" id="L188" title="All 2 branches covered.">		for(int i = 0; i &lt; Team_Size; i++) {</span>
+<span class="pc bpc" id="L189" title="1 of 2 branches missed.">			if(!K1.isEmptyMemberList()) atu.append(i, &quot;T-&quot; + string(i,4,'0'), K1.getMembersList().get(i), false, false);</span>
+<span class="pc bpc" id="L190" title="1 of 2 branches missed.">			if(!K2.isEmptyMemberList()) atu.append(i, &quot;T-&quot; + string(i,4,'0'), K2.getMembersList().get(i), false, false);</span>
+<span class="pc bpc" id="L191" title="1 of 2 branches missed.">			if(!K3.isEmptyMemberList()) atu.append(i, &quot;T-&quot; + string(i,4,'0'), </span>
+<span class="fc" id="L192">					K3.getMembersList().get(map.get(Get_K1_Average(atu.getTeams().get(i)) + Get_K2_Average(atu.getTeams().get(i))))</span>
+					, false, false);
+		}
+//		if(K3.getMembersList().size() == Team_Size + 1) {
+//			atu.append(Team_Size-1, &quot;T-&quot; + string(Team_Size-1,4,'0'), K3.getMembersList().get(Team_Size), false, true);
+//			if(K3.getMembersList().size() == Team_Size + 2) {
+//				atu.append(Team_Size-2, &quot;T-&quot; + string(Team_Size-2,4,'0'), K3.getMembersList().get(Team_Size+1), false, true);
+//			}
+//		}
+<span class="fc" id="L201">	}</span>
+	
+	/**
+	 * Method to calculate team's averag K1 energy
+	 * @param t team object
+	 */
+	
+	private void Set_K1_Average(Team t) {
+<span class="fc" id="L209">		double result = 0;</span>
+<span class="fc bfc" id="L210" title="All 2 branches covered.">		for(Student s : t.getMembersList()) {</span>
+<span class="fc" id="L211">			result += Integer.parseInt(s.getK1energy());</span>
+<span class="fc" id="L212">		}</span>
+<span class="fc" id="L213">		System.out.println(&quot;K1 average is:&quot; + result/t.getNumOfMembers());</span>
+<span class="fc" id="L214">		this.team_K1_avg = result/t.getNumOfMembers();</span>
+<span class="fc" id="L215">	}</span>
+	
+	/**
+	 * Method to get team's averag K1 energy
+	 * @param t team object
+	 */
+	
+	public double Get_K1_Average(Team t) {
+<span class="fc" id="L223">		double result = 0;</span>
+<span class="fc bfc" id="L224" title="All 2 branches covered.">		for(Student s : t.getMembersList()) {</span>
+<span class="fc" id="L225">			result += Integer.parseInt(s.getK1energy());</span>
+<span class="fc" id="L226">		}</span>
+<span class="fc" id="L227">		return result/t.getNumOfMembers();</span>
+	}
+	
+	/**
+	 * Method to calculate team's averag K2 energy
+	 * @param t team object
+	 */
+	
+	private void Set_K2_Average(Team t) {
+<span class="fc" id="L236">		double result = 0;</span>
+<span class="fc bfc" id="L237" title="All 2 branches covered.">		for(Student s : t.getMembersList()) {</span>
+<span class="fc" id="L238">			result += Integer.parseInt(s.getK2energy());</span>
+<span class="fc" id="L239">		}</span>
+<span class="fc" id="L240">		System.out.println(&quot;K2 average is:&quot; + result/t.getNumOfMembers());</span>
+<span class="fc" id="L241">		this.team_K2_avg = result/t.getNumOfMembers();</span>
+<span class="fc" id="L242">	}</span>
+	
+	/**
+	 * Method to get team's averag K2 energy
+	 * @param t team object
+	 */
+	public double Get_K2_Average(Team t) {
+<span class="fc" id="L249">		double result = 0;</span>
+<span class="fc bfc" id="L250" title="All 2 branches covered.">		for(Student s : t.getMembersList()) {</span>
+<span class="fc" id="L251">			result += Integer.parseInt(s.getK1energy());</span>
+<span class="fc" id="L252">		}</span>
+<span class="fc" id="L253">		return result/t.getNumOfMembers();</span>
+	}
+	/**
+	 * Method to get totol s.d. of teams' K1 energy
+	 * @return s.d. of K1 energy
+	 */
+	
+	public double Get_Standard_Deviation_K1() {
+<span class="fc" id="L261">		System.out.println(&quot;Standard Devaition of K1 is:&quot; + this.standardDeviationK1);</span>
+<span class="fc" id="L262">		return standardDeviationK1;</span>
+	}
+	
+	/**
+	 * Method to get totol s.d. of teams' K2 energy
+	 * @return s.d. of K2 energy
+	 */
+	
+	public double Get_Standard_Deviation_K2() {
+<span class="fc" id="L271">		System.out.println(&quot;Standard Devaition of K2 is:&quot; + this.standardDeviationK2);</span>
+<span class="fc" id="L272">		return standardDeviationK2;</span>
+	}
+	
+	/**
+	 * Method to get totol s.d. of teams' K1+k2 energy
+	 * @return s.d. of K1+K2 energy
+	 */
+	
+	public double Get_Standard_Deviation_K1K2() {
+<span class="fc" id="L281">		System.out.println(&quot;Standard Devaition of K1K2 is:&quot; + this.standardDeviationK1K2);</span>
+<span class="fc" id="L282">		return standardDeviationK1K2;</span>
+	}
+	
+	/**
+	 * Method to calculate totol s.d. of teams' K1 energy
+	 * @return void
+	 */
+	private void Set_Standard_Deviation_K1() {
+<span class="fc" id="L290">		double result = 0;</span>
+<span class="fc bfc" id="L291" title="All 2 branches covered.">		for(Team t : this.atu.getTeams()) {</span>
+<span class="fc" id="L292">			result += Math.pow(this.Get_K1_Average(t) - team_K1_avg, 2);</span>
+<span class="fc" id="L293">		}</span>
+<span class="fc" id="L294">		this.standardDeviationK1 = Math.sqrt(result/atu.getTeams().size());</span>
+<span class="fc" id="L295">	}</span>
+	
+	/**
+	 * Method to calculate totol s.d. of teams' K2 energy
+	 * @return void
+	 */
+	private void Set_Standard_Deviation_K2() {
+<span class="fc" id="L302">		double result = 0;</span>
+<span class="fc bfc" id="L303" title="All 2 branches covered.">		for(Team t : this.atu.getTeams()) {</span>
+<span class="fc" id="L304">			result += Math.pow(this.Get_K2_Average(t) - team_K2_avg, 2);</span>
+<span class="fc" id="L305">		}</span>
+<span class="fc" id="L306">		this.standardDeviationK2 = Math.sqrt(result/atu.getTeams().size());</span>
+<span class="fc" id="L307">	}</span>
+	
+	/**
+	 * Method to calculate totol s.d. of teams' K1+k2 energy
+	 * @return void
+	 */
+	
+	private void Set_Standard_Deviation_K1K2() {
+<span class="fc" id="L315">		double result = 0;</span>
+<span class="fc bfc" id="L316" title="All 2 branches covered.">		for(Team t : this.atu.getTeams()) {</span>
+<span class="fc" id="L317">			result += Math.pow((this.Get_K1_Average(t) + this.Get_K2_Average(t))/2 - (team_K1_avg + team_K2_avg)/2, 2);</span>
+<span class="fc" id="L318">		}</span>
+<span class="fc" id="L319">		this.standardDeviationK1K2 = Math.sqrt(result/atu.getTeams().size());</span>
+<span class="fc" id="L320">	}</span>
+		
+	/**
+	 * Method to append integers and char into string
+	 * @param i int
+	 * @param j int
+	 * @param c char
+	 * @return String
+	 */
+	private String string(int i, int j, char c) {
+<span class="fc" id="L330">		return new String(Integer.toString(i) + Integer.toString(j) + Character.toString(c));</span>
+	}
+	
+	/**
+	 * Method to get K1 arraylist
+	 * @return arraylist
+	 */
+	public Team get_K1() {
+<span class="fc" id="L338">		return K1; </span>
+	}
+	
+	/**
+	 * Method to get K2 arraylist
+	 * @return arraylist
+	 */
+	public Team get_K2() {
+<span class="fc" id="L346">		return K2;</span>
+	}
+	
+	/**
+	 * Method to get K3 arraylist
+	 * @return arraylist
+	 */
+	public Team get_K3() {
+<span class="fc" id="L354">		return K3;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -142,6 +142,12 @@ public class ControllerforInstructorFunctions extends MyApplication {
     		alert.showAndWait();
     	}
     }
+    /**
+     * This method will be called when pressing "process data" button, it will form teams according to the algorithm
+     * @param studentData ArrayList studentData
+     * @param teamDatacopy Team teamDatacopy
+     * @param a Algorithm a
+     */
 
 	void process_team_data(ArrayList<Student> studentData,  Team teamDatacopy, Algorithm a) {
 		for(int i =0; i < studentData.size(); i++) {
@@ -149,7 +155,6 @@ public class ControllerforInstructorFunctions extends MyApplication {
 		}
 		
 		a.compute(teamDatacopy, 33);
-
 		System.out.println("K1 student");
 		print(a.get_K1());
 		System.out.println("K2 student");
@@ -157,8 +162,10 @@ public class ControllerforInstructorFunctions extends MyApplication {
 		System.out.println("K3 student");
 		print(a.get_K3());
 		
+		
 		a.Get_Standard_Deviation_K1();
 		a.Get_Standard_Deviation_K2();
+		a.Get_Standard_Deviation_K1K2();
 		
 		for(int i = 0; i < a.atu.getTeams().size(); i ++) {
 			print(a.atu.getTeams().get(i));
@@ -167,6 +174,11 @@ public class ControllerforInstructorFunctions extends MyApplication {
 		
 		set_isTeamsFormed(true);
 	}
+	
+	/**
+	 * This is a helper function to print out team's information. It is for internal debugging use
+	 * @param t Team t
+	 */
 	
 	static void print(Team t) {
 		System.out.println("Team id: " + t.getTeamId() + " / Team name: " + t.getName());

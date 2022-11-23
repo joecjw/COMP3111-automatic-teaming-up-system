@@ -26,7 +26,7 @@ public class Team {
 	
 	/**
 	 * Copy Constructor, initializes {@code members} and {@code numOfMembers} from input Team object
-	 * @param t This the Team object to be copied
+	 * @param t This is the Team object to be copied
 	 */
 	public Team(Team t) {
 		members = new ArrayList<Student>(t.getMembersList());

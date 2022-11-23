@@ -167,7 +167,7 @@ public class UiTester extends ApplicationTest{
 		sleep(100);
 		
 		//valid input
-		clickOn("#input_text").write("20556367");
+		clickOn("#input_text").write("20890771");
 		sleep(100);
 		clickOn("Confirm");
 		sleep(100);
@@ -182,14 +182,14 @@ public class UiTester extends ApplicationTest{
 		TextField k1 = (TextField) mainstage.getScene().lookup("#k1_average");
 		TextField k2 = (TextField) mainstage.getScene().lookup("#k2_average");
 		
-		assertEquals("20556367", id.getText());
-		assertEquals("ANAHEIM James", name.getText());
-		assertEquals("6", t_number.getText());
-		assertEquals("ANAHEIM James", t_1.getText());
-		assertEquals("ANGELICA Cat", t_2.getText());
-		assertEquals("MARJORAM Coral", t_3.getText());
+		assertEquals("20890771", id.getText());
+		assertEquals("SUNFLOWER Gatonia", name.getText());
+		assertEquals("11", t_number.getText());
+		assertEquals("CHARD Alabai", t_1.getText());
+		assertEquals("SUNFLOWER Gatonia", t_2.getText());
+		assertEquals("CINNAMON Bilby", t_3.getText());
 		assertEquals(true, t_4.getText().isEmpty());
-		assertEquals("70", k1.getText());
-		assertEquals("65", k2.getText());
+		assertEquals("55", k1.getText());
+		assertEquals("75", k2.getText());
 	}
 }

@@ -3,13 +3,25 @@ package COMP3111.Project;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 
@@ -42,6 +54,7 @@ public class ControllerforChart extends MyApplication{
     
     /**
      * This method initialize the linechart with processed team data
+     * and also shows a table with standard deviation data of formed teams
      */
     void initialize_chart(Algorithm a) {
     	//initialize three series for linechart
@@ -96,6 +109,50 @@ public class ControllerforChart extends MyApplication{
     	linechart.getData().add(series_k1);
     	linechart.getData().add(series_k2);
     	linechart.getData().add(series_k1_k2);
+    	
+    	//show the standard deviation table UI (extra feature implementation)
+    	ObservableList<Statistics> sd_data = FXCollections.observableArrayList();
+    	TableView<Statistics> sd_table = new TableView<Statistics>();
+    	
+    	Scene scene_sd = new Scene(new Group());
+		Stage stage_sd = new Stage();
+		stage_sd.setTitle("Table of formed teams' standard deviation data");
+		stage_sd.setWidth(450);
+		stage_sd.setHeight(500);
+	
+		final Label label_sd = new Label("Standard Deviation");
+		label_sd.setFont(new Font("Arial", 20));
+		
+		sd_table.setEditable(false);
+
+		TableColumn row_column = new TableColumn("Row_Index");
+		row_column.setMinWidth(80);
+		row_column.setCellValueFactory(new PropertyValueFactory<Statistics, String>("rowid"));
+		
+		TableColumn entry_column = new TableColumn("Entry");
+		entry_column.setMinWidth(180);
+		entry_column.setCellValueFactory(new PropertyValueFactory<Statistics, String>("entry"));
+	
+		TableColumn value_column = new TableColumn("Value");
+		value_column.setMinWidth(150);
+		value_column.setCellValueFactory(new PropertyValueFactory<Statistics, String>("value"));
+		
+		sd_data.add(new Statistics("0", "K1 Standard Deviation", Double.toString(a.Get_Standard_Deviation_K1())));
+		sd_data.add(new Statistics("1", "K2 Standard Deviation", Double.toString(a.Get_Standard_Deviation_K2())));
+		sd_data.add(new Statistics("2", "K1+K2 Standard Deviation", Double.toString(a.Get_Standard_Deviation_K1K2())));
+	
+		sd_table.setItems(sd_data);
+		sd_table.getColumns().addAll(row_column, entry_column, value_column);
+		sd_table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+		final VBox vbox_stat = new VBox();
+		vbox_stat.setSpacing(5);
+		vbox_stat.setPadding(new Insets(10, 0, 0, 10));
+		vbox_stat.getChildren().addAll(label_sd, sd_table);
+	
+		((Group) scene_sd.getRoot()).getChildren().addAll(vbox_stat);
+	
+		stage_sd.setScene(scene_sd);
+		stage_sd.show();
     }
     
     public class TeamAverage{//class used to store a team's average statistics
