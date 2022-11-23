@@ -139,7 +139,7 @@ public class ControllerforChart extends MyApplication{
 		
 		sd_data.add(new Statistics("0", "K1 Standard Deviation", Double.toString(a.Get_Standard_Deviation_K1())));
 		sd_data.add(new Statistics("1", "K2 Standard Deviation", Double.toString(a.Get_Standard_Deviation_K2())));
-		sd_data.add(new Statistics("2", "K1+K1 Standard Deviation", Double.toString(a.Get_Standard_Deviation_K1K2())));
+		sd_data.add(new Statistics("2", "K1+K2 Standard Deviation", Double.toString(a.Get_Standard_Deviation_K1K2())));
 	
 		sd_table.setItems(sd_data);
 		sd_table.getColumns().addAll(row_column, entry_column, value_column);
