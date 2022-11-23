@@ -31,10 +31,6 @@ public class Algorithm {
 	public void compute(Team t, int Team_Size) {
 		Set_K1_Average(t);
 		Set_K2_Average(t);
-//		for(int i = 0; i < Team_Size/precision; i++) {
-//			Select_K1_member(t, precision, i);
-//			Select_K2_member(t, precision, i);
-//		}
 		Select_K1_member(t, Team_Size);
 		Select_K2_member(t, Team_Size);
 		Select_K3_member(t, Team_Size);
@@ -142,6 +138,7 @@ public class Algorithm {
 			copy.removeMember(s);
 		}
 	}
+	
 	/**
 	 * Method to create hashmap for indicating which member in K3 should be appended to which teams
 	 * @param Team_Size total number of teams

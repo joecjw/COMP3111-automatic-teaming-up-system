@@ -33,7 +33,7 @@ public class MyApplication extends Application{
 	
 	private static boolean isTeamsFormed = false;
 	
-	private Algorithm ATU = new Algorithm();
+	private static Algorithm ATU = new Algorithm();
 	
 	private static ArrayList<Student> studentData = new ArrayList<Student>();
 	

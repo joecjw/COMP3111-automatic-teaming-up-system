@@ -100,7 +100,7 @@ public class UiTester extends ApplicationTest{
 	    //import csv file performed manually
 	    clickOn("Back");
 	    //Here the csv file path should be set manually according to the tester's local path
-	    controller.set_fxmlPath("C:\\Users\\s2015\\git\\COMP3111-Project\\src\\main\\resources\\Sample Student Data File.CSV");
+	    controller.set_fxmlPath("/Users/wang/git/COMP3111-Project/src/main/resources/Sample Student Data File.CSV");
 	    controller.read(controller.get_fxmlPath());
 		controller.set_isFileimported(true);
 		
@@ -187,9 +187,9 @@ public class UiTester extends ApplicationTest{
 		assertEquals("6", t_number.getText());
 		assertEquals("ANAHEIM James", t_1.getText());
 		assertEquals("ANGELICA Cat", t_2.getText());
-		assertEquals("MARJORAM Coral", t_3.getText());
+		assertEquals("ALLSPICE Beta", t_3.getText());
 		assertEquals(true, t_4.getText().isEmpty());
-		assertEquals("70", k1.getText());
-		assertEquals("65", k2.getText());
+		assertEquals("55", k1.getText());
+		assertEquals("63", k2.getText());
 	}
 }
