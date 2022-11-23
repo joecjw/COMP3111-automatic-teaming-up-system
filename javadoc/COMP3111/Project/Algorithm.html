@@ -15,7 +15,7 @@
 <script type="text/javascript" src="../../script-dir/jquery-ui.min.js"></script>
 </head>
 <body class="class-declaration-page">
-<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10};
+<script type="text/javascript">var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "alt-color";
 var rowColor = "row-color";
@@ -101,7 +101,7 @@ extends java.lang.Object</pre>
 </thead>
 <tbody>
 <tr class="alt-color">
-<td class="col-first"><code>static <a href="ATU_Team.html" title="class in COMP3111.Project">ATU_Team</a></code></td>
+<td class="col-first"><code><a href="ATU_Team.html" title="class in COMP3111.Project">ATU_Team</a></code></td>
 <th class="col-second" scope="row"><code><span class="member-name-link"><a href="#atu">atu</a></span></code></th>
 <td class="col-last">&nbsp;</td>
 </tr>
@@ -150,24 +150,67 @@ extends java.lang.Object</pre>
 </thead>
 <tbody>
 <tr class="alt-color" id="i0">
-<td class="col-first"><code><a href="Team.html" title="class in COMP3111.Project">Team</a></code></td>
-<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#get_K1()">get_K1</a></span>()</code></th>
+<td class="col-first"><code>void</code></td>
+<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#compute(COMP3111.Project.Team,int)">compute</a></span>&#8203;(<a href="Team.html" title="class in COMP3111.Project">Team</a>&nbsp;t,
+int&nbsp;Team_Size)</code></th>
 <td class="col-last">
-<div class="block">Method to get K1 arraylist<team></div>
+<div class="block">Method to compute and create output</div>
 </td>
 </tr>
 <tr class="row-color" id="i1">
 <td class="col-first"><code><a href="Team.html" title="class in COMP3111.Project">Team</a></code></td>
-<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#get_K2()">get_K2</a></span>()</code></th>
+<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#get_K1()">get_K1</a></span>()</code></th>
 <td class="col-last">
-<div class="block">Method to get K2 arraylist<team></div>
+<div class="block">Method to get K1 arraylist</div>
 </td>
 </tr>
 <tr class="alt-color" id="i2">
+<td class="col-first"><code>double</code></td>
+<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#Get_K1_Average(COMP3111.Project.Team)">Get_K1_Average</a></span>&#8203;(<a href="Team.html" title="class in COMP3111.Project">Team</a>&nbsp;t)</code></th>
+<td class="col-last">
+<div class="block">Method to get team's averag K1 energy</div>
+</td>
+</tr>
+<tr class="row-color" id="i3">
+<td class="col-first"><code><a href="Team.html" title="class in COMP3111.Project">Team</a></code></td>
+<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#get_K2()">get_K2</a></span>()</code></th>
+<td class="col-last">
+<div class="block">Method to get K2 arraylist</div>
+</td>
+</tr>
+<tr class="alt-color" id="i4">
+<td class="col-first"><code>double</code></td>
+<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#Get_K2_Average(COMP3111.Project.Team)">Get_K2_Average</a></span>&#8203;(<a href="Team.html" title="class in COMP3111.Project">Team</a>&nbsp;t)</code></th>
+<td class="col-last">
+<div class="block">Method to get team's averag K2 energy</div>
+</td>
+</tr>
+<tr class="row-color" id="i5">
 <td class="col-first"><code><a href="Team.html" title="class in COMP3111.Project">Team</a></code></td>
 <th class="col-second" scope="row"><code><span class="member-name-link"><a href="#get_K3()">get_K3</a></span>()</code></th>
 <td class="col-last">
-<div class="block">Method to get K3 arraylist<team></div>
+<div class="block">Method to get K3 arraylist</div>
+</td>
+</tr>
+<tr class="alt-color" id="i6">
+<td class="col-first"><code>double</code></td>
+<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#Get_Standard_Deviation_K1()">Get_Standard_Deviation_K1</a></span>()</code></th>
+<td class="col-last">
+<div class="block">Method to get totol s.d.</div>
+</td>
+</tr>
+<tr class="row-color" id="i7">
+<td class="col-first"><code>double</code></td>
+<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#Get_Standard_Deviation_K1K2()">Get_Standard_Deviation_K1K2</a></span>()</code></th>
+<td class="col-last">
+<div class="block">Method to get totol s.d.</div>
+</td>
+</tr>
+<tr class="alt-color" id="i8">
+<td class="col-first"><code>double</code></td>
+<th class="col-second" scope="row"><code><span class="member-name-link"><a href="#Get_Standard_Deviation_K2()">Get_Standard_Deviation_K2</a></span>()</code></th>
+<td class="col-last">
+<div class="block">Method to get totol s.d.</div>
 </td>
 </tr>
 </tbody>
@@ -191,7 +234,7 @@ extends java.lang.Object</pre>
 <li>
 <section class="detail" id="atu">
 <h3>atu</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="ATU_Team.html" title="class in COMP3111.Project">ATU_Team</a></span>&nbsp;<span class="member-name">atu</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ATU_Team.html" title="class in COMP3111.Project">ATU_Team</a></span>&nbsp;<span class="member-name">atu</span></div>
 </section>
 </li>
 </ul>
@@ -217,13 +260,81 @@ extends java.lang.Object</pre>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
+<section class="detail" id="compute(COMP3111.Project.Team,int)">
+<h3>compute</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="member-name">compute</span>&#8203;(<span class="parameters"><a href="Team.html" title="class in COMP3111.Project">Team</a>&nbsp;t,
+int&nbsp;Team_Size)</span></div>
+<div class="block">Method to compute and create output</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>t</code> - team class object</dd>
+<dd><code>Team_Size</code> - total number of teams</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="Get_K1_Average(COMP3111.Project.Team)">
+<h3>Get_K1_Average</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="member-name">Get_K1_Average</span>&#8203;(<span class="parameters"><a href="Team.html" title="class in COMP3111.Project">Team</a>&nbsp;t)</span></div>
+<div class="block">Method to get team's averag K1 energy</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>t</code> - team object</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="Get_K2_Average(COMP3111.Project.Team)">
+<h3>Get_K2_Average</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="member-name">Get_K2_Average</span>&#8203;(<span class="parameters"><a href="Team.html" title="class in COMP3111.Project">Team</a>&nbsp;t)</span></div>
+<div class="block">Method to get team's averag K2 energy</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>t</code> - team object</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="Get_Standard_Deviation_K1()">
+<h3>Get_Standard_Deviation_K1</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="member-name">Get_Standard_Deviation_K1</span>()</div>
+<div class="block">Method to get totol s.d. of teams' K1 energy</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>s.d. of K1 energy</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="Get_Standard_Deviation_K2()">
+<h3>Get_Standard_Deviation_K2</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="member-name">Get_Standard_Deviation_K2</span>()</div>
+<div class="block">Method to get totol s.d. of teams' K2 energy</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>s.d. of K2 energy</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="Get_Standard_Deviation_K1K2()">
+<h3>Get_Standard_Deviation_K1K2</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="member-name">Get_Standard_Deviation_K1K2</span>()</div>
+<div class="block">Method to get totol s.d. of teams' K1+k2 energy</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>s.d. of K1+K2 energy</dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="get_K1()">
 <h3>get_K1</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Team.html" title="class in COMP3111.Project">Team</a></span>&nbsp;<span class="member-name">get_K1</span>()</div>
-<div class="block">Method to get K1 arraylist<team></div>
+<div class="block">Method to get K1 arraylist</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>arraylist<team></dd>
+<dd>arraylist</dd>
 </dl>
 </section>
 </li>
@@ -231,10 +342,10 @@ extends java.lang.Object</pre>
 <section class="detail" id="get_K2()">
 <h3>get_K2</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Team.html" title="class in COMP3111.Project">Team</a></span>&nbsp;<span class="member-name">get_K2</span>()</div>
-<div class="block">Method to get K2 arraylist<team></div>
+<div class="block">Method to get K2 arraylist</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>arraylist<team></dd>
+<dd>arraylist</dd>
 </dl>
 </section>
 </li>
@@ -242,10 +353,10 @@ extends java.lang.Object</pre>
 <section class="detail" id="get_K3()">
 <h3>get_K3</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Team.html" title="class in COMP3111.Project">Team</a></span>&nbsp;<span class="member-name">get_K3</span>()</div>
-<div class="block">Method to get K3 arraylist<team></div>
+<div class="block">Method to get K3 arraylist</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>arraylist<team></dd>
+<dd>arraylist</dd>
 </dl>
 </section>
 </li>
