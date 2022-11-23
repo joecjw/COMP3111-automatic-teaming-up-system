@@ -154,7 +154,7 @@ public class ControllerforInstructorFunctions extends MyApplication {
 			teamDatacopy.addMember(studentData.get(i));
 		}
 		
-		a.compute(teamDatacopy, 33);
+		a.compute(teamDatacopy, studentData.size()/3);
 		System.out.println("K1 student");
 		print(a.get_K1());
 		System.out.println("K2 student");
